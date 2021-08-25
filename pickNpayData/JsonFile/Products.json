@@ -309,17 +309,26 @@
     "CategoryId": 5,
     "IsTopDeal": false,
     "ImageUrl": "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrycheesecakesmall.jpg"
+  },
+
+
+
+
+
+
+
+
+
+  {
+    "ProductId": 52,
+    "Name": "Roni Liz Sneakers For Men. Designed with durability",
+    "Price": 16000,
+    "ShortDescription": "These shoes are designed with durability as well as the trend in mind.!",
+    "LongDescription": "They are exclusively designed to match the latest trends. These will go with most of your casual outfits. Pair with jeans, Either way, this pair of sneaker is sure to make you look smart.",
+    "CategoryId": 3,
+    "IsTopDeal": true,
+    "ImageUrl": "https://www.googleadservices.com/roni-liz-sneakers-for-men-4221614"
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
