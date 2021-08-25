@@ -25,26 +25,36 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
+                        <li><img class="img-responsive" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg"/></li>
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        @await Component.InvokeAsync("CategoryMenu")
-                        <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
-                        @await Component.InvokeAsync("ShoppingCartSummary")
-                        <partial name="_LoginPartial" />
-                    </ul>
+                    </ul> 
+                   
+                    <div class="pull-right">
+                        <ul class="nav navbar-nav">
+                           
+                            @await Component.InvokeAsync("CategoryMenu")
+                            <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
+                            @await Component.InvokeAsync("ShoppingCartSummary")
+                            <partial name="_LoginPartial" />
+                        </ul>
+                    </div>
+                   
                 </div>
             </div>
         </nav>
 
         <div class="row">
-            <div class="col-md-3">
-                <p class="lead">
-                    <img class="img-responsive" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.png" />
-                </p>
-            </div>
-            <div class="col-md-9">
+            <div class="col-md-0">
                 @RenderBody()
             </div>
         </div>
+
+        <div class="panel-footer">
+
+        </div>
+
+
+
         @RenderSection("Scripts", required: false)
     </div>
 </body>
