@@ -6,7 +6,7 @@
 <div class="thumbnail">
     <img alt="@Model.Name" src="@Model.ImageUrl">
     <div class="caption-full">
-        <h3 class="pull-right">@Model.Price.ToString("c")</h3>
+        <h3 class="pull-right">@string.Format("# {0:N}", @Model.Price)</h3>
         <h3>
             <a href="#">@Model.Name</a>
         </h3>
@@ -15,7 +15,7 @@
         <div class="addToCart">
             <p class="button">
                 <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-                   asp-route-pieId="@Model.ProductId">Add to cart</a>
+                   asp-route-productId="@Model.ProductId">Add To Cart</a>
             </p>
         </div>
     </div>

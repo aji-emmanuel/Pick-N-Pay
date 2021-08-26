@@ -17,9 +17,9 @@
             <tr>
                 <td class="text-center">@line.Amount</td>
                 <td class="text-left">@line.Product.Name</td>
-                <td class="text-right">@line.Product.Price.ToString("c")</td>
+                <td class="text-right">@string.Format("# {0:N}",line.Product.Price)</td>
                 <td class="text-right">
-                    @((line.Amount * line.Product.Price).ToString("c"))
+                    @(string.Format("# {0:N}", (line.Amount * line.Product.Price)))
                 </td>
             </tr>
         }
@@ -28,7 +28,7 @@
         <tr>
             <td colspan="3" class="text-right">Total:</td>
             <td class="text-right">
-                @Model.ShoppingCartTotal.ToString("c")
+                @string.Format("# {0:N}", Model.ShoppingCartTotal)
             </td>
         </tr>
     </tfoot>
