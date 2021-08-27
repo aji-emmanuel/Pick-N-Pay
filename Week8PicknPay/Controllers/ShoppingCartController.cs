@@ -44,7 +44,7 @@ namespace Week8PicknPay.Controllers
             {
                 _shoppingCart.AddToCart(selectedProduct, 1);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public RedirectToActionResult RemoveFromShoppingCart(int productId)

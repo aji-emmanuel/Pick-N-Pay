@@ -66,19 +66,33 @@ namespace DataBase.Migrations
                 {
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Address = table.Column<string>(maxLength: 100, nullable: false),
                     City = table.Column<string>(maxLength: 50, nullable: false),
                     State = table.Column<string>(maxLength: 10, nullable: true),
                     PhoneNumber = table.Column<string>(maxLength: 25, nullable: false),
-                    Email = table.Column<string>(maxLength: 50, nullable: false),
                     OrderTotal = table.Column<double>(nullable: false),
                     OrderPlaced = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRequests",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Subject = table.Column<string>(maxLength: 100, nullable: false),
+                    Description = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRequests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -341,6 +355,9 @@ namespace DataBase.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShoppingCartItems");
+
+            migrationBuilder.DropTable(
+                name: "UserRequests");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -25,16 +25,15 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><img class="img-responsive" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg"/></li>
+                        <li style="padding-top: 10px;"><img class="img-responsive" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg"/></li>
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     </ul> 
                    
                     <div class="pull-right">
                         <ul class="nav navbar-nav">
-                           
                             @await Component.InvokeAsync("CategoryMenu")
-                            <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
                             @await Component.InvokeAsync("ShoppingCartSummary")
+                            <li><a asp-controller="Request" asp-action="Index">Contact Us</a></li>
                             <partial name="_LoginPartial" />
                         </ul>
                     </div>
@@ -48,12 +47,25 @@
                 @RenderBody()
             </div>
         </div>
+        <hr />
 
-        <div class="panel-footer">
 
+
+
+        <hr/>
+        <div class="container">
+            <footer class="py-4 my-3">
+                <ul class="nav navbar-nav justify-content:center border-bottom pb-3 mb-3">
+                    <li class="nav-item"><a asp-controller="Home" asp-action="Index" class="nav-link px-2 text-muted">Home</a></li>
+                    <li class="nav-item"><a asp-controller="Home" asp-action="Index" class="nav-link px-2 text-muted">Products</a></li>
+                    <li class="nav-item"><a asp-controller="Request" asp-action="Index" class="nav-link px-2 text-muted">Contact Us</a></li>
+                    <li class="nav-item"><p>Phone:234-806-231-6992</p></li>
+                </ul>
+                <p class="text-center text-muted">© 2021 Aji Crafts Company, Inc</p>
+            </footer>
         </div>
 
-
+         
 
         @RenderSection("Scripts", required: false)
     </div>

@@ -1,7 +1,10 @@
 ﻿@model Product
     <div class="col-sm-4 col-lg-4 col-md-4">
         <div class="thumbnail">
-            <img src="@Model.ImageUrl" alt="">
+            <div class="" style="display:flex; justify-content:center;">
+                <img src="@Model.ImageUrl" alt="@Model.Name" style="height: 250px; width: 100%; margin-left:20px; margin-right:20px; margin-top:20px;">
+            </div>
+           
             <div class="caption">
                 <h3 class="pull-right">@string.Format("# {0:N}", @Model.Price)</h3>
                 <h3>
@@ -16,13 +19,8 @@
                     <a class="btn btn-primary" 
                        asp-controller="ShoppingCart" 
                        asp-action="AddToShoppingCart"
-                       asp-route-pieId="@Model.ProductId">Add to cart</a>
+                       asp-route-productId="@Model.ProductId">Add To Cart</a>
                 </p>
             </div>
         </div>
     </div>
-
-
-    @*<div class="col-md-6">
-        <img src="@Model.ImageUrl" alt="@Model.ProductName" style="width:100%; margin:20px" />
-    </div>*@

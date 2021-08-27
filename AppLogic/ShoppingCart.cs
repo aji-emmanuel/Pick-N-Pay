@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Build.Tasks.Deployment.Bootstrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
-using Product = Week8PicknPay.Models.Product;
 
 namespace Week8PicknPay.Repository
 {
@@ -51,7 +49,7 @@ namespace Week8PicknPay.Repository
                 {
                     ShoppingCartId = ShoppingCartId,
                     Product = product,
-                    Amount = 1
+                    Amount = amount
                 };
 
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
@@ -91,11 +89,10 @@ namespace Week8PicknPay.Repository
 
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            ShoppingCartItems = _appDbContext.ShoppingCartItems
-                .Where(c => c.ShoppingCartId == ShoppingCartId)
-                    .Include(s => s.Product)
-                    .ToList();
-            return ShoppingCartItems;
+            return ShoppingCartItems ??=
+                       _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+                           .Include(s => s.Product)
+                           .ToList();
         }
 
         public void ClearCart()

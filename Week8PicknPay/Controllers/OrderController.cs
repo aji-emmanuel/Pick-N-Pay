@@ -50,7 +50,7 @@ namespace Week8PicknPay.Controllers
 
         public IActionResult CheckoutComplete()
         {
-            ViewBag.CheckoutCompleteMessage = "Thanks for your order!";
+            ViewBag.CheckoutCompleteMessage = "Thanks for patronizing PicknPay!";
             return View();
         }
     }
