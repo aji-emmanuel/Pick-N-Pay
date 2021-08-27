@@ -1,36 +1,35 @@
 
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
+WORKDIR /sapp
+EXPOSE 80
+EXPOSE 443
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY *.sln .
-# copy and restore all projects
+#COPY ["Week8PicknPay/Week8PicknPay.csproj", "Week8PicknPay/"]
 COPY Week8PicknPay/*.csproj Week8PicknPay/
-#COPY PickNPayTest/*.csproj PickNPayTest/
+COPY AppLogic/*.csproj AppLogic/
 COPY pickNpayData/*.csproj pickNpayData/
-#COPY AppModel/*.csproj AppModel/
-#COPY AppLogic/*.csproj AppLogic/
+COPY Models/*.csproj Models/
 RUN dotnet restore Week8PicknPay/*.csproj
-#RUN dotnet restore PickNPayTest/*.csproj
-# Copy everything else
 COPY . .
-#Testing
-#FROM base AS testing
-#WORKDIR /src/Week7SQLite
-#RUN dotnet build
-#WORKDIR /src/PickNPayTest
-#WORKDIR /src/PickNPayTest
-#RUN dotnet test
-
-#Publishing
-FROM base AS publish
 WORKDIR /src/Week8PicknPay
-RUN dotnet publish -c Release -o /src/publish
-
-#Get the runtime into a folder called app
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS runtime
+RUN dotnet build 
+FROM build AS publish
+WORKDIR /src/Week8PicknPay
+RUN dotnet publish -c Release -o /app/publish
+FROM base AS final
 WORKDIR /app
-COPY --from=publish /src/publish .
-COPY --from=publish /src/pickNpayData/JsonFile/* JsonFile/
-#ENTRYPOINT ["dotnet", "Week7SQLite.dll"]
+COPY --from=publish /app/publish .
+COPY --from=publish src/Week8PicknPay/JsonFile/Category.json json/
+COPY --from=publish src/Week8PicknPay/JsonFile/Products.json json/
+#COPY --from=publish src/Week8PicknPay/JsonFile/ProductImages.json json/
+#ENTRYPOINT ["dotnet", "Week8PicknPay.dll"]
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet Week8PicknPay.dll
+    
+    
+  
+  
+
