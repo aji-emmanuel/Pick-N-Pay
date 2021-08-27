@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,8 @@ namespace Week8PicknPay.Database
 {
     public class Seeder
     {
+        private static IServiceProvider serviceProvider;
+
         public static async Task ProductData(AppDbContext context)
         {
             try
