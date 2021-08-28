@@ -12,8 +12,6 @@ namespace Week8PicknPay.Database
 {
     public class Seeder
     {
-        private static IServiceProvider serviceProvider;
-
         public static async Task ProductData(AppDbContext context)
         {
             try

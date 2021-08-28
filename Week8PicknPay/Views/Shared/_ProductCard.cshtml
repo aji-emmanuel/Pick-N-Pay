@@ -2,10 +2,10 @@
     <div class="col-sm-4 col-lg-4 col-md-4">
         <div class="thumbnail">
             <div class="" style="display:flex; justify-content:center;">
-                <img src="@Model.ImageUrl" alt="@Model.Name" style="height: 250px; width: 100%; margin-left:20px; margin-right:20px; margin-top:20px;">
+                <img src="@Model.ImageUrl" alt="@Model.Name" style="height: 250px; width: 100%; margin: 5px; margin-bottom:0px;">
             </div>
            
-            <div class="caption">
+            <div class="caption" style="margin:0px;">
                 <h3 class="pull-right">@string.Format("# {0:N}", @Model.Price)</h3>
                 <h3>
                     <a asp-controller="Product"
@@ -14,7 +14,7 @@
                 </h3>
                 <p>@Model.ShortDescription</p>
             </div>
-            <div class="addToCart">
+            <div class="addToCart" style="margin:0px;">
                 <p class="button">
                     <a class="btn btn-primary" 
                        asp-controller="ShoppingCart" 

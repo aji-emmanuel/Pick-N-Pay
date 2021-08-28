@@ -5,7 +5,7 @@
     ViewData["Title"] = "Log In Account";
 }
 
-<h1 class="col-md-8" style="padding-left:10em">@ViewData["Title"]</h1>
+<h1 class="col-md-8" style="padding-left:10em; color:crimson;">@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-8" style="padding-left:10em">
         <section>
@@ -36,10 +36,10 @@
                 </div>
                 <div class="form-group">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a style="color:crimson;" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Don't Have an Account? SignUp'</a>
+                        <a style="color:crimson;" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Don't Have an Account? SignUp'</a>
                     </p>
                 </div>
             </form>
