@@ -26,11 +26,15 @@ namespace Week8PicknPay.Controllers
             return View();
         }
 
-        [HttpPost]
+       
         public IActionResult Reply(Request request)
         {
+            if(!ModelState.IsValid)
+            {
+                return View("Index");
+            }
+
             _requestForm.SaveRequest(request);
-            ViewBag.RequestMessage = "Thanks for submitting your request! We will get back to you as soon as possible.";
             return RedirectToAction("Index", "Home");
         }
     }

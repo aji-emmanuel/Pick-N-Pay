@@ -17,6 +17,9 @@ namespace Week8PicknPay.Repository
             _appDbContext = appDbContext;
         }
 
+        /// <summary>
+        /// Returns all products contained in the database
+        /// </summary>
         public IEnumerable<Product> AllProducts
         {
             get
@@ -25,14 +28,22 @@ namespace Week8PicknPay.Repository
             }
         }
 
-        public IEnumerable<Product> ProductsOfTheWeek
+        /// <summary>
+        /// Returns products whose IsTopDeal property is set to true.
+        /// </summary>
+        public IEnumerable<Product> TopDealProducts
         {
             get
             {
-                return _appDbContext.Products.Include(c => c.Category).Where(p => p.IsTopDeal);
+                return _appDbContext.Products.Where(p => p.IsTopDeal);//.Include(c => c.Category).Where(p => p.IsTopDeal);
             }
         }
 
+        /// <summary>
+        /// Returns a particular product using the product id.
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public Product GetProductById(int productId)
         {
             return _appDbContext.Products.FirstOrDefault(p => p.ProductId == productId);

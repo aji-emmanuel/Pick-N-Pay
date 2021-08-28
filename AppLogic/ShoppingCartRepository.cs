@@ -10,7 +10,7 @@ using Week8PicknPay.Models;
 
 namespace Week8PicknPay.Repository
 {
-    public class ShoppingCart
+    public class ShoppingCart : IShoppingCart
     {
         private readonly AppDbContext _appDbContext;
 
@@ -23,6 +23,11 @@ namespace Week8PicknPay.Repository
             _appDbContext = appDbContext;
         }
 
+        /// <summary>
+        /// Returns a specific shopping cart using shopping cart id
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static ShoppingCart GetCart(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?
@@ -37,6 +42,11 @@ namespace Week8PicknPay.Repository
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
+        /// <summary>
+        ///  Adds a product from a specific shopping cart using product id and shopping cart id
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="amount"></param>
         public void AddToCart(Product product, int amount)
         {
             var shoppingCartItem =
@@ -61,6 +71,11 @@ namespace Week8PicknPay.Repository
             _appDbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Removes a product from a specific shopping cart using product id and shopping cart id
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public int RemoveFromCart(Product product)
         {
             var shoppingCartItem =
@@ -87,6 +102,10 @@ namespace Week8PicknPay.Repository
             return localAmount;
         }
 
+        /// <summary>
+        /// Returns all products in a specific shopping cart using the shopping cart id.
+        /// </summary>
+        /// <returns></returns>
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
             return ShoppingCartItems ??=
@@ -95,6 +114,9 @@ namespace Week8PicknPay.Repository
                            .ToList();
         }
 
+        /// <summary>
+        /// Clears all products from a specific shopping cart using shopping cart id
+        /// </summary>
         public void ClearCart()
         {
             var cartItems = _appDbContext
@@ -106,6 +128,10 @@ namespace Week8PicknPay.Repository
             _appDbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Returns the total sum of the prices of all the products in a shopping cart
+        /// </summary>
+        /// <returns></returns>
         public double GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)

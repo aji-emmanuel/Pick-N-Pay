@@ -1,9 +1,12 @@
 ﻿@model Product
 
-<h2>@Model.Name</h2>
-
+<div style="display: flex; justify-content: center;">
+    <h2 style="color: #b61a4c;">@Model.Name</h2>
+</div>
 <div class="thumbnail">
-    <img alt="@Model.Name" src="@Model.ImageUrl">
+    <div style="display: flex; justify-content: center;">
+        <img alt="@Model.Name" src="@Model.ImageUrl" style="height: 500px; width: 500px; margin: 5px; margin-bottom:0px;">
+    </div>
     <div class="caption-full">
         <h3 class="pull-right">@string.Format("# {0:N}", @Model.Price)</h3>
         <h3>

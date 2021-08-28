@@ -20,7 +20,6 @@ namespace Week8PicknPay.Components
 
         public IViewComponentResult Invoke()
         {
-
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
 
@@ -28,7 +27,6 @@ namespace Week8PicknPay.Components
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
-
             };
             return View(shoppingCartViewModel);
         }

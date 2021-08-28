@@ -23,7 +23,11 @@ namespace Week8PicknPay.Controllers
         }
 
        
-
+        /// <summary>
+        /// Creates a list of all the products or a selected product using category name
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         public ViewResult List(string category)
         {
             IEnumerable<Product> products;
@@ -48,13 +52,16 @@ namespace Week8PicknPay.Controllers
             });
         }
 
-
+        /// <summary>
+        /// Gets a specific product using product id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Details(int id)
         {
             var product = _productRepository.GetProductById(id);
             if (product == null)
                 return NotFound();
-
             return View(product);
         }
     }

@@ -15,11 +15,18 @@ namespace Week8PicknPay.Repository
             _appDbContext = appDbContext;
         }
 
+        /// <summary>
+        /// Saves Request details from customers
+        /// </summary>
+        /// <param name="request"></param>
         public void SaveRequest(Request request)
         {
             request.Id = Guid.NewGuid().ToString();
             _appDbContext.UserRequests.Add(request);
-            _appDbContext.SaveChanges();
+            if(request.Subject!=null && request.Description!=null)
+            {
+                _appDbContext.SaveChanges();
+            }
         }
     }
 }

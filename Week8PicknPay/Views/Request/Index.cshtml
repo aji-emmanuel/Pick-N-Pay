@@ -1,5 +1,5 @@
 ﻿
-@ViewBag.RequestMessage
+
 @model Request
 <h4>Fill the Request Form below.</h4>
 <hr />
@@ -25,38 +25,19 @@
         <button type="submit" class="btn btn-primary">Submit Request</button>
     </div>
 
-
-    
-      
-        {
-            <script type="text/javascript">
-                window.onload = function () {
-                    alert('@ViewBag.RequestMessage');
+   @* {
+        <script type="text/javascript">
+            window.onclick = function () {
+                    alert('Thanks for submitting your request! We will get back to you as soon as possible.');
                 };
-            </script>
-        }
+        </script>
+    }*@
 }
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<hr />
 <div>
     <h4 style="display:flex; justify-content:center;">You can also send us an Email by clicking on the link below.</h4>
     <div class="" style="display:flex; justify-content:center;">

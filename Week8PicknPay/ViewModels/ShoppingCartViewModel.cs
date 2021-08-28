@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Week8PicknPay.Models;
+﻿
 using Week8PicknPay.Repository;
 
 namespace Week8PicknPay.ViewModels
 {
+    /// <summary>
+    /// Model for displaying the shopping cart page
+    /// </summary>
     public class ShoppingCartViewModel
     {
         public ShoppingCart ShoppingCart { get; set; }

@@ -1,7 +1,7 @@
 ﻿@model ProductsListViewModel
 
 
-<h1>@Model.CurrentCategory</h1>
+<h1 style="color: #b61a4c; display: flex; justify-content: center; ">@Model.CurrentCategory.ToUpper()</h1>
 
 @foreach (var product in Model.Products)
 {

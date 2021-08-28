@@ -8,6 +8,6 @@ namespace Week8PicknPay.ViewModels
 {
     public class HomeViewModel
     {
-        public IEnumerable<Product> ProductsOfTheWeek { get; set; }
+        public IEnumerable<Product> TopDealProducts { get; set; }
     }
 }

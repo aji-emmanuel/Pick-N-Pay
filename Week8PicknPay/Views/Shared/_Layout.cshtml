@@ -27,10 +27,9 @@
                     <ul class="nav navbar-nav">
                         <li style="padding-top: 10px;"><img class="img-responsive" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" /></li>
                         <li style="margin-left: 50px;"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li style="padding-top: 10px; margin-left:150px;">
+                        <li style="padding-top: 10px; margin-left:50px;">
                             <form class="d-flex">
                                 <input class="form-control " type="search" placeholder="Search By Product Name" aria-label="Search">
-                                @* <button class="btn btn-outline-success" type="submit">Search</button>*@
                             </form>
                         </li>
 
@@ -56,10 +55,10 @@
         </div>
         <hr />
 
-        <footer class="border-top footer text-muted bg-footer">
-            <div class="container" style="display: flex; justify-content: center; color:white;">
-                <a asp-controller="Home" asp-action="Index" style="color:white; margin:20px;">Home</a>
-                <a  asp-controller="Product" asp-action="List" asp-route-Category="" style="color:white; margin:20px;">Products</a>
+        <footer class="navbar navbar-inverse" style="bottom: 0px; left:0px;">
+            <div class="container" style="display: flex; justify-content: center; color: white;">
+                <a asp-controller="Home" asp-action="Index" style="color:white; margin:10px;">Home</a>
+                <a asp-controller="Product" asp-action="List" asp-route-Category="" style="color:white; margin:20px;">Products</a>
                 <a asp-controller="Request" asp-action="Index" style="color:white; margin:20px;">Contact Us</a>
             </div>
             <div class="container" style="display: flex; justify-content: center; color:white;">

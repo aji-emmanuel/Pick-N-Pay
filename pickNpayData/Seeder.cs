@@ -12,6 +12,25 @@ namespace Week8PicknPay.Database
 {
     public class Seeder
     {
+        private static IServiceProvider serviceProvider;
+
+        /// <summary>
+        /// Provides an instance of the DbContext class
+        /// </summary>
+        /// <param name="services"></param>
+        public static void SeedDataBase(IServiceCollection services)
+        {
+            serviceProvider = services.BuildServiceProvider();
+            AppDbContext context = serviceProvider.GetRequiredService<AppDbContext>();
+            CategoryData(context).Wait();
+            ProductData(context).Wait();
+        }
+
+        /// <summary>
+        /// Saves a list of products to the database
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static async Task ProductData(AppDbContext context)
         {
             try
@@ -32,6 +51,11 @@ namespace Week8PicknPay.Database
             }
         }
 
+        /// <summary>
+        /// Saves a list of categories to the database
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static async Task CategoryData(AppDbContext context)
         {
             try

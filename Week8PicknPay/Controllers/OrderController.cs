@@ -23,11 +23,20 @@ namespace Week8PicknPay.Controllers
             _shoppingCart = shoppingCart;
         }
 
+        /// <summary>
+        /// Returns the checkout view
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Checkout()
         {
             return View();
         }
 
+        /// <summary>
+        /// Displays all products in the shopping cart
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
@@ -38,7 +47,6 @@ namespace Week8PicknPay.Controllers
             {
                 ModelState.AddModelError("", "Your cart is empty, add some products first");
             }
-
             if (ModelState.IsValid)
             {
                 _orderRepository.CreateOrder(order);
@@ -48,6 +56,7 @@ namespace Week8PicknPay.Controllers
             return View(order);
         }
 
+        
         public IActionResult CheckoutComplete()
         {
             ViewBag.CheckoutCompleteMessage = "Thanks for patronizing PicknPay!";

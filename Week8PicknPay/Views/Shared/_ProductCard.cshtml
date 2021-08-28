@@ -8,7 +8,7 @@
             <div class="caption" style="margin:0px;">
                 <h3 class="pull-right">@string.Format("# {0:N}", @Model.Price)</h3>
                 <h3>
-                    <a asp-controller="Product"
+                    <a style="color:crimson;" asp-controller="Product"
                        asp-action="Details"
                        asp-route-id="@Model.ProductId">@Model.Name</a>
                 </h3>

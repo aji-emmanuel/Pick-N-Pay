@@ -22,6 +22,10 @@ namespace Week8PicknPay.Controllers
             _shoppingCart = shoppingCart;
         }
 
+        /// <summary>
+        /// Gets and returns a view of shopping cart items
+        /// </summary>
+        /// <returns></returns>
         public ViewResult Index()
         {
             var items = _shoppingCart.GetShoppingCartItems();
@@ -36,6 +40,11 @@ namespace Week8PicknPay.Controllers
             return View(shoppingCartViewModel);
         }
 
+        /// <summary>
+        /// Adds a product to the shopping cart
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public RedirectToActionResult AddToShoppingCart(int productId)
         {
             var selectedProduct = _productRepository.AllProducts.FirstOrDefault(p => p.ProductId == productId);
@@ -47,6 +56,11 @@ namespace Week8PicknPay.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Removes a product from the shopping cart
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public RedirectToActionResult RemoveFromShoppingCart(int productId)
         {
             var selectedProduct = _productRepository.AllProducts.FirstOrDefault(p => p.ProductId == productId);

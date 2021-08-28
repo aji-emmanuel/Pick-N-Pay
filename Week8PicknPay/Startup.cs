@@ -19,30 +19,31 @@ namespace Week8PicknPay
 {
     public class Startup : IDesignTimeDbContextFactory<AppDbContext>
     {
-        private const string connectionString = "Data Source=myPicknPay.db";
         public IConfiguration Configuration { get; }
-        private static IServiceProvider serviceProvider;
 
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(optionsBuilder =>
-                     optionsBuilder.UseSqlite(connectionString));
-            serviceProvider = services.BuildServiceProvider();
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IRequestForm, RequestForm>();
-            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddScoped(sp => ShoppingCart.GetCart(sp));
 
             services.AddHttpContextAccessor();
             services.AddSession();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            SeedDataBase();
+            Seeder.SeedDataBase(services);
         }
 
 
@@ -75,17 +76,10 @@ namespace Week8PicknPay
             });
         }
 
-        public static void SeedDataBase()
-        {
-            AppDbContext context = serviceProvider.GetRequiredService<AppDbContext>();
-            Seeder.CategoryData(context).Wait();
-            Seeder.ProductData(context).Wait();
-        }
-
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             return new AppDbContext(optionsBuilder.Options);
         }
     }

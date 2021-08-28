@@ -20,11 +20,15 @@ namespace Week8PicknPay.Controllers
             _productRepository = productRepository;
         }
 
+        /// <summary>
+        /// Returns a view of Top deal products
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             var homeViewModel = new HomeViewModel
             {
-                ProductsOfTheWeek = _productRepository.ProductsOfTheWeek
+                TopDealProducts = _productRepository.TopDealProducts
             };
 
             return View(homeViewModel);

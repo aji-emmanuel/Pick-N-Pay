@@ -1,7 +1,4 @@
-﻿           using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 
@@ -16,6 +13,9 @@ namespace Week8PicknPay.Repository
             _appDbContext = appDbContext;
         }
 
+        /// <summary>
+        /// Gets a list of all categories from the database
+        /// </summary>
         public IEnumerable<Category> AllCategories => _appDbContext.Categories;
     }
 }
