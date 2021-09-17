@@ -30,8 +30,8 @@ jobs:
           HEROKU_API_KEY: 0506cb3b-e4ae-4358-9f6e-ea26328a2004
           APP_NAME: pick-n-pay
         run: |
-          docker build -t picknpaywebsite .
-          docker tag picknpaywebsite registry.heroku.com
+          docker build -t pick-n-pay .
+          docker tag pick-n-pay registry.heroku.com
           docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
           heroku container:push web -a $APP_NAME
           heroku container:release web -a $APP_NAME
