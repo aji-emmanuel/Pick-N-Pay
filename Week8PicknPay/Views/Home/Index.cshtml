@@ -1,0 +1,20 @@
+﻿@model HomeViewModel
+
+
+<partial name="_Carousel" />
+
+<h2 style="color:crimson;">TOP DEALS OF THE WEEK, JUST FOR YOU!</h2>
+<hr />
+<div class="row">
+
+    @foreach (var product in Model.TopDealProducts)
+    {
+        <partial name="_ProductCard" model="product" />
+    }
+
+</div>
+<hr class="" style="color:crimson;"/>
+<div class="container">
+    <h4 style="color:crimson; display:flex; justify-content:center;">ABOUT US</h4>
+    <p> PicknPay is West Africa’s number one online Shopping destination. We pride ourselves in having everything you could possibly need for life and living at the best prices than anywhere else. Our access to premium sellers gives us a wide range of products at very low prices. Some of our popular categories include electronics, home and kitchen, and a whole lot more from premium brands. To make your shopping experience swift and memorable, there are also added services like gift vouchers, consumer promotion activities across different categories and bulk purchases with hassle-free delivery. Enjoy free shipping rates for certain products and with the bulk purchase option, you can enjoy low shipping rates, discounted prices and flexible payment. Get the best of lifestyle services online. Don't miss out on the biggest sales online which takes place on special dates yearly.</p>
+</div>

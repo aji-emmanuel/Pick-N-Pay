@@ -1,0 +1,29 @@
+[
+  {
+    "CategoryId": 1,
+    "CategoryName": "Electronics",
+    "Description": "The advancement in technology has made electronics imperative in many homes, buying electronics is no longer a choice but a necessity, the major concern of some people is where to buy their preferred electronics with numerous online shopping sites competing with the local markets in terms of prices. Find original electronics from the best brands on PicknPay at the guaranteed lowest prices in Nigeria"
+  },
+  {
+    "CategoryId": 2,
+    "CategoryName": "Jewelery",
+    "Description": "Konga provides you with a wide selection of jewelry for ladies from our top local and international suppliers."
+  },
+  {
+    "CategoryId": 3,
+    "CategoryName": "Men's Clothing",
+    "Description": "Get the best fashion style for men from trusted brands online from PicknPay and you will make all the trendy clothes for men become yours just by the click of a button. Get a selection of all categories of men fashion from work, play, church, and seminar and any other event you might have."
+  },
+  {
+    "CategoryId": 4,
+    "CategoryName": "Women's Clothing",
+    "Description": "With famous brands such as Victoria’s Secret, Top Shop, Calvin Klein and Zara, you really cannot afford to not buy clothes here!"
+  },
+  {
+    "CategoryId": 5,
+    "CategoryName": "Delicious Pies",
+    "Description": "A delicious collection of Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake pie chocolate bar cookie dragée brownie. "
+  }
+]
+
+

@@ -1,0 +1,24 @@
+﻿@model Product
+
+<div style="display: flex; justify-content: center;">
+    <h2 style="color: #b61a4c;">@Model.Name</h2>
+</div>
+<div class="thumbnail">
+    <div style="display: flex; justify-content: center;">
+        <img alt="@Model.Name" src="@Model.ImageUrl" style="height: 500px; width: 500px; margin: 5px; margin-bottom:0px;">
+    </div>
+    <div class="caption-full">
+        <h3 class="pull-right">@string.Format("# {0:N}", @Model.Price)</h3>
+        <h3>
+            <a href="#" style="color:crimson">@Model.Name</a>
+        </h3>
+        <h4>@Model.ShortDescription</h4>
+        <p>@Model.LongDescription</p>
+        <div class="addToCart">
+            <p class="button">
+                <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                   asp-route-productId="@Model.ProductId">Add To Cart</a>
+            </p>
+        </div>
+    </div>
+</div>
