@@ -28,7 +28,7 @@ jobs:
       - name: Build and deploy the Docker Image
         env:
           HEROKU_API_KEY: 0506cb3b-e4ae-4358-9f6e-ea26328a2004
-          APP_NAME: picknpaywebsite
+          APP_NAME: pick-n-pay
         run: |
           docker build -t picknpaywebsite .
           docker tag picknpaywebsite registry.heroku.com
