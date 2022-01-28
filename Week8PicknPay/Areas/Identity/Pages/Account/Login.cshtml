@@ -5,46 +5,47 @@
     ViewData["Title"] = "Log In Account";
 }
 
-<h1 class="col-md-8" style="padding-left:10em; color:crimson;">@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-8" style="padding-left:10em">
-        <section>
-            <form id="account" method="post">
-                <h4>Enter your Log In details.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log In</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a style="color:crimson;" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a style="color:crimson;" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Don't Have an Account? SignUp'</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
+
+<div style="display:flex; justify-content:center">
+       
+    <form id="account" method="post">
+        <div style="text-align:center">
+            <h2 style="color:crimson;">@ViewData["Title"]</h2>
+            <h4>Enter your Log In details.</h4>
+        </div>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label asp-for="Input.RememberMe">
+                    <input asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+        </div>
+        <div style="text-align: center;">
+            <p>
+                <a style="color:crimson;" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+            </p>
+            <p>
+                <a style="color:crimson;" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Don't Have an Account? SignUp'</a>
+            </p>
+        </div>
+    </form>
+    
 </div>
 
 @section Scripts {

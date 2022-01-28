@@ -4,12 +4,15 @@
     ViewData["Title"] = "Sign Up";
 }
 
-<h1 style="padding-left:10em; color:crimson;">@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-10" style="padding-left:10em">
+
+
+    <div style="display:flex; justify-content:center">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+            <div style="text-align:center">
+                <h2 style="color:crimson; margin-top:0px;">@ViewData["Title"]</h2>
+                <h4>Create a new account.</h4>
+            </div>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -40,10 +43,10 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
         </form>
     </div>
-</div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -25,7 +25,7 @@ body {
 }
 
 .caption {
-    height: 130px;
+    height: 110px;
     overflow: hidden;
 }
 
@@ -52,7 +52,6 @@ body {
     }
 
 footer {
-    margin-bottom: 10px;
     background-color: #b61a4c;
 }
 
@@ -95,4 +94,10 @@ footer {
 .btn {
     background-color: #b61a4c !important;
     border-color: #fba1a1 !important;
+}
+
+form {
+    width: 40rem;
+    border: 1px solid #b61a4c;
+    padding: 5rem;
 }

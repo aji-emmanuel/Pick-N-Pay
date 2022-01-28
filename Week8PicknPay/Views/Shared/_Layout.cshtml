@@ -11,42 +11,44 @@
     <link href="~/Content/site.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li style="padding-top: 10px;"><img class="img-responsive" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" /></li>
-                        <li style="margin-left: 50px;"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li style="padding-top: 10px; margin-left:50px;">
-                            <form class="d-flex">
-                                <input class="form-control " type="search" placeholder="Search By Product Name" aria-label="Search">
-                            </form>
-                        </li>
 
-                    </ul>
-
-                    <div class="pull-right">
-                        <ul class="nav navbar-nav">
-                            @await Component.InvokeAsync("CategoryMenu")
-                            @await Component.InvokeAsync("ShoppingCartSummary")
-                            <li><a asp-controller="Request" asp-action="Index">Contact Us</a></li>
-                            <partial name="_LoginPartial" />
-                        </ul>
-                    </div>
-
-                </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #b61a4c !important;">
+        <div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-        </nav>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a asp-controller="Home" asp-action="Index">
+                                <img style="margin-top: -7px;" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
+                            </a>
+                        </li>
+                        <li >
+                            <input class="form-control" style="margin-top: 10px; line-height:20px" type="search" placeholder="Search By Product Name" aria-label="Search">
+                        </li>
+                    </ul>
+                </div>
+                <div class="pull-right">
+                    <ul class="nav navbar-nav" style="padding-right:2rem;">
+                        @await Component.InvokeAsync("CategoryMenu")
+                        @await Component.InvokeAsync("ShoppingCartSummary")
+                        <li><a asp-controller="Request" asp-action="Index">Contact Us</a></li>
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="min-height:77vh;">
 
         <div class="row">
             <div class="col-md-0">
@@ -55,22 +57,22 @@
         </div>
         <hr />
 
-        <footer class="navbar navbar-inverse" style="bottom: 0px; left:0px;">
-            <div class="container" style="display: flex; justify-content: center; color: white;">
-                <a asp-controller="Home" asp-action="Index" style="color:white; margin:10px;">Home</a>
-                <a asp-controller="Product" asp-action="List" asp-route-Category="" style="color:white; margin:20px;">Products</a>
-                <a asp-controller="Request" asp-action="Index" style="color:white; margin:20px;">Contact Us</a>
-            </div>
-            <div class="container" style="display: flex; justify-content: center; color:white;">
-                &copy; 2021 Aji Crafts, Inc - <a style="color:white;" asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-        </footer>
-
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
 
         @RenderSection("Scripts", required: false)
     </div>
+
+    <footer>
+        <div class="container" style="display: flex; justify-content: center; color: white;">
+            <a asp-controller="Home" asp-action="Index" style="color:white; margin:20px;">Home</a>
+            <a asp-controller="Product" asp-action="List" asp-route-Category="" style="color:white; margin:20px;">Products</a>
+            <a asp-controller="Request" asp-action="Index" style="color:white; margin:20px;">Contact Us</a>
+        </div>
+        <div class="container" style="display: flex; justify-content: center; color:white;">
+            &copy; 2021 Aji Crafts, Inc - <a style="color:white;" asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
 </body>
 </html>
