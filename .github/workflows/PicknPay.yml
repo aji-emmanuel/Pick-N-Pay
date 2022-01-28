@@ -27,7 +27,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build and deploy the Docker Image
         env:
-          HEROKU_API_KEY: 59671249-1342-4d46-a9c9-ddc5b1f11e55
+          HEROKU_API_KEY: 435c9517-4cb6-4c6f-8251-3ec0ce10e818
           APP_NAME: pick-n-pay
         run: |
           docker build -t pick-n-pay .
