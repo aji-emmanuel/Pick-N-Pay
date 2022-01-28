@@ -101,3 +101,9 @@ form {
     border: 1px solid #b61a4c;
     padding: 5rem;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #b61a4c !important;
+    border-color: #b61a4c !important;
+}

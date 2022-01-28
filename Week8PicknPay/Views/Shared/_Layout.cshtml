@@ -8,13 +8,18 @@
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="~/content/site.css" rel="stylesheet" />
 </head>
 <body>
 
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #b61a4c !important;">
         <div>
+            <div class=pull-left>
+                <a asp-controller="Home" asp-action="Index">
+                    <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px;" />
+                </a>
+            </div>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -23,15 +28,11 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div>
                     <ul class="nav navbar-nav">
                         <li>
-                            <a asp-controller="Home" asp-action="Index">
-                                <img style="margin-top: -7px;" alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
-                            </a>
-                        </li>
-                        <li >
                             <input class="form-control" style="margin-top: 10px; line-height:20px" type="search" placeholder="Search By Product Name" aria-label="Search">
                         </li>
                     </ul>
@@ -57,9 +58,7 @@
         </div>
         <hr />
 
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/jquery.js"></script>
 
         @RenderSection("Scripts", required: false)
     </div>

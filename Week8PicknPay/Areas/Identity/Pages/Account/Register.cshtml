@@ -44,6 +44,12 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+
+            <div style="text-align: center;">
+                <p style=" margin-top: 1rem;">
+                    <a style="color:crimson;" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already Have an Account? SignIn'</a>
+                </p>
+            </div>
         </form>
     </div>
 
