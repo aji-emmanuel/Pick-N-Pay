@@ -32,7 +32,74 @@ body {
         white-space: nowrap;
     }
 
-.thumbnail img {
+.thumbnail {
+    display: block;
+    padding: 4px;
+    height: fit-content;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.25);
+    transition: transform 300ms;
+}
+
+    .thumbnail:hover {
+        transform: scale(1.03);
+        box-shadow: 0 15px 35px 0 rgba(0,0,0,0.5);
+    }
+
+.thumbnail-img {
+    display: flex;
+    justify-content: center;
+    padding: 0 .6rem;
+}
+
+    .thumbnail-img img {
+        height: 15em;
+        width: 100%;
+        margin: 5px;
+        margin-bottom: 0px;
+    }
+
+@media (max-width:500px) {
+    .thumbnail-img img {
+        height: 30vw;
+    }
+}
+
+@media (min-width:500px) and (max-width:770px) {
+    .thumbnail-img img {
+        height: 35vw;
+    }
+}
+
+@media (min-width:770px) and (max-width:1000px) {
+    .thumbnail-img img {
+        height: 20vw;
+    }
+}
+
+.thumbnail > img,
+.thumbnail a > img {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+    border-color: #337ab7;
+}
+
+.thumbnail .caption {
+    padding: 9px;
+    color: #333;
+}
+    .thumbnail img {
     width: 100%;
 }
 
