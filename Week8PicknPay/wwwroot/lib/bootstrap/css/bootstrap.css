@@ -4254,13 +4254,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     border-radius: 0;
   }
 }
-.navbar-fixed-top,
-.navbar-fixed-bottom {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-}
 @media (min-width: 768px) {
   .navbar-fixed-top,
   .navbar-fixed-bottom {
@@ -5014,11 +5007,12 @@ a.badge:focus {
     border-radius: 4px;
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.25);
+    transition: transform 300ms;
 }
     .thumbnail:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        transform: scale(1.1);
+        box-shadow: 0 15px 35px 0 rgba(0,0,0,0.5);
     }
 
 .thumbnail > img,

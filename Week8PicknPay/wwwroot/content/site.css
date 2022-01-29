@@ -45,6 +45,11 @@ body {
 .thumbnail {
     padding: 0;
 }
+@media (max-width: 1000px){
+    .thumbnail {
+        margin: 0 -10px 10px -10px;
+    }
+}
 
     .thumbnail .caption-full {
         padding: 9px;
@@ -53,6 +58,7 @@ body {
 
 footer {
     background-color: #b61a4c;
+    margin-right: -2rem;
 }
 
 .navbar {
@@ -106,4 +112,10 @@ form {
     color: #fff;
     background-color: #b61a4c !important;
     border-color: #b61a4c !important;
+}
+
+@media only screen and (max-width: 520px) {
+    h1, .h1 {
+        font-size: 2.2rem;
+    }
 }
