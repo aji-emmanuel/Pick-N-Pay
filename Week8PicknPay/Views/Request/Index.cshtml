@@ -4,11 +4,10 @@
 
 <div style="display:flex; justify-content:center; margin:0 2rem;">
     <div>
-        <h4>Fill the Request Form below.</h4>
+        <h4 style="text-align: center;">Fill the request form below.</h4>
         <hr />
         @using (Html.BeginForm("Reply", "Request"))
         {
-
             <div style="margin-bottom:2rem;" class="form-group">
                 <label asp-for="Subject"></label>
                 <input asp-for="Subject" class="form-control" />
@@ -21,16 +20,14 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
-            <div style="margin-bottom:2rem;">
-                <button type="submit" class="btn btn-primary">Submit Request</button>
+            <div style="margin-bottom:2rem; width: 100%;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
             </div>
-        }
 
-        <div style="margin-top:2rem;">
-            <p>
+            <p style="margin-top:2rem; text-align:center;">
                 You can also send us an <email address="ajiemilo@gmail.com" content="email"></email>.
             </p>
-        </div>
+        }
     </div>
 </div>
 

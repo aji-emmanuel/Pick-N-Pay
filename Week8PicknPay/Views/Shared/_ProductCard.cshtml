@@ -1,22 +1,22 @@
 ﻿@model Product
     <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
         <div class="thumbnail">
-            <div class="" style="display:flex; justify-content:center; padding:0 .6rem;">
-                <img src="@Model.ImageUrl" alt="@Model.Name" style="height: 250px; width: 100%; margin: 5px; margin-bottom:0px;">
+            <div class="thumbnail-img">
+                <img src="@Model.ImageUrl" alt="@Model.Name">
             </div>
            
             <div class="caption" style="margin:0px;">
                 <div>
-                    <h4>
+                    <h4 class="product-name">
                         <a style="color:crimson;" asp-controller="Product"
                            asp-action="Details"
                            asp-route-id="@Model.ProductId">@Model.Name</a>
                     </h4>
-                    <h4 class="pull-right">@string.Format("# {0:N}", @Model.Price)</h4>
+                    <h4 class="pull-right">@string.Format("#{0:N}", @Model.Price)</h4>
                 </div>
                 <p>@Model.ShortDescription</p>
             </div>
-            <div class="addToCart" style="margin:0px;">
+            <div class="addToCart" style="margin-bottom:5px;">
                
                     <a class="btn btn-primary" 
                        asp-controller="ShoppingCart" 

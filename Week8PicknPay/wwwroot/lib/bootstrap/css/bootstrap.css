@@ -1582,26 +1582,13 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+    min-height: 77vh;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
 }
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
-}
+
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;
@@ -4166,7 +4153,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
     position: relative;
     min-height: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
     border: 1px solid transparent;
     background-color: #b61a4c !important;
 }
@@ -4635,16 +4622,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-form {
   border-color: #101010;
 }
-    .navbar-inverse .navbar-nav > .open > a,
-    .navbar-inverse .navbar-nav > .open > a:hover,
-    .navbar-inverse .navbar-nav > .open > a:focus {
-        color: #fff;
-        background-color: #b61a4c !important;
-    }
+   
 @media (max-width: 767px) {
-  .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-    border-color: #080808;
-  }
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+        border-color: #b61a4c !important;
+    }
     .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
         background-color: #b61a4c !important;
     }
@@ -4999,7 +4981,7 @@ a.badge:focus {
 .thumbnail {
     display: block;
     padding: 4px;
-    height: 41rem;
+    height: fit-content;
     margin-bottom: 20px;
     line-height: 1.42857143;
     background-color: #fff;
@@ -5011,20 +4993,46 @@ a.badge:focus {
     transition: transform 300ms;
 }
     .thumbnail:hover {
-        transform: scale(1.1);
+        transform: scale(1.03);
         box-shadow: 0 15px 35px 0 rgba(0,0,0,0.5);
     }
 
-.thumbnail > img,
-.thumbnail a > img {
-  margin-right: auto;
-  margin-left: auto;
+.thumbnail-img {
+    display: flex;
+    justify-content: center;
+    padding: 0 .6rem;
 }
+    .thumbnail-img img {
+        height: 15em;
+        width: 100%;
+        margin: 5px;
+        margin-bottom: 0px;
+    }
+@media (max-width:500px) {
+    .thumbnail-img img {
+        height: 30vw;
+    }
+}
+@media (min-width:500px) and (max-width:770px) {
+    .thumbnail-img img {
+        height: 35vw;
+    }
+}
+@media (min-width:770px) and (max-width:1000px) {
+    .thumbnail-img img {
+        height: 20vw;
+    }
+}
+
+    .thumbnail > img,
+    .thumbnail a > img {
+        margin-right: auto;
+        margin-left: auto;
+    }
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
   border-color: #337ab7;
-  transla
 }
 .thumbnail .caption {
   padding: 9px;
@@ -5851,7 +5859,6 @@ button.list-group-item-danger.active:focus {
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
-  filter: alpha(opacity=20);
   opacity: .2;
 }
 .close:hover,
@@ -5859,7 +5866,6 @@ button.list-group-item-danger.active:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  filter: alpha(opacity=50);
   opacity: .5;
 }
 button.close {
@@ -6757,3 +6763,4 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+container
