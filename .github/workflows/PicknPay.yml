@@ -6,7 +6,7 @@ name: picknpayapp/CICD
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
 
-  pull_request:
+  push:
     branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -27,8 +27,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build and deploy the Docker Image
         env:
-          HEROKU_API_KEY: e8eebed3-1278-4d86-8644-c6702efd8c71
-          APP_NAME: picknpaywebsite
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
           docker build -t pick-n-pay .
           docker tag pick-n-pay registry.heroku.com
