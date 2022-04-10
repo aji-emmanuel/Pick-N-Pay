@@ -4,10 +4,13 @@
 
 <div style="display:flex; justify-content:center; margin:0 2rem;">
     <div>
-        <h4 style="text-align: center;">Fill the request form below.</h4>
-        <hr />
+
         @using (Html.BeginForm("Reply", "Request"))
         {
+            <div style="text-align:center">
+                <h4 style="color:crimson;">Request Form</h4>
+            </div>
+
             <div style="margin-bottom:2rem;" class="form-group">
                 <label asp-for="Subject"></label>
                 <input asp-for="Subject" class="form-control" />

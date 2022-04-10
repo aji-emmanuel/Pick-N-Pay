@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Week8PicknPay", "Week8PicknPay\Week8PicknPay.csproj", "{DCEA841A-6374-4291-B801-914409835433}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "pickNpayData\DataBase.csproj", "{187865EF-BF5F-4BEF-97A1-6B15514613E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "pickNpayData\DataBase.csproj", "{187865EF-BF5F-4BEF-97A1-6B15514613E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{806CEE02-5700-4B88-B9D2-FD29C79476F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{806CEE02-5700-4B88-B9D2-FD29C79476F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppRepository", "AppLogic\AppRepository.csproj", "{91B02F76-A685-4CAB-A7DA-382B936E720F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppRepository", "AppLogic\AppRepository.csproj", "{91B02F76-A685-4CAB-A7DA-382B936E720F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

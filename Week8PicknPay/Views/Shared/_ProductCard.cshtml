@@ -1,28 +1,25 @@
 ﻿@model Product
-    <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
-        <div class="thumbnail">
-            <div class="thumbnail-img">
-                <img src="@Model.ImageUrl" alt="@Model.Name">
+<div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
+    <div class="thumbnail">
+        <div class="thumbnail-img">
+            <img src="@Model.ImageUrl" alt="@Model.Name">
+        </div>
+
+        <div class="caption" style="margin:0px;">
+            <div>
+                <h4 class="product-name">
+                    <a style="color:crimson;" asp-controller="Product" asp-action="Details"
+                        asp-route-id="@Model.ProductId">@Model.Name</a>
+                </h4>
+                <h4 class="pull-right">@string.Format("#{0:N}", @Model.Price)</h4>
             </div>
-           
-            <div class="caption" style="margin:0px;">
-                <div>
-                    <h4 class="product-name">
-                        <a style="color:crimson;" asp-controller="Product"
-                           asp-action="Details"
-                           asp-route-id="@Model.ProductId">@Model.Name</a>
-                    </h4>
-                    <h4 class="pull-right">@string.Format("#{0:N}", @Model.Price)</h4>
-                </div>
-                <p>@Model.ShortDescription</p>
-            </div>
-            <div class="addToCart" style="margin-bottom:5px;">
-               
-                    <a class="btn btn-primary" 
-                       asp-controller="ShoppingCart" 
-                       asp-action="AddToShoppingCart"
-                       asp-route-productId="@Model.ProductId">Add To Cart</a>
-               
-            </div>
+            <p>@Model.ShortDescription</p>
+        </div>
+        <div class="addToCart" style="margin-bottom:5px;">
+
+            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                asp-route-productId="@Model.ProductId">Add To Cart</a>
+
         </div>
     </div>
+</div>

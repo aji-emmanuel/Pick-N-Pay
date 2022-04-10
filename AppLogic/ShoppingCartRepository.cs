@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 
@@ -18,7 +17,7 @@ namespace Week8PicknPay.Repository
 
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
-        private ShoppingCart(AppDbContext appDbContext)
+        public ShoppingCart(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
@@ -61,7 +60,6 @@ namespace Week8PicknPay.Repository
                     Product = product,
                     Amount = amount
                 };
-
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
@@ -71,35 +69,49 @@ namespace Week8PicknPay.Repository
             _appDbContext.SaveChanges();
         }
 
+
+        /// <summary>
+        /// Increases the quantity of a product in a shopping cart.
+        /// </summary>
+        /// <param name="productId"></param>
+        public void IncreaseQty(int productId)
+        {
+            var shoppingCartItem =
+                   _appDbContext.ShoppingCartItems.SingleOrDefault(
+                       s => s.Product.ProductId == productId && s.ShoppingCartId == ShoppingCartId);
+            shoppingCartItem.Amount++;
+            _appDbContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Decreases the quantity of a product in a shopping cart.
+        /// </summary>
+        /// <param name="productId"></param>
+        public void DecreaseQty(int productId)
+        {
+            var shoppingCartItem =
+                   _appDbContext.ShoppingCartItems.SingleOrDefault(
+                       s => s.Product.ProductId == productId && s.ShoppingCartId == ShoppingCartId);
+            if (shoppingCartItem.Amount-1 >=1)
+            {
+                shoppingCartItem.Amount--;
+                _appDbContext.SaveChanges();
+            }
+        }
+
         /// <summary>
         /// Removes a product from a specific shopping cart using product id and shopping cart id
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public int RemoveFromCart(Product product)
+        public int RemoveFromCart(int productId)
         {
             var shoppingCartItem =
                     _appDbContext.ShoppingCartItems.SingleOrDefault(
-                        s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
+                        s => s.Product.ProductId == productId && s.ShoppingCartId == ShoppingCartId);
 
-            var localAmount = 0;
-
-            if (shoppingCartItem != null)
-            {
-                if (shoppingCartItem.Amount > 1)
-                {
-                    shoppingCartItem.Amount--;
-                    localAmount = shoppingCartItem.Amount;
-                }
-                else
-                {
-                    _appDbContext.ShoppingCartItems.Remove(shoppingCartItem);
-                }
-            }
-
-            _appDbContext.SaveChanges();
-
-            return localAmount;
+            _appDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+            return _appDbContext.SaveChanges();
         }
 
         /// <summary>
@@ -108,10 +120,10 @@ namespace Week8PicknPay.Repository
         /// <returns></returns>
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ??=
-                       _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+            var list =  _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                            .Include(s => s.Product)
                            .ToList();
+            return list;
         }
 
         /// <summary>
@@ -124,7 +136,6 @@ namespace Week8PicknPay.Repository
                 .Where(cart => cart.ShoppingCartId == ShoppingCartId);
 
             _appDbContext.ShoppingCartItems.RemoveRange(cartItems);
-
             _appDbContext.SaveChanges();
         }
 

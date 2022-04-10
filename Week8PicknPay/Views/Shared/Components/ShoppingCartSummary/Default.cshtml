@@ -1,12 +1,12 @@
-﻿@model ShoppingCartViewModel
-
-@*@if (Model.ShoppingCart.ShoppingCartItems.Count > 0)*@
+﻿
+@using Week8PicknPay.Repository
+@inject IShoppingCart Cart
 
     <li>
         <a asp-controller="ShoppingCart" asp-action="Index">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             <span id="cart-status">
-                @Model.ShoppingCart.ShoppingCartItems.Count
+                @Cart.GetShoppingCartItems().Count
             </span>
         </a>
     </li>

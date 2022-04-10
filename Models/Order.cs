@@ -26,7 +26,9 @@ namespace Week8PicknPay.Models
         [Required(ErrorMessage = "Please enter your city")]
         [StringLength(50)]
         public string City { get; set; }
-        [StringLength(10)]
+
+        [Required(ErrorMessage = "Please enter your state")]
+        [StringLength(50)]
         public string State { get; set; }
 
         [Required(ErrorMessage = "Please enter your phone number")]
@@ -43,5 +45,4 @@ namespace Week8PicknPay.Models
         [ScaffoldColumn(false)]
         public DateTime OrderPlaced { get; set; }
     }
-
 }

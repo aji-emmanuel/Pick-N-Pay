@@ -1,0 +1,78 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Repository
+@using Week8PicknPay.Models
+
+@inject IShoppingCart _cart 
+
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Change your Mind?</th>
+                <th class="text-center">Product Qty</th>
+                <th class="text-center">Product</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in _cart.GetShoppingCartItems())
+            {
+                <tr>
+                    <td class="text-center">
+                        <button @onclick="(e => RemoveProductFromCart(item.Product.ProductId))">
+                           Remove
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <div class="qty-div">
+                            <button class="qty-button" @onclick="(e =>DecreaseQty(item.Product.ProductId))">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            @item.Amount
+                            <button class="qty-button" @onclick="(e =>IncreaseQty(item.Product.ProductId))">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </td>
+
+                    <td class="text-center">@item.Product.Name</td>
+                    <td class="text-center">@string.Format("# {0:N}", item.Product.Price)</td>
+                    <td class="text-center">
+                        @(string.Format("# {0:N}", (item.Amount * item.Product.Price)))
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right" style="font-weight:bolder">Total:</td>
+                <td colspan="2" class="text-left" style="font-weight:bolder">
+                    @string.Format("# {0:N}", _cart.GetShoppingCartTotal())
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+  
+
+
+
+@code {
+
+    void IncreaseQty(int id)
+    {
+        _cart.IncreaseQty(id);
+    }
+
+    void DecreaseQty(int id)
+    {
+        _cart.DecreaseQty(id);
+    }
+
+    void RemoveProductFromCart(int id)
+    {
+        _cart.RemoveFromCart(id);
+    }
+}
+

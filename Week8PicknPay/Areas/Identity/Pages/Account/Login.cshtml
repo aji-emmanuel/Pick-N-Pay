@@ -14,7 +14,6 @@
             <h4>Enter your Log In details.</h4>
         </div>
         <hr />
-        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Input.Email"></label>
             <input asp-for="Input.Email" class="form-control" />
@@ -32,6 +31,7 @@
                     @Html.DisplayNameFor(m => m.Input.RememberMe)
                 </label>
             </div>
+            <span asp-for= "Failed" class="text-danger"></span>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
@@ -51,3 +51,12 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var yourPrompt= '@ViewData["PromptMessage"]';
+        if(yourPrompt=="Invalid"){
+        alert("Invalid Credentials supplied");
+       }
+    });
+</script>

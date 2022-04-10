@@ -12,6 +12,8 @@ namespace Week8PicknPay.Repository
         void ClearCart();
         List<ShoppingCartItem> GetShoppingCartItems();
         double GetShoppingCartTotal();
-        int RemoveFromCart(Product product);
+        void IncreaseQty(int productId);
+        void DecreaseQty(int productId);
+        int RemoveFromCart(int productId);
     }
 }

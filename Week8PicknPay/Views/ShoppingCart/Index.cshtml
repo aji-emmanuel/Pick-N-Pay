@@ -1,51 +1,16 @@
-﻿@model ShoppingCartViewModel
+﻿@using Week8PicknPay.Views.ShoppingCart
 
-<h2 style="color: #b61a4c;">Your shopping cart</h2>
-<h4 style="color:#b61a4c">Here are the products in your shopping cart.</h4>
 <div class="container">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Change your Mind?</th>
-                <th>Product Qty</th>
-                <th>Product</th>
-                <th class="text-right">Price</th>
-                <th class="text-right">Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
-            {
-                <tr>
-                    <td class="btn">
-                        <p class="button">
-                            <a class="btn btn-primary"
-                               asp-controller="ShoppingCart"
-                               asp-action="RemoveFromShoppingCart"
-                               asp-route-productId="@line.Product.ProductId">Remove</a>
-                        </p>
-                    </td>
-                    <td class="text-center">@line.Amount</td>
-                    <td class="text-left">@line.Product.Name</td>
-                    <td class="text-right">@string.Format("# {0:N}", line.Product.Price)</td>
-                    <td class="text-right">
-                        @(string.Format("# {0:N}", (line.Amount * line.Product.Price)))
-                    </td>
-                </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Total:</td>
-                <td class="text-right">
-                    @string.Format("# {0:N}", Model.ShoppingCartTotal)
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+    <div class="text-center">
+        <h2 style="color: #b61a4c;">Your shopping cart</h2>
+        <h4 style="color:#b61a4c">Here are the products in your shopping cart.</h4>
+    </div>
 
-<div class="text-center">
-    <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Check out now!</a>
-</div>
 
+
+    @(await Html.RenderComponentAsync<ShoppingCartItems>(RenderMode.ServerPrerendered))
+
+    <div class="text-center">
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Check out now!</a>
+    </div>
+</div>

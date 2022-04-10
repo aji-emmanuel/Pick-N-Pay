@@ -96,7 +96,7 @@ namespace Week8PicknPay.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Wrong Email or Password.");
+                    ViewData["PromptMessage"] = "Invalid";
                     return Page();
                 }
             }

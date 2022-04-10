@@ -8,7 +8,12 @@
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="~/content/site.css" rel="stylesheet" />
+
+    <script src="_framework/blazor.server.js"></script>
 </head>
 <body>
 
@@ -51,21 +56,24 @@
     <div class="container">
 
         @RenderBody()
-        <hr />
 
         <script src="~/lib/jquery/jquery.js"></script>
         @RenderSection("Scripts", required: false)
     </div>
 
     <footer>
-        <div style="display: flex; justify-content: center; color: white;">
-            <a asp-controller="Home" asp-action="Index" style="color:white; margin:20px;">Home</a>
-            <a asp-controller="Product" asp-action="List" asp-route-Category="" style="color:white; margin:20px;">Products</a>
-            <a asp-controller="Request" asp-action="Index" style="color:white; margin:20px;">Contact Us</a>
+        <div style="display: flex; justify-content: center;">
+            <div class="footer-links">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Product" asp-action="List">Products</a>
+                <a asp-controller="Request" asp-action="Index">Contact Us</a>
+            </div>
         </div>
-        <div style="display: flex; justify-content: center; color:white;">
-            &copy; 2021 Aji Crafts, Inc - <a style="color:white;" asp-area="" asp-page="/Privacy">Privacy</a>
+        <div class="footer-copyright">
+            &copy; 2021 Aji Crafts, Inc - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 </body>
 </html>
+
+<script src ="_framework/blazor.server.js"></script>

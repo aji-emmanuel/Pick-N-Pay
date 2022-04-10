@@ -183,6 +183,13 @@ table {
   border-spacing: 0;
   border-collapse: collapse;
 }
+
+@media (max-width:450px) {
+    table {
+        font-size: 10px;
+    }
+}
+
 td,
 th {
   padding: 0;
@@ -1583,8 +1590,7 @@ pre code {
 }
 .container {
     min-height: 77vh;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding: 1rem;
     margin-right: auto;
     margin-left: auto;
 }

@@ -37,12 +37,14 @@ namespace Week8PicknPay
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IRequestForm, RequestForm>();
-            services.AddScoped(sp => ShoppingCart.GetCart(sp));
+            services.AddTransient<IShoppingCart, ShoppingCart>();
+           // services.AddScoped(sp => ShoppingCart.GetCart(sp));
 
             services.AddHttpContextAccessor();
             services.AddSession();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddServerSideBlazor();
             Seeder.SeedDataBase(services);
         }
 
@@ -73,6 +75,7 @@ namespace Week8PicknPay
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
             });
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 
@@ -9,9 +8,9 @@ namespace Week8PicknPay.Repository
     public class OrderRepository : IOrderRepository
     {
         private readonly AppDbContext _appDbContext;
-        private readonly ShoppingCart _shoppingCart;
+        private readonly IShoppingCart _shoppingCart;
 
-        public OrderRepository(AppDbContext appDbContext, ShoppingCart shoppingCart)
+        public OrderRepository(AppDbContext appDbContext, IShoppingCart shoppingCart)
         {
             _appDbContext = appDbContext;
             _shoppingCart = shoppingCart;
