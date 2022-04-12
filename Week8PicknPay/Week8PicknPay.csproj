@@ -31,4 +31,8 @@
     <ProjectReference Include="..\AppLogic\AppRepository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>
