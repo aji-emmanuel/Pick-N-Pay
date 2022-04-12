@@ -21,7 +21,7 @@
             {
                 <tr>
                     <td class="text-center">
-                        <button @onclick="(e => RemoveProductFromCart(item.Product.ProductId))">
+                        <button @onclick="(e => SetDelete(item))">
                            Remove
                         </button>
                     </td>
@@ -55,10 +55,23 @@
         </tfoot>
     </table>
   
-
+   @if(delete != null)
+    {
+       <div class="alert alert-danger">
+           <div>
+               <p class="alert-info">Do you want to remove @delete.Product.Name from cart?</p>
+           </div>
+           <div>
+               <button class="alert-link" @onclick="(e => RemoveProductFromCart())">Yes</button>
+               <button class="alert-link" @onclick="(e => CancelDelete())">No</button>
+           </div>
+       </div>
+    }
 
 
 @code {
+
+    ShoppingCartItem delete;
 
     void IncreaseQty(int id)
     {
@@ -70,9 +83,20 @@
         _cart.DecreaseQty(id);
     }
 
-    void RemoveProductFromCart(int id)
+    void SetDelete(ShoppingCartItem item)
     {
-        _cart.RemoveFromCart(id);
+        delete = item;
+    }
+
+    void CancelDelete()
+    {
+        delete = null;
+    }
+
+    void RemoveProductFromCart()
+    {
+        _cart.RemoveFromCart(delete.Product.ProductId);
+        delete = null;
     }
 }
 

@@ -15,27 +15,16 @@ namespace Week8PicknPay.Repository
             _appDbContext = appDbContext;
         }
 
-
         /// <returns>All products in a category or all products in database.</returns>
         public IEnumerable<Product> GetAllProducts(int? categoryId)
         {
-            if(categoryId == 0)
+            if(categoryId > 0)
             {
-                return _appDbContext.Products.ToList();
+                return _appDbContext.Products.Where(prod => prod.CategoryId == categoryId);
             }
-            else
-            {
-                return _appDbContext.Products.Where(prod => prod.CategoryId == categoryId).ToList();
-            }
+            return _appDbContext.Products.ToList();
         }
 
-
-        /// <param name="categoryId"></param>
-        /// <returns>All products in a given category</returns>
-        public IEnumerable<Product> GetCategoryProducts(int categoryId)
-        {
-            return _appDbContext.Products.Where( prod => prod.CategoryId == categoryId).ToList();
-        }
 
         /// <summary>
         /// Returns products whose IsTopDeal property is set to true.

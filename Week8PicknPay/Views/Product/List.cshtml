@@ -1,9 +1,10 @@
-﻿@model ProductsListViewModel
+﻿@model Category
 
 @using Week8PicknPay.Views.Product
 
 
-<h1 style="color: #b61a4c; display: flex; justify-content: center; ">@Model.CurrentCategory.CategoryName.ToUpper()</h1>
+<h1 style="color: #b61a4c; display: flex; justify-content: center; ">@Model.CategoryName.ToUpper()</h1>
 
- @(await Html.RenderComponentAsync<ProductList>(RenderMode.ServerPrerendered, new {CategoryId = Model.CurrentCategory.CategoryId }))
-
+<div class="row" style="padding: 0 1rem;">
+    @(await Html.RenderComponentAsync<ProductList>(RenderMode.ServerPrerendered, new { CategoryId = Model.CategoryId}))
+</div>

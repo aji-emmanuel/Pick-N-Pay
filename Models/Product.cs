@@ -15,6 +15,5 @@ namespace Week8PicknPay.Models
         public int CategoryId { get; set; }
         public bool IsTopDeal { get; set; }
         public string ImageUrl { get; set; }
-        public Category Category { get; set; }
     }
 }

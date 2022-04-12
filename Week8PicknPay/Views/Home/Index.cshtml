@@ -1,16 +1,16 @@
-﻿@model HomeViewModel
+﻿
+@using Week8PicknPay.Views.Home
+@using Week8PicknPay.Repository
 
+@inject IProductRepository _productRepository;
 
 <partial name="_Carousel" />
 
 <h2 style="color:crimson;">TOP DEALS OF THE WEEK, JUST FOR YOU!</h2>
 <hr />
 <div class="row" style="padding: 0 1rem;">
-
-    @foreach (var product in Model.TopDealProducts)
-    {
-        <partial name="_ProductCard" model="product" />
-    }
+    
+     @(await Html.RenderComponentAsync<TopDeals>(RenderMode.ServerPrerendered))
 
 </div>
 <hr />
