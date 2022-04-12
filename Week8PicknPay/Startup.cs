@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Week8PicknPay.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Week8PicknPay.Repository;
+using Newtonsoft.Json;
 using Week8PicknPay.Database;
-using Microsoft.EntityFrameworkCore.Design;
+using Week8PicknPay.Repository;
 
 namespace Week8PicknPay
 {
@@ -42,7 +37,12 @@ namespace Week8PicknPay
 
             services.AddHttpContextAccessor();
             services.AddSession();
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             Seeder.SeedDataBase(services);

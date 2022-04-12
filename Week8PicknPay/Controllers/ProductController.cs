@@ -28,27 +28,26 @@ namespace Week8PicknPay.Controllers
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
-        public ViewResult List(string category)
+        public ViewResult List(int? categoryId)
         {
             IEnumerable<Product> products;
-            string currentCategory;
+            Category productCategory = new Category();
 
-            if (string.IsNullOrEmpty(category))
+            if (categoryId == null)
             {
-                products = _productRepository.AllProducts.OrderBy(p => p.ProductId);
-                currentCategory = "All products";
+                products = _productRepository.GetAllProducts(categoryId);
+                productCategory.CategoryName = "All products";
             }
             else
             {
-                products = _productRepository.AllProducts.Where(p => p.Category.CategoryName == category)
-                    .OrderBy(p => p.ProductId);
-                currentCategory = _categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
+                productCategory = _categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryId == categoryId);
+                products = _productRepository.GetCategoryProducts(productCategory.CategoryId);
             }
 
             return View(new ProductsListViewModel
             {
                 Products = products,
-                CurrentCategory = currentCategory
+                CurrentCategory = productCategory
             });
         }
 

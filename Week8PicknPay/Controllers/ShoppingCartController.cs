@@ -40,16 +40,16 @@ namespace Week8PicknPay.Controllers
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
-        public RedirectToActionResult AddToShoppingCart(int productId)
-        {
-            var selectedProduct = _productRepository.AllProducts.FirstOrDefault(p => p.ProductId == productId);
+        //public RedirectToActionResult AddToShoppingCart(int productId)
+        //{
+        //    var selectedProduct = _productRepository.GetAllProducts().FirstOrDefault(p => p.ProductId == productId);
 
-            if (selectedProduct != null)
-            {
-                _shoppingCart.AddToCart(selectedProduct, 1);
-            }
-            return RedirectToAction("Index", "Home");
-        }
+        //    if (selectedProduct != null)
+        //    {
+        //        _shoppingCart.AddToCart(selectedProduct, 1);
+        //    }
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         /// <summary>
         /// Removes a product from the shopping cart

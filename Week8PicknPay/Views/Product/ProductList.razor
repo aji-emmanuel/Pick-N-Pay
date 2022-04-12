@@ -1,0 +1,62 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Models
+@using Week8PicknPay.Repository
+
+@inject IShoppingCart _cart
+@inject IProductRepository _productRepo;
+
+@foreach (var product in _productRepo.GetAllProducts(CategoryId))
+{
+    <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
+        <div class="thumbnail">
+            <div class="thumbnail-img">
+                <img src="@product.ImageUrl" alt="@product.Name">
+            </div>
+
+            <div class="caption" style="margin:0px;">
+                <div>
+                    <h4 class="product-name">
+                        <a style="color:crimson;" asp-controller="Product" asp-action="Details"
+                           asp-route-id="@product.ProductId">@product.Name</a>
+                    </h4>
+                    <h4 class="pull-right">@string.Format("#{0:N}", product.Price)</h4>
+                </div>
+                <p>@product.ShortDescription</p>
+            </div>
+            <div class="addToCart" style="margin-bottom:5px;">
+
+                <a class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</a>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@code {
+
+    [Parameter]
+    public int CategoryId { get; set; }
+
+    int productQty = 1;
+
+    void IncreaseQty()
+    {
+        productQty++;
+    }
+
+    void DecreaseQty(int id)
+    {
+        if (productQty - 1 > 0)
+        {
+            productQty--;
+        }
+    }
+
+    void AddToCart(Product product)
+    {
+        var result = _cart.AddToCart(product, productQty);
+    }
+}

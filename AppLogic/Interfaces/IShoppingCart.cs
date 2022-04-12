@@ -8,7 +8,7 @@ namespace Week8PicknPay.Repository
         string ShoppingCartId { get; set; }
         List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
-        void AddToCart(Product product, int amount);
+        bool AddToCart(Product product, int amount);
         void ClearCart();
         List<ShoppingCartItem> GetShoppingCartItems();
         double GetShoppingCartTotal();

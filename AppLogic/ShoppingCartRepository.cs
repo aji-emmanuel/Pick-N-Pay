@@ -46,7 +46,7 @@ namespace Week8PicknPay.Repository
         /// </summary>
         /// <param name="product"></param>
         /// <param name="amount"></param>
-        public void AddToCart(Product product, int amount)
+        public bool AddToCart(Product product, int amount)
         {
             var shoppingCartItem =
                     _appDbContext.ShoppingCartItems.SingleOrDefault(
@@ -66,7 +66,7 @@ namespace Week8PicknPay.Repository
             {
                 shoppingCartItem.Amount++;
             }
-            _appDbContext.SaveChanges();
+            return _appDbContext.SaveChanges() > 0;
         }
 
 
