@@ -5,7 +5,7 @@ namespace Week8PicknPay.Repository
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetAllProducts(int? categoryId);
+        IEnumerable<Product> GetAllProducts(string categoryName);
         IEnumerable<Product> TopDealProducts { get; }
         Product GetProductById(int productId);
     }

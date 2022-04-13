@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Models
+@using Week8PicknPay.Controllers
 
 @inject IProductRepository _productRepository;
 @inject IShoppingCart _cart
@@ -19,7 +20,7 @@
                 <div class="caption" style="margin:0px;">
                     <div>
                         <h4 class="product-name">
-                            <a style="color:crimson;" asp-controller="Product" asp-action="Details"
+                            <a style="color:crimson;" @onclick ="(e => ProductDetails(product))" asp-controller="Product" asp-action="Details"
                                asp-route-id="@product.ProductId">@product.Name</a>
                         </h4>
                         <h4 class="pull-right">@string.Format("#{0:N}", product.Price)</h4>
@@ -73,6 +74,11 @@
     void CloseNotification()
     {
         show = false;
+    }
+
+    void ProductDetails(Product product)
+    {
+        new ProductController().Details(product);
     }
 
 }

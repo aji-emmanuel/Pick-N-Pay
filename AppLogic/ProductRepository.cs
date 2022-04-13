@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
@@ -15,12 +14,14 @@ namespace Week8PicknPay.Repository
             _appDbContext = appDbContext;
         }
 
+
         /// <returns>All products in a category or all products in database.</returns>
-        public IEnumerable<Product> GetAllProducts(int? categoryId)
+        public IEnumerable<Product> GetAllProducts(string categoryName)
         {
-            if(categoryId > 0)
+            if(!string.IsNullOrWhiteSpace(categoryName))
             {
-                return _appDbContext.Products.Where(prod => prod.CategoryId == categoryId);
+                Category category = _appDbContext.Categories.FirstOrDefault(category => category.CategoryName == categoryName);
+                return _appDbContext.Products.Where(prod => prod.CategoryId == category.CategoryId);
             }
             return _appDbContext.Products.ToList();
         }
