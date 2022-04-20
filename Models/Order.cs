@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Week8PicknPay.Models
 {
     public class Order
     {
-        [BindNever]
-        public int OrderId { get; set; }
-
+        [Key]
+        public string Id { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter your address")]
@@ -36,13 +35,8 @@ namespace Week8PicknPay.Models
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
-
-        [BindNever]
-        [ScaffoldColumn(false)]
         public double OrderTotal { get; set; }
-
-        [BindNever]
-        [ScaffoldColumn(false)]
-        public DateTime OrderPlaced { get; set; }
+        public string PaymentStatus { get; set; }
+        public DateTime OrderTime { get => DateTime.Now; }
     }
 }

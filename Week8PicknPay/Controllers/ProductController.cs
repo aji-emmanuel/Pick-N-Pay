@@ -21,36 +21,17 @@ namespace Week8PicknPay.Controllers
  
         public ViewResult List(string categoryName)
         {
-            // IEnumerable<Product> products;
             Category productCategory = new Category
             {
-
-                //if (String.IsNullOrWhiteSpace(categoryName))
-                //{
-                //  //  products = _productRepository.GetAllProducts();
-                //    productCategory.CategoryName = "All products";
-                //}
-                //else
-                //{
                 CategoryName = categoryName
             };
-            // products = _productRepository.GetCategoryProducts(productCategory.CategoryId);
-            // }
-
             return View(productCategory);
-
-            //return View(new ProductsListViewModel
-            //{
-            //    Products = products,
-            //    CurrentCategory = productCategory
-            //});
         }
 
-       
-        public IActionResult Details(Product product)
+        public IActionResult Details(int product)
         {
            // var product = _productRepository.GetProductById(id);
-            if (product == null)
+            if (product == 0)
                 return NotFound();
             return View(product);
         }

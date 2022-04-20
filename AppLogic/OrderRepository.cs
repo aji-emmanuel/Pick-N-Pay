@@ -22,8 +22,6 @@ namespace Week8PicknPay.Repository
         /// <param name="order"></param>
         public void CreateOrder(Order order)
         {
-            order.OrderPlaced = DateTime.Now;
-
             List<ShoppingCartItem> shoppingCartItems = _shoppingCart.ShoppingCartItems;
             order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
 

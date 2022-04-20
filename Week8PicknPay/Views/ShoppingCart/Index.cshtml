@@ -9,6 +9,6 @@
     @(await Html.RenderComponentAsync<ShoppingCartItems>(RenderMode.ServerPrerendered))
 
     <div class="text-center">
-        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Check out now!</a>
+        <a class="btn btn-primary" href="/order/checkout">Check out now!</a>
     </div>
 

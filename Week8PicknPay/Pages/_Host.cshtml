@@ -1,0 +1,11 @@
+﻿
+@page "/blazor"
+@using Week8PicknPay.Pages
+
+@{
+    Layout = "_Layout";
+ }
+
+<app>
+    @(await Html.RenderComponentAsync<App>(RenderMode.Server));
+</app>

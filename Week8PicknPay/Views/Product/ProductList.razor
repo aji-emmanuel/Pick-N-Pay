@@ -18,8 +18,7 @@
                 <div class="caption" style="margin:0px;">
                     <div>
                         <h4 class="product-name">
-                            <a style="color:crimson;" asp-controller="Product" asp-action="Details"
-                               asp-route-id="@product.ProductId">@product.Name</a>
+                            <a style="color:crimson;" href="/product/@product.ProductId.ToString()"> @product.Name</a>
                         </h4>
                         <h4 class="pull-right">@string.Format("#{0:N}", product.Price)</h4>
                     </div>

@@ -76,6 +76,7 @@ namespace Week8PicknPay
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
 

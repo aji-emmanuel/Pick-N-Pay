@@ -1,0 +1,44 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Models
+@using Week8PicknPay.Components
+@using Week8PicknPay.Repository
+
+@inject IShoppingCart _cart
+
+
+@inherits ProductCart
+
+
+<div style="display: flex; justify-content: center;">
+    <img alt="@product.Name" src="@product.ImageUrl" style="height: 30rem; min-width: 30rem; padding-right:.2rem; margin: 5px 5px 0 5px; ">
+</div>
+<div>
+    <h3 class="pull-right">
+        @string.Format("# {0:N}", product.Price)
+    </h3>
+    <h3 style="color:crimson">
+        @product.Name
+    </h3>
+    <h4>@product.ShortDescription</h4>
+    <p style="text-align:justify;">@product.LongDescription</p>
+
+    <div class="addToCart" style="margin-bottom:5px;">
+        <a class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</a>
+    </div>
+
+</div>
+
+
+
+
+@code {
+
+    [Parameter] public Product product { get; set; }
+
+    public void AddToCart(Product product)
+    {
+        show = _cart.AddToCart(product, productQty);
+    }
+
+}
