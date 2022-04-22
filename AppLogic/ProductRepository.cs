@@ -18,7 +18,7 @@ namespace Week8PicknPay.Repository
         /// <returns>All products in a category or all products in database.</returns>
         public IEnumerable<Product> GetAllProducts(string categoryName)
         {
-            if(!string.IsNullOrWhiteSpace(categoryName))
+            if(categoryName != "All")
             {
                 Category category = _appDbContext.Categories.FirstOrDefault(category => category.CategoryName == categoryName);
                 return _appDbContext.Products.Where(prod => prod.CategoryId == category.CategoryId);

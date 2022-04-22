@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿
+@using Week8PicknPay.Views.Shared.Components
+
+<!DOCTYPE html>
 
 <html>
     <head>
@@ -44,7 +47,7 @@
                     </div>
                     <div class="pull-right">
                         <ul class="nav navbar-nav" style="padding-right:2rem;">
-                            @await Component.InvokeAsync("CategoryMenu")
+                            @(await Html.RenderComponentAsync<CategoryMenu>(RenderMode.ServerPrerendered))
                             @await Component.InvokeAsync("ShoppingCartSummary")
                             <li><a asp-controller="Request" asp-action="Index">Contact Us</a></li>
                             <partial name="_LoginPartial" />

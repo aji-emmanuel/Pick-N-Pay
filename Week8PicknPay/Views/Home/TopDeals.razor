@@ -56,11 +56,4 @@
     {
         show = _cart.AddToCart(product, productQty);
     }
-
-    void ProductDetails(Product product)
-    {
-        //new ProductController().Details(product);
-        _navigationManager.NavigateTo($"Product/Details/{product.ProductId}", true);
-        
-    }
 }

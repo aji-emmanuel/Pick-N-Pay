@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 

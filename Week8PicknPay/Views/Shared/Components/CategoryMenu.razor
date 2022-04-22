@@ -1,5 +1,21 @@
-﻿<h3>CategoryMenu</h3>
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Repository
 
-@code {
+@inject ICategoryRepository _categoryRepo 
 
-}
+    <li class="dropdown">
+        <a 
+           class="dropdown-toggle" data-toggle="dropdown">Product Categories<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            @foreach (var categoryName in _categoryRepo.CategoryNames)
+            {
+                <li>
+                    <a href="/@categoryName/products">@categoryName</a>
+                </li>
+            }
+            <li class="divider"></li>
+            <li>
+                <a href="/All/products">View all products</a>
+            </li>
+        </ul>
+    </li>

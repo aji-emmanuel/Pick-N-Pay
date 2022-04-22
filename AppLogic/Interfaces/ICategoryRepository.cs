@@ -9,5 +9,6 @@ namespace Week8PicknPay.Repository
     public interface ICategoryRepository
     {
         IEnumerable<Category> AllCategories { get; }
+        IEnumerable<string> CategoryNames { get; }
     }
 }

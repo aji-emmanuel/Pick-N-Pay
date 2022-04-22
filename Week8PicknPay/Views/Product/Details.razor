@@ -33,6 +33,21 @@
 
     Product product;
 
+    int productQty = 1;
+
+    void IncreaseQty()
+    {
+        productQty++;
+    }
+
+    void DecreaseQty(int id)
+    {
+        if (productQty - 1 > 0)
+        {
+            productQty--;
+        }
+    }
+
     protected override void OnInitialized()
     {
         product = _productRepository.GetProductById(int.Parse(Id));

@@ -1,4 +1,6 @@
 ﻿
+@page "/{categoryName}/products"
+
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Models
@@ -7,6 +9,8 @@
 @inject IShoppingCart _cart
 
 
+<h1 style="color: #b61a4c; display: flex; justify-content: center; ">@PageTitle</h1>
+<div class="row" style="padding: 0 1rem;">
     @foreach (var product in _productRepository.GetAllProducts(CategoryName))
     {
         <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
@@ -32,46 +36,40 @@
     }
 
 
-
-@if (show)
-{
-    <div class="alert-success">
-        <p class="close" @onclick="(e => CloseNotification())">x</p>
-        <p class="alert-info">Product successfully added to cart!</p>
-    </div>
-}
-
-
-
-@code {
-
-    [Parameter] public string CategoryName { get; set; }
-
-    bool show = false;
-
-    int productQty = 1;
-
-    void IncreaseQty()
+    @if (show)
     {
-        productQty++;
+        <div class="alert-success">
+            <p class="close" @onclick="(e => CloseNotification())">x</p>
+            <p class="alert-info">Product successfully added to cart!</p>
+        </div>
     }
 
-    void DecreaseQty(int id)
-    {
-        if (productQty - 1 > 0)
+</div>
+
+
+    @code {
+
+        [Parameter] public string CategoryName { get; set; }
+
+        string PageTitle;
+
+        protected override void OnParametersSet()
         {
-            productQty--;
+            PageTitle = CategoryName == "All" ? "ALL PRODUCTS" : CategoryName.ToUpper();
+        }
+
+
+        bool show = false;
+
+        int productQty = 1;
+
+        void AddToCart(Product product)
+        {
+            show = _cart.AddToCart(product, productQty);
+        }
+
+        void CloseNotification()
+        {
+            show = false;
         }
     }
-
-    void AddToCart(Product product)
-    {
-        show = _cart.AddToCart(product, productQty);
-    }
-
-    void CloseNotification()
-    {
-        show = false;
-    }
-
-}
