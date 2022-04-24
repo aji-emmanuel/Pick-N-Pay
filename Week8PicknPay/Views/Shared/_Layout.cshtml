@@ -20,60 +20,63 @@
     </head>
 
     <body>
-
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div>
-                <div class=pull-left>
-                    <a asp-controller="Home" asp-action="Index">
-                        <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px;" />
-                    </a>
-                </div>
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div>
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <input class="form-control" style="margin-top: 10px; line-height:20px" type="search" placeholder="Search By Product Name" aria-label="Search">
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="pull-right">
-                        <ul class="nav navbar-nav" style="padding-right:2rem;">
-                            @(await Html.RenderComponentAsync<CategoryMenu>(RenderMode.ServerPrerendered))
-                            @await Component.InvokeAsync("ShoppingCartSummary")
-                            <li><a asp-controller="Request" asp-action="Index">Contact Us</a></li>
-                            <partial name="_LoginPartial" />
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </nav>
-
         <div class="container">
-            @RenderBody()
-        </div>
 
-        <footer>
-            <div style="display: flex; justify-content: center;">
-                <div class="footer-links">
-                    <a asp-controller="Home" asp-action="Index">Home</a>
-                    <a asp-controller="Product" asp-action="List">Products</a>
-                    <a asp-controller="Request" asp-action="Index">Contact Us</a>
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div>
+                    <div class=pull-left>
+                        <a asp-controller="Home" asp-action="Index">
+                            <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px;" />
+                        </a>
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div>
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <input class="navbar-search" type="search" placeholder="Search By Product Name" aria-label="Search">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pull-right">
+                            <ul class="nav navbar-nav" style="padding-right:2rem;">
+                                @(await Html.RenderComponentAsync<CategoryMenu>(RenderMode.ServerPrerendered))
+                                @(await Html.RenderComponentAsync<CartSummary>(RenderMode.ServerPrerendered))
+                                <partial name="_LoginPartial" />
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
+            </nav>
+
+            <div class="content-container">
+                @RenderBody()
             </div>
-            <div class="footer-copyright">
-                &copy; 2021 Aji Crafts, Inc - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-        </footer>
+
+
+            <footer>
+                <div style="display: flex; justify-content: center;">
+                    <div class="footer-links">
+                        <a asp-controller="Home" asp-action="Index">Home</a>
+                        <a asp-controller="Product" asp-action="List">Products</a>
+                        <a asp-controller="Request" asp-action="Index">Contact Us</a>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2021 Aji Crafts, Inc - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                </div>
+            </footer>
+
+        </div>
 
         <script src="~/lib/jquery/jquery.js"></script>
         @RenderSection("Scripts", required: false)

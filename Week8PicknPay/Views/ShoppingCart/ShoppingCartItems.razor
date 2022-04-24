@@ -1,9 +1,33 @@
 ﻿
+@page "/shoppingcart"
+
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Models
 
-@inject IShoppingCart _cart 
+@inject IShoppingCart _cart
+
+
+
+
+@if (shoppingCartItems.Count() == 0)
+{
+    <div class="cart-card">
+        <div>
+            <span class="glyphicon glyphicon-shopping-cart cart"></span>
+        </div>
+        <div>
+            <h4>Your cart is empty!</h4>
+        </div>
+        <p>You have not added any item to your cart.</p>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h2 style="color: #b61a4c;">Your shopping cart</h2>
+        <h4 style="color:#b61a4c">Here are the products in your shopping cart.</h4>
+    </div>
 
 
     <table class="table table-bordered table-striped">
@@ -17,12 +41,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in _cart.GetShoppingCartItems())
+            @foreach (var item in shoppingCartItems)
             {
                 <tr>
                     <td class="text-center">
                         <button @onclick="(e => SetDelete(item))">
-                           Remove
+                            Remove
                         </button>
                     </td>
                     <td class="text-center">
@@ -54,24 +78,40 @@
             </tr>
         </tfoot>
     </table>
-  
-   @if(delete != null)
-    {
-       <div class="alert alert-danger">
-           <div>
-               <p class="alert-info">Do you want to remove @delete.Product.Name from cart?</p>
-           </div>
-           <div>
-               <button class="alert-link" @onclick="(e => RemoveProductFromCart())">Yes</button>
-               <button class="alert-link" @onclick="(e => CancelDelete())">No</button>
-           </div>
-       </div>
-    }
+
+    <div class="text-center">
+        <a class="btn btn-primary" href="/order/checkout">Check out now!</a>
+    </div>
+}
+
+
+
+
+
+@if (delete != null)
+{
+    <div class="alert alert-danger">
+        <div>
+            <p class="alert-info">Do you want to remove @delete.Product.Name from cart?</p>
+        </div>
+        <div>
+            <button class="alert-link" @onclick="(e => RemoveProductFromCart())">Yes</button>
+            <button class="alert-link" @onclick="(e => CancelDelete())">No</button>
+        </div>
+    </div>
+}
 
 
 @code {
 
     ShoppingCartItem delete;
+
+    List<ShoppingCartItem> shoppingCartItems;
+
+    protected override void OnParametersSet()
+    {
+        shoppingCartItems = _cart.GetShoppingCartItems();
+    }
 
     void IncreaseQty(int id)
     {
@@ -96,7 +136,7 @@
     void RemoveProductFromCart()
     {
         _cart.RemoveFromCart(delete.Product.ProductId);
+        shoppingCartItems.Remove(delete);
         delete = null;
     }
 }
-

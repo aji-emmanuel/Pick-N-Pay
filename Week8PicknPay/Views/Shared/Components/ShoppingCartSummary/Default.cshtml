@@ -3,7 +3,7 @@
 @inject IShoppingCart Cart
 
     <li>
-        <a asp-controller="ShoppingCart" asp-action="Index">
+        <a href="/shoppingcart">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             <span id="cart-status">
                 @Cart.GetShoppingCartItems().Count

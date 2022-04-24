@@ -17,6 +17,8 @@ namespace Week8PicknPay.Repository
 
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
+        public int CartItemsCount { get; set; }
+
         public ShoppingCart(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -61,6 +63,7 @@ namespace Week8PicknPay.Repository
                     Amount = amount
                 };
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
+                CartItemsCount++;
             }
             else
             {
@@ -110,7 +113,11 @@ namespace Week8PicknPay.Repository
                     _appDbContext.ShoppingCartItems.SingleOrDefault(
                         s => s.Product.ProductId == productId && s.ShoppingCartId == ShoppingCartId);
 
-            _appDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+            if (shoppingCartItem != null)
+            { 
+                _appDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+                CartItemsCount--;
+            }
             return _appDbContext.SaveChanges();
         }
 
@@ -123,6 +130,7 @@ namespace Week8PicknPay.Repository
             var list =  _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                            .Include(s => s.Product)
                            .ToList();
+            CartItemsCount = list.Count;
             return list;
         }
 

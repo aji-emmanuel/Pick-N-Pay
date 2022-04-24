@@ -1,0 +1,28 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Repository
+@inject IShoppingCart _cart
+
+<li>
+    <a href="/shoppingcart">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+        <span id="cart-status">
+            @Count
+        </span>
+    </a>
+</li>
+
+@code{
+    private int Count;
+
+
+    protected override void OnInitialized()
+    {
+        _cart.GetShoppingCartItems();
+    }
+
+    protected override void OnParametersSet()
+    {
+        Count = _cart.CartItemsCount;
+    }
+}

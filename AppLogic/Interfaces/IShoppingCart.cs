@@ -6,6 +6,7 @@ namespace Week8PicknPay.Repository
     public interface IShoppingCart
     {
         string ShoppingCartId { get; set; }
+        int CartItemsCount { get; set; }
         List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         bool AddToCart(Product product, int amount);

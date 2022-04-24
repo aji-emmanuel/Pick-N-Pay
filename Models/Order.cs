@@ -6,15 +6,14 @@ namespace Week8PicknPay.Models
 {
     public class Order
     {
-        [Key]
         public string Id { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
 
-        [Required]
+        //[Required]
         public string FirstName { get; set; }
-        [Required]
+       // [Required]
         public string LastName { get; set; }
-        [Required]
+       // [Required]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter your address")]
@@ -37,6 +36,6 @@ namespace Week8PicknPay.Models
         public string PhoneNumber { get; set; }
         public double OrderTotal { get; set; }
         public string PaymentStatus { get; set; }
-        public DateTime OrderTime { get => DateTime.Now; }
+        public DateTime OrderTime { get; set; }
     }
 }

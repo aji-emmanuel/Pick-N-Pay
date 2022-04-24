@@ -27,29 +27,11 @@ namespace Week8PicknPay.Controllers
         {
             return View();
         }
-
-        /// <summary>
-        /// Displays all products in the shopping cart
-        /// </summary>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult Checkout(Order order)
+        
+        public IActionResult CheckoutComplete(Order order)
         {
-            //var items = _shoppingCart.GetShoppingCartItems();
-            //if (items.Count == 0)
-            //{
-            //    ModelState.AddModelError("", "Your cart is empty, add some products first!");
-            //    return RedirectToAction("Index", "ShoppingCart");
-            //}
             _orderRepository.CreateOrder(order);
             _shoppingCart.ClearCart();
-            return RedirectToAction("CheckoutComplete");
-        }
-
-        
-        public IActionResult CheckoutComplete()
-        {
             ViewBag.CheckoutCompleteMessage = "Thanks for patronizing PicknPay!";
             return View();
         }
