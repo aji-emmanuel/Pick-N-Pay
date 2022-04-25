@@ -15,16 +15,15 @@ body {
 }
 
 .content-container {
+    margin-top: 56px;
     padding: 1rem 1rem 80px;
 }
 
 .navbar {
-    background-image: none;
-}
-
-.navbar-inverse {
-    background-color: #b61a4c;
-    border-color: #a593c2;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: #b61a4c !important;
 }
 
 .nav.navbar-nav.navbar-right li a {
@@ -38,7 +37,14 @@ body {
     color: white;
     cursor: pointer;
 }
+.navbar-link {
+    color: #feb9b9 !important;
+}
 
+    .navbar-link:hover {
+        text-decoration: underline;
+        color: #f9f0f0 !important
+    }
 
 .navbar-nav > li > .dropdown-menu {
     background-color: #b61a4c;
@@ -52,13 +58,23 @@ body {
     background-color: #b61a4c !important;
 }
 
+.nav-search-div {
+    flex: 1;
+}
+
+@media (max-width: 889px){
+    .nav-search-div {
+        width: 100%;
+    }
+}
+
 .navbar-search {
     margin-top: 10px;
-    display: block;
     width: 100%;
     height: 34px;
     padding: 5px 10px;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-style: italic;
     color: #555;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -117,6 +133,10 @@ body {
     .thumbnail:hover {
         transform: scale(1.03);
         box-shadow: 0 15px 35px 0 rgba(0,0,0,0.5);
+    }
+
+    .thumbnail a:hover{
+        text-decoration:none;
     }
 
 .thumbnail-img {
@@ -219,6 +239,7 @@ a.thumbnail.active {
     text-overflow: ellipsis;
     border: 1px solid #ddd;
     margin: 0;
+    color: crimson;
 }
 
 footer {
@@ -350,6 +371,7 @@ a {
     border-radius: 1rem;
     position: fixed;
     bottom: 10px;
+    z-index: 1000;
     left: 10px;
     display: flex;
     flex-direction: column;
@@ -375,6 +397,7 @@ a {
 
 .add-cart-success {
     position: fixed;
+    z-index: 1000;
     bottom: 10px;
     left: 10px;
     display: grid;
@@ -453,3 +476,13 @@ a {
         font-weight: bold;
         color: #a94442;
     }
+
+
+.product-qty {
+    height: 3rem;
+    width: 3rem;
+    background-color: #b61a4c;
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px;
+}

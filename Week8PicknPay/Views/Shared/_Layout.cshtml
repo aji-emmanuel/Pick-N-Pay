@@ -22,8 +22,7 @@
     <body>
         <div class="container">
 
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div>
+            <nav class="navbar navbar-inverse" role="navigation">
                     <div class=pull-left>
                         <a asp-controller="Home" asp-action="Index">
                             <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px;" />
@@ -39,15 +38,11 @@
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <div>
-                            <ul class="nav navbar-nav">
-                                <li>
-                                    <input class="navbar-search" type="search" placeholder="Search By Product Name" aria-label="Search">
-                                </li>
-                            </ul>
+                        <div class="nav-search-div">
+                             <input class="navbar-search" type="search" placeholder="Search for products and categories..." aria-label="Search">
                         </div>
                         <div class="pull-right">
-                            <ul class="nav navbar-nav" style="padding-right:2rem;">
+                            <ul class="nav navbar-nav">
                                 @(await Html.RenderComponentAsync<CategoryMenu>(RenderMode.ServerPrerendered))
                                 @(await Html.RenderComponentAsync<CartSummary>(RenderMode.ServerPrerendered))
                                 <partial name="_LoginPartial" />
@@ -55,7 +50,6 @@
                         </div>
 
                     </div>
-                </div>
             </nav>
 
             <div class="content-container">

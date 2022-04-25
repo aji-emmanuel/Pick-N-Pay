@@ -11,28 +11,31 @@
 
 @inherits ProductCart
 
-<div class="row" style="padding: 0 1rem;">
+<div class="row">
 
     @foreach (var product in _productRepository.TopDealProducts)
     {
         <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
+           
             <div class="thumbnail">
-                <div class="thumbnail-img">
-                    <img src="@product.ImageUrl" alt="@product.Name">
-                </div>
-
-                <div class="caption" style="margin:0px;">
-                    <div>
-                        <h4 class="product-name">
-                            <a style="color:crimson;" href="/product/@product.ProductId.ToString()"> @product.Name</a>
-                        </h4>
-                        <h4 class="pull-right">@string.Format("#{0:N}", product.Price)</h4>
+                <a href="/product/@product.ProductId.ToString()">
+                    <div class="thumbnail-img">
+                        <img src="@product.ImageUrl" alt="@product.Name">
                     </div>
-                    <p>@product.ShortDescription</p>
-                </div>
-                <div class="addToCart" style="margin-bottom:5px;">
-                    <a class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</a>
-                </div>
+
+                    <div class="caption" style="margin:0px;">
+                        <div>
+                            <h4 class="product-name">
+                                @product.Name
+                            </h4>
+                            <h4 class="pull-right">@string.Format("#{0:N}", product.Price)</h4>
+                        </div>
+                        <p>@product.ShortDescription</p>
+                    </div>
+                    <div class="addToCart" style="margin-bottom:5px;">
+                        <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
+                    </div>
+                </a>
             </div>
         </div>
     }

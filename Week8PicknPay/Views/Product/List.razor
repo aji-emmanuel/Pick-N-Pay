@@ -4,17 +4,21 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Models
+@using Week8PicknPay.Components
 
 @inject IProductRepository _productRepository;
 @inject IShoppingCart _cart
 
+@inherits ProductCart
+
 
 <h1 style="color: #b61a4c; display: flex; justify-content: center; ">@PageTitle</h1>
-<div class="row" style="padding: 0 1rem;">
+<div class="row">
     @foreach (var product in _productRepository.GetAllProducts(CategoryName))
     {
-        <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
-            <div class="thumbnail">
+    <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
+        <div class="thumbnail">
+            <a href="/product/@product.ProductId.ToString()">
                 <div class="thumbnail-img">
                     <img src="@product.ImageUrl" alt="@product.Name">
                 </div>
@@ -22,17 +26,18 @@
                 <div class="caption" style="margin:0px;">
                     <div>
                         <h4 class="product-name">
-                            <a style="color:crimson;" href="/product/@product.ProductId.ToString()"> @product.Name</a>
+                            @product.Name
                         </h4>
                         <h4 class="pull-right">@string.Format("#{0:N}", product.Price)</h4>
                     </div>
                     <p>@product.ShortDescription</p>
                 </div>
                 <div class="addToCart" style="margin-bottom:5px;">
-                    <a class="btn btn-primary" @onclick="(() => AddToCart(product))">Add To Cart</a>
+                    <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
                 </div>
-            </div>
+            </a>
         </div>
+    </div>
     }
 
 
@@ -52,29 +57,19 @@
 </div>
 
 
-    @code {
+@code {
 
-        [Parameter] public string CategoryName { get; set; }
+    [Parameter] public string CategoryName { get; set; }
 
-        string PageTitle;
+    string PageTitle;
 
-        protected override void OnParametersSet()
-        {
-            PageTitle = CategoryName == "All" ? "ALL PRODUCTS" : CategoryName.ToUpper();
-        }
-
-
-        bool show = false;
-
-        int productQty = 1;
-
-        void AddToCart(Product product)
-        {
-            show = _cart.AddToCart(product, productQty);
-        }
-
-        void CloseNotification()
-        {
-            show = false;
-        }
+    protected override void OnParametersSet()
+    {
+        PageTitle = CategoryName == "All" ? "ALL PRODUCTS" : CategoryName.ToUpper();
     }
+
+    void AddToCart(Product product)
+    {
+        show = _cart.AddToCart(product, productQty);
+    }
+}
