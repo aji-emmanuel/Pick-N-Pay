@@ -246,6 +246,7 @@ a.thumbnail.active {
     border: 1px solid #ddd;
     margin: 0;
     color: crimson;
+    text-align: center;
 }
 
 footer {
@@ -547,6 +548,7 @@ a {
     text-align: center;
     border: none;
     font-family: cursive;
+    margin-top: 3rem;
 }
 
 .cart-price-group {
