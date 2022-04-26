@@ -28,9 +28,8 @@
                             <h4 class="product-name">
                                 @product.Name
                             </h4>
-                            <h4 class="pull-right">@string.Format("#{0:N}", product.Price)</h4>
+                            <h4 style="font-weight:bold">@string.Format("#{0:N}", product.Price)</h4>
                         </div>
-                        <p>@product.ShortDescription</p>
                     </div>
                     <div class="addToCart" style="margin-bottom:5px;">
                         <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
