@@ -54,7 +54,7 @@ else
                             <button class="qty-button" @onclick="(e =>DecreaseQty(item.Product.ProductId))">
                                 <i class="fa-solid fa-minus"></i>
                             </button>
-                            @item.Amount
+                            @item.Quantity
                             <button class="qty-button" @onclick="(e =>IncreaseQty(item.Product.ProductId))">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
@@ -64,7 +64,7 @@ else
                     <td class="text-center">@item.Product.Name</td>
                     <td class="text-center">@string.Format("# {0:N}", item.Product.Price)</td>
                     <td class="text-center">
-                        @(string.Format("# {0:N}", (item.Amount * item.Product.Price)))
+                        @(string.Format("# {0:N}", (item.Quantity * item.Product.Price)))
                     </td>
                 </tr>
             }

@@ -60,14 +60,14 @@ namespace Week8PicknPay.Repository
                 {
                     ShoppingCartId = ShoppingCartId,
                     Product = product,
-                    Amount = amount
+                    Quantity = amount
                 };
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
                 CartItemsCount++;
             }
             else
             {
-                shoppingCartItem.Amount++;
+                shoppingCartItem.Quantity++;
             }
             return _appDbContext.SaveChanges() > 0;
         }
@@ -82,7 +82,7 @@ namespace Week8PicknPay.Repository
             var shoppingCartItem =
                    _appDbContext.ShoppingCartItems.SingleOrDefault(
                        s => s.Product.ProductId == productId && s.ShoppingCartId == ShoppingCartId);
-            shoppingCartItem.Amount++;
+            shoppingCartItem.Quantity++;
             _appDbContext.SaveChanges();
         }
 
@@ -95,9 +95,9 @@ namespace Week8PicknPay.Repository
             var shoppingCartItem =
                    _appDbContext.ShoppingCartItems.SingleOrDefault(
                        s => s.Product.ProductId == productId && s.ShoppingCartId == ShoppingCartId);
-            if (shoppingCartItem.Amount-1 >=1)
+            if (shoppingCartItem.Quantity-1 >=1)
             {
-                shoppingCartItem.Amount--;
+                shoppingCartItem.Quantity--;
                 _appDbContext.SaveChanges();
             }
         }
@@ -154,7 +154,7 @@ namespace Week8PicknPay.Repository
         public double GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                .Select(c => c.Product.Price * c.Amount).Sum();
+                .Select(c => c.Product.Price * c.Quantity).Sum();
             return total;
         }
     }

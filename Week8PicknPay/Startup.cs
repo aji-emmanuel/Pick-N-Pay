@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Week8PicknPay.Database;
+using Week8PicknPay.Models;
 using Week8PicknPay.Repository;
+using Week8PicknPay.Utility;
 
 namespace Week8PicknPay
 {
@@ -27,13 +28,15 @@ namespace Week8PicknPay
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IRequestForm, RequestForm>();
             services.AddTransient<IShoppingCart, ShoppingCart>();
+
+            services.AddAutoMapper(typeof(AutoMapping));
 
             services.AddHttpContextAccessor();
             services.AddSession();

@@ -1,35 +1,136 @@
 ﻿@model Order
 
-<div style="display:flex; justify-content:center;">
-    <form asp-action="CheckoutComplete" method="post" class="form-horizontal" role="form">
-        <div style="text-align:center">
-            <h4>Fill in your details correctly to ensure a quick and successful delivery.</h4>
-        </div>
+<div class="order-checkout">
+    <h4> Checkout</h4>
+    <div class="order-section">
+        <h5>Delivery/PickUp Options</h5>
+        <hr />
+        <div class="options">
+            <div class="options-content">
 
-        <div class="form-group">
-            <label asp-for="Address"></label>
-            <input asp-for="Address" class="form-control" />
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
+                <div class="options-heading">
+                    <p>Deliver to me</p>
+                    <a class="btn plain">Select Delivery Address</a>
+                </div>
+                <div style="display: flex">
+                    <i class="fas fa-location-dot"></i>
+                    <p class="instruct">Hi @Model.FirstName, click on select delivery address to specify a delivery address.</p>
+                </div>
+                <p class="options-words">Your item should be delivered to you in about 5 working days within Lagos and Abuja, and 7 to 14 working days outside Lagos and Abuja.</p>
+            </div>
+            <div class="options-content">
 
-        <div class="form-group">
-            <label asp-for="City"></label>
-            <input asp-for="City" class="form-control" />
-            <span asp-validation-for="City" class="text-danger"></span>
+                <div class="options-heading">
+                    <p>Pickup from a Store</p>
+                    <a class="btn plain">Select PickUp Location</a>
+                </div>
+                <div style="display: flex">
+                    <i class="fas fa-location-dot"></i>
+                    <p class="instruct">Select a pickup location nearest to you from our 45 pickup locations nationwide.</p>
+                </div>
+                <p class="options-words">Pickup items from our pickup locations closest to you.<br />Save some amount on delivery charges.</p>
+            </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="State"></label>
-            <input asp-for="State" class="form-control" />
-            <span asp-validation-for="State" class="text-danger"></span>
+    <div class="order-section">
+        <h5>Review Order</h5>
+        <hr />
+        <div class="table-label">
+            <div>Products</div>
+            <div>Quantity</div>
+            <div>Price</div>
+            <div>SubTotal</div>
         </div>
+        <hr />
 
-        <div class="form-group">
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" class="form-control" />
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        @foreach (var item in Model.OrderItems)
+        {
+            <div class="table-label">
+                <div class="order-product">
+                    <div>
+                        <img src="@item.Product.ImageUrl" alt="...">
+                    </div>
+                    <div class="item-name">@item.Product.Name</div>
+                </div>
+                <div>@item.Quantity</div>
+                <div>@string.Format("# {0:N}", item.Product.Price)</div>
+                <div>@string.Format("# {0:N}", item.SubTotal)</div>
+            </div>
+            <hr />
+        }
+        <div class="order-total"><b>Total (excluding delivery charges): @string.Format("# {0:N}", Model.OrderTotal)</b></div>
+    </div>
+
+    <div class="order-section">
+        <h5>Payment Options</h5>
+        <hr />
+        <div style="color: #726d6d;">
+            <div class="cards">
+                <p><b>We accept:</b></p>
+                <img src="~/Images/mastercard.png" alt="master card" style="max-height: 5rem;" />
+                <img src="~/Images/verve.png" alt="verve card" />
+                <img src="~/Images/visa.jpg" alt="visa card" />
+            </div>
+            <div>
+                <ul>
+                    <li>Ensure sufficient balance to cover this transaction</li>
+                    <li>No minimum or maximum order</li>
+                    <li>Make sure your card is still valid</li>
+                </ul>
+            </div>
+            <i class="fas fa-padlock"></i>
+            <p style="margin-left: 2rem;">Transactions are 100% Safe and Secure.</p>
         </div>
+       
+        <hr />
+        <div class="order-subtotal">
+            <h5>Order SubTotal:</h5>
+            <h5>@string.Format("# {0:N}", Model.OrderTotal)</h5>
+        </div>
+        <hr />
 
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Complete order</button>
-    </form>
+        <div class="options">
+            <div class="options-content payment-methods">
+                <a>
+                    <div class="payment-options">
+                        <div>
+                            <h5>Bank Transfer</h5>
+                            <p>Make Payments Using Bank Transfer</p>
+                        </div>
+                        <div>
+                            <img src="~/Images/bank-transfer.png" alt="transfer" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="options-content payment-methods">
+                <a>
+                    <div class="payment-options">
+                        <div>
+                            <h5>Card</h5>
+                            <p>Make Payments with your Credit or Debit Card</p>
+                        </div>
+                        <div>
+                            <img src="~/Images/credit-card.svg" alt="card" />
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="options-content payment-methods">
+                <a>
+                    <div class="payment-options">
+                        <div>
+                            <h5>Cash on Delivery</h5>
+                            <p>Pay with Cash on Delivery</p>
+                        </div>
+                        <div>
+                            <img src="~/Images/cash-on-delivery.png" alt="cash" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

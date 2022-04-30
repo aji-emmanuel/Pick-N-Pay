@@ -7,35 +7,68 @@ namespace Week8PicknPay.Models
     public class Order
     {
         public string Id { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
 
-        //[Required]
+        [Required]
         public string FirstName { get; set; }
-       // [Required]
+
+        [Required]
         public string LastName { get; set; }
-       // [Required]
+
+        [Required]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please enter your address")]
-        [StringLength(100)]
-        [Display(Name = "Address")]
-        public string Address { get; set; }
+        public Address Address { get; set; }
 
-        [Required(ErrorMessage = "Please enter your city")]
-        [StringLength(50)]
-        public string City { get; set; }
+        public IEnumerable<OrderDetail> OrderItems { get; set; }
 
-        [Required(ErrorMessage = "Please enter your state")]
-        [StringLength(50)]
-        public string State { get; set; }
-
-        [Required(ErrorMessage = "Please enter your phone number")]
-        [StringLength(25)]
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone number")]
-        public string PhoneNumber { get; set; }
         public double OrderTotal { get; set; }
+
         public string PaymentStatus { get; set; }
+
         public DateTime OrderTime { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // public List<OrderDetail> OrderDetails { get; set; }
+
+        // //[Required]
+        // public string FirstName { get; set; }
+        //// [Required]
+        // public string LastName { get; set; }
+        //// [Required]
+        // public string Email { get; set; }
+
+        // [Required(ErrorMessage = "Please enter your address")]
+        // [StringLength(100)]
+        // [Display(Name = "Address")]
+        // public string Address { get; set; }
+
+        // [Required(ErrorMessage = "Please enter your city")]
+        // [StringLength(50)]
+        // public string City { get; set; }
+
+        // [Required(ErrorMessage = "Please enter your state")]
+        // [StringLength(50)]
+        // public string State { get; set; }
+
+        // [Required(ErrorMessage = "Please enter your phone number")]
+        // [StringLength(25)]
+        // [DataType(DataType.PhoneNumber)]
+        // [Display(Name = "Phone number")]
+        // public string PhoneNumber { get; set; }
+
     }
 }

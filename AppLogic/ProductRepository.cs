@@ -47,5 +47,20 @@ namespace Week8PicknPay.Repository
         {
             return _appDbContext.Products.FirstOrDefault(p => p.ProductId == productId);
         }
+
+        public IEnumerable<Product> SearchProducts(string query)
+        {
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                var category = _appDbContext.Categories.FirstOrDefault(cat => cat.CategoryName.ToLower().Contains(query.ToLower().Trim()));
+
+                if (category != null)
+                {
+                    return _appDbContext.Products.Where(prod => prod.CategoryId == category.CategoryId);
+                }
+                return _appDbContext.Products.Where(x => x.Name.ToLower().Contains(query.ToLower().Trim()));
+            }
+            return default;
+        }
     }
 }

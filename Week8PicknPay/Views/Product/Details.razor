@@ -2,6 +2,7 @@
 @page "/product/{id}"
 
 @using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Views.Shared.Components
 @using Week8PicknPay.Models
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Components
@@ -11,42 +12,49 @@
 
 @inherits ProductCart
 
-<div class="product-page">
-    <div class="product-image">
-        <img alt="@product.Name" src="@product.ImageUrl">
-    </div>
-    <div class="product-details">
-        <h3 class="product-name">
-            @product.Name
-        </h3>
-        <hr />
-        <div class="cart-price-group">
-            <h3>
-                @string.Format("# {0:N}", product.Price)
+@if (product != null)
+{
+    <div class="product-page">
+        <div class="product-image">
+            <img alt="@product.Name" src="@product.ImageUrl">
+        </div>
+        <div class="product-details">
+            <h3 class="product-name">
+                @product.Name
             </h3>
-            <div class="cart-buttons">
-                <button class="product-qty" @onclick="(e =>DecreaseQty())">
-                    <i class="fa-solid fa-minus"></i>
-                </button>
-                <p style="font-size: 2.5rem;">@productQty</p>
-                <button class="product-qty" @onclick="(e =>IncreaseQty())">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <p class="button">
-                    <a class="btn btn-primary" @onclick="(() => AddToCart(product))">Add To Cart</a>
-                </p>
-            </div>
-        </div>
-        <hr />
-        <div class="product-description">
-            <h3>Description</h3>
             <hr />
-            <h4>@product.ShortDescription</h4>
-            <p>@product.LongDescription</p>
-        </div>
+            <div class="cart-price-group">
+                <h3>
+                    @string.Format("# {0:N}", product.Price)
+                </h3>
+                <div class="cart-buttons">
+                    <button class="product-qty" @onclick="(e =>DecreaseQty())">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <p style="font-size: 2.5rem;">@productQty</p>
+                    <button class="product-qty" @onclick="(e =>IncreaseQty())">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <p class="button">
+                        <a class="btn btn-primary" @onclick="(() => AddToCart(product))">Add To Cart</a>
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <div class="product-description">
+                <h3>Description</h3>
+                <hr />
+                <h4>@product.ShortDescription</h4>
+                <p>@product.LongDescription</p>
+            </div>
 
+        </div>
     </div>
-</div>
+}
+else
+{
+    <NotFound />
+}
 
 
 @if (show)

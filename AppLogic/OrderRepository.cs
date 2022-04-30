@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 
@@ -8,37 +10,47 @@ namespace Week8PicknPay.Repository
     {
         private readonly AppDbContext _appDbContext;
         private readonly IShoppingCart _shoppingCart;
+        private readonly IMapper _mapper;
 
-        public OrderRepository(AppDbContext appDbContext, IShoppingCart shoppingCart)
+        public OrderRepository(AppDbContext appDbContext, IShoppingCart shoppingCart, IMapper mapper)
         {
             _appDbContext = appDbContext;
             _shoppingCart = shoppingCart;
+            _mapper = mapper;
         }
 
         /// <summary>
         /// Creates and saves a new Order to the database
         /// </summary>
         /// <param name="order"></param>
-        public void CreateOrder(Order order)
+        public Order CreateOrder(User user)
         {
-            List<ShoppingCartItem> shoppingCartItems = _shoppingCart.ShoppingCartItems;
-            order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+            IEnumerable<ShoppingCartItem> shoppingCartItems = _shoppingCart.GetShoppingCartItems();
+            //foreach (var item in shoppingCartItems)
+            //{
+            //    orderItems.Add(new OrderDetail()
+            //    {
+            //        Id = Guid.NewGuid().ToString(),
+            //        OrderId = Guid.NewGuid().ToString(),
+            //        Product = item.Product,
+            //        Quantity = item.Quantity
+            //    });
+            //}
 
-            order.OrderDetails = new List<OrderDetail>();
-            
-            foreach (var shoppingCartItem in shoppingCartItems)
+
+            var order = new Order()
             {
-                var orderDetail = new OrderDetail               //adding the order with its details
-                {
-                    Amount = shoppingCartItem.Amount,
-                    ProductId = shoppingCartItem.Product.ProductId,
-                    Price = shoppingCartItem.Product.Price
-                };
-
-                order.OrderDetails.Add(orderDetail);
-            }
-            _appDbContext.Orders.Add(order);
-            _appDbContext.SaveChanges();
+                Id = Guid.NewGuid().ToString(),
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                OrderItems = _mapper.Map<IEnumerable<ShoppingCartItem>, IEnumerable<OrderDetail>>(shoppingCartItems),
+                OrderTotal = _shoppingCart.GetShoppingCartTotal(),
+                OrderTime = DateTime.Now
+            };
+           // _appDbContext.Orders.Add(order);
+          //  _appDbContext.SaveChanges();
+            return order;
         }
     }
 }

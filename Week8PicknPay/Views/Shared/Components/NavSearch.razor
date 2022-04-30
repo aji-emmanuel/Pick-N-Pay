@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Repository
+
+@inject IProductRepository _productRepository;
+
+
+
+<div class="nav-search-div">
+    <input class="navbar-search" type="search" @bind-value="@SearchTerm" @bind-value:event ="onsubmit" placeholder="Search for products and categories..." aria-label="Search">
+</div>
+
+
+
+
+
+@code {
+
+    public string SearchTerm { get; set; }
+
+    //protected override void OnParametersSet()
+    //{
+    //    var products = _productRepository.SearchProducts(SearchTerm);
+    //}
+
+}
