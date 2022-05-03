@@ -54,12 +54,12 @@
                     <div class="item-name">@item.Product.Name</div>
                 </div>
                 <div>@item.Quantity</div>
-                <div>@string.Format("# {0:N}", item.Product.Price)</div>
-                <div>@string.Format("# {0:N}", item.SubTotal)</div>
+                <div>@string.Format("# {0:N0}", item.Product.Price)</div>
+                <div>@string.Format("# {0:N0}", item.SubTotal)</div>
             </div>
             <hr />
         }
-        <div class="order-total"><b>Total (excluding delivery charges): @string.Format("# {0:N}", Model.OrderTotal)</b></div>
+        <div class="order-total"><b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.OrderTotal)</b></div>
     </div>
 
     <div class="order-section">
@@ -86,13 +86,13 @@
         <hr />
         <div class="order-subtotal">
             <h5>Order SubTotal:</h5>
-            <h5>@string.Format("# {0:N}", Model.OrderTotal)</h5>
+            <h5>@string.Format("# {0:N0}", Model.OrderTotal)</h5>
         </div>
         <hr />
 
         <div class="options">
             <div class="options-content payment-methods">
-                <a>
+                <a data-toggle="modal" data-target="#transfer-modal" data-backdrop="static" data-keyboard="false">
                     <div class="payment-options">
                         <div>
                             <h5>Bank Transfer</h5>
@@ -130,6 +130,75 @@
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="transfer-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px;" />
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="order-subtotal">
+                    <h5><b>Order SubTotal:</b></h5>
+                    <h5><b>@string.Format("# {0:N0}", Model.OrderTotal)</b></h5>
+                </div>
+                <div class="strip">
+                    <b>A COPY OF THIS INSTRUCTION HAS BEEN SENT TO YOUR EMAIL</b>
+                </div>
+                <div style="margin: 1rem 0; text-align: justify;">
+                    <p>Kindly transfer into the Account below then click the 'I have made a transfer' button to complete the transaction. (<b>NB:</b> This account number is not reusable).</p>
+                </div>
+                <div class="transfer-details">
+                    <p>Amount:</p>
+                    <h5>@string.Format("# {0:N0}", Model.OrderTotal)</h5>
+                </div>
+                <div class="transfer-details">
+                    <p>Bank Name:</p>
+                    <h5>Guaranty Trust Bank</h5>
+                </div>
+                <div class="transfer-details">
+                    <p>Account Number:</p>
+                    <h5>1234567890</h5>
+                </div>
+                <div class="transfer-details">
+                    <p>Account Name:</p>
+                    <h5>PickNPay-Ref</h5>
+                </div>
+                <a class="btn plain" data-dismiss="modal" data-toggle="modal" data-target="#order-success-modal" data-backdrop="static" data-keyboard="false"> I have made a transfer</a>
+                <a class="btn btn-primary" data-dismiss="modal">Select another payment method</a>
+
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="modal fade" id="order-success-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px;" />
+            </div>
+
+            <div class="modal-body">
+               
+                <div class="strip">
+                    <b>THANKS FOR PATRONISING US</b>
+                </div>
+                <div style="margin: 1rem 0; text-align: justify;">
+                    <p>An email will be sent to you once payment has been verified and the products are been shipped.</p>
+                </div>
+               
+                <a class="btn btn-primary" href="/">OK</a>
+
             </div>
         </div>
     </div>

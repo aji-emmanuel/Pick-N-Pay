@@ -9,6 +9,10 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+hr {
+    border-top: 1px solid #e9e4e4;
+}
+
 .container {
     min-height: 100vh;
     position: relative;
@@ -662,7 +666,7 @@ a {
 .order-checkout {
     background-color: whitesmoke;
     padding: 2rem;
-    margin: -1rem -1rem 0;
+    margin: -1rem -1rem;
 }
 
     .order-checkout h4 {
@@ -735,7 +739,7 @@ a {
     padding: 1rem;
     margin-bottom: 1.5rem;
     border-radius: 1rem;
-    border: solid 1px #eee;
+    border: solid 1px #aba9a9;
 }
 
     .options-content.payment-methods {
@@ -827,3 +831,73 @@ a {
     width: 5rem;
     height: 5rem;
 }
+/*-------- Transfer Modal ---------------*/
+.modal {
+
+}
+    .modal.in .modal-dialog {
+        display: flex;
+        height: 100%;
+    }
+        .modal-content {
+    max-width: 500px;
+    margin: auto;
+}
+.modal-body {
+    position: relative;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .modal-body a {
+        margin: 2rem 0 0;
+    }
+        .modal-body a:active,
+        .modal-body a:focus {
+            font-weight:bold;
+        }
+
+.modal-body .strip {
+    background-color: #F58634;
+    padding: 1rem 2rem;
+    margin: 1rem -1.5rem 2rem;
+    text-align: center;
+}
+.transfer-details {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: solid 1px #eee;
+}
+
+    .transfer-details p {
+        margin: 0 6rem 0 0;
+    }
+    .transfer-details h5 {
+        font-weight: bold;
+    }
+
+/*-------------- spinner -----------------*/
+
+.spinner {
+    border: 16px solid silver;
+    border-top: 16px solid crimson;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 700ms linear infinite;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}/*-----------------------------------------------------------*/

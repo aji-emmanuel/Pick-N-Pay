@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Week8PicknPay.Models;
-using Week8PicknPay.Repository;
-
-
 
 namespace Week8PicknPay.Components
 {

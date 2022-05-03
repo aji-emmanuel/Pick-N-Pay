@@ -14,7 +14,6 @@ namespace Week8PicknPay.Repository
             _appDbContext = appDbContext;
         }
 
-
         /// <returns>All products in a category or all products in database.</returns>
         public IEnumerable<Product> GetAllProducts(string categoryName)
         {
@@ -26,16 +25,12 @@ namespace Week8PicknPay.Repository
             return _appDbContext.Products.ToList();
         }
 
-
         /// <summary>
         /// Returns products whose IsTopDeal property is set to true.
         /// </summary>
         public IEnumerable<Product> TopDealProducts
         {
-            get
-            {
-                return _appDbContext.Products.Where(p => p.IsTopDeal);//.Include(c => c.Category).Where(p => p.IsTopDeal);
-            }
+            get => _appDbContext.Products.Where(p => p.IsTopDeal); //.Include(c => c.Category).Where(p => p.IsTopDeal);
         }
 
         /// <summary>

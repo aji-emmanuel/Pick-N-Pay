@@ -7,9 +7,6 @@
 
 @inject IShoppingCart _cart
 
-
-
-
 @if (shoppingCartItems.Count() == 0)
 {
     <div class="cart-card">
@@ -62,9 +59,9 @@ else
                     </td>
 
                     <td class="text-center">@item.Product.Name</td>
-                    <td class="text-center">@string.Format("# {0:N}", item.Product.Price)</td>
+                    <td class="text-center">@string.Format("# {0:N0}", item.Product.Price)</td>
                     <td class="text-center">
-                        @(string.Format("# {0:N}", (item.Quantity * item.Product.Price)))
+                        @(string.Format("# {0:N0}", (item.Quantity * item.Product.Price)))
                     </td>
                 </tr>
             }
@@ -73,13 +70,13 @@ else
             <tr>
                 <td colspan="3" class="text-right" style="font-weight:bolder">Total (excluding delivery charges):</td>
                 <td colspan="2" class="text-left" style="font-weight:bolder">
-                    @string.Format("# {0:N}", _cart.GetShoppingCartTotal())
+                    @string.Format("# {0:N0}", _cart.GetShoppingCartTotal())
                 </td>
             </tr>
         </tfoot>
     </table>
 
-    <div class="text-center">
+    <div class="text-center" style="margin-bottom: 3rem;">
         <a class="btn btn-primary" href="/order/checkout">Check out now!</a>
     </div>
 }

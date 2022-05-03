@@ -25,11 +25,14 @@ namespace Week8PicknPay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthenticationCore();
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
-
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
@@ -37,7 +40,6 @@ namespace Week8PicknPay
             services.AddTransient<IShoppingCart, ShoppingCart>();
 
             services.AddAutoMapper(typeof(AutoMapping));
-
             services.AddHttpContextAccessor();
             services.AddSession();
 
@@ -45,9 +47,7 @@ namespace Week8PicknPay
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-
-            services.AddRazorPages();
-            services.AddServerSideBlazor();
+           
             Seeder.SeedDataBase(services);
         }
 

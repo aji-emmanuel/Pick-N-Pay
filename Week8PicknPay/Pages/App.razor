@@ -1,9 +1,10 @@
 ﻿
 @using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Authorization
 
 <Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="routeData" />
+        <AuthorizeRouteView RouteData="routeData" />
     </Found>
     <NotFound>
         <Week8PicknPay.Views.Shared.Components.NotFound />

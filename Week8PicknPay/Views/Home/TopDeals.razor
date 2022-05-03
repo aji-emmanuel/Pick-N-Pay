@@ -11,36 +11,36 @@
 
 @inherits ProductCart
 
-<div class="row">
+    <div class="row">
 
-    @foreach (var product in _productRepository.TopDealProducts)
-    {
-        <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
-           
-            <div class="thumbnail">
-                <a href="/product/@product.ProductId.ToString()">
-                    <div class="thumbnail-img">
-                        <img src="@product.ImageUrl" alt="@product.Name">
-                    </div>
+        @foreach (var product in _productRepository.TopDealProducts)
+        {
+            <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
 
-                    <div class="caption" style="margin:0px;">
-                        <div>
-                            <h4 class="product-name">
-                                @product.Name
-                            </h4>
-                            <h4 style="font-weight:bold">@string.Format("#{0:N}", product.Price)</h4>
+                <div class="thumbnail">
+                    <a href="/product/@product.ProductId.ToString()">
+                        <div class="thumbnail-img">
+                            <img src="@product.ImageUrl" alt="@product.Name">
                         </div>
-                    </div>
-                </a>
-                <div class="addToCart" style="margin-bottom:5px;">
-                    <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
-                </div>
-                
-            </div>
-        </div>
-    }
 
-</div>
+                        <div class="caption" style="margin:0px;">
+                            <div>
+                                <h4 class="product-name">
+                                    @product.Name
+                                </h4>
+                                <h4 style="font-weight:bold">@string.Format("#{0:N0}", product.Price)</h4>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="addToCart" style="margin-bottom:5px;">
+                        <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
 
 
 @if (show)
