@@ -29,6 +29,5 @@ namespace Week8PicknPay.Models
         public string PaymentStatus { get; set; }
 
         public DateTime OrderTime { get; set; }
-
     }
 }
