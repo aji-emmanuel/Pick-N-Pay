@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Week8PicknPay.Repository
     {
         private readonly AppDbContext _context;
         private readonly DbSet<Address> _addresses;
+        private static string UserId { get; set; }
         public AddressRepository(AppDbContext context)
         {
             _context = context;
@@ -19,12 +21,15 @@ namespace Week8PicknPay.Repository
 
         public async Task<bool> AddAddressAsync(Address address)
         {
+            address.Id = Guid.NewGuid().ToString();
+            address.UserId = UserId;
             _addresses.Add(address);
             return await _context.SaveChangesAsync() > 0;
         }
 
         public IEnumerable<Address> GetUserAddresses(string userId)
         {
+            UserId = userId;
             return _addresses.Where(x => x.UserId == userId);
         }
 

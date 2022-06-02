@@ -38,6 +38,7 @@ namespace Week8PicknPay
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IRequestForm, RequestForm>();
             services.AddTransient<IShoppingCart, ShoppingCart>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
 
             services.AddAutoMapper(typeof(AutoMapping));
             services.AddHttpContextAccessor();

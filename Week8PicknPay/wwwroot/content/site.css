@@ -684,12 +684,14 @@ a {
     .order-section h5 {
         font-weight: bold;
     }
+
     .order-section .cards {
         display: flex;
         justify-content: space-around;
         align-items: center;
         margin: 2rem;
     }
+
 .cards img {
     max-width: 20vw;
     max-height: 3rem;
@@ -808,18 +810,18 @@ a {
     justify-content: end;
 }
 
-.payment-options{
+.payment-options {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
-.payment-options h5 {
-    margin: 0;
-    font-family: ui-monospace;
-    font-style: normal;
-    font-weight: bold;
-    color: #726d6d;
-}
+    .payment-options h5 {
+        margin: 0;
+        font-family: ui-monospace;
+        font-style: normal;
+        font-weight: bold;
+        color: #726d6d;
+    }
 
 .order-subtotal {
     display: flex;
@@ -835,35 +837,41 @@ a {
 .modal {
 
 }
+
     .modal.in .modal-dialog {
         display: flex;
         height: 100%;
     }
-        .modal-content {
-    max-width: 500px;
-    margin: auto;
+
+.modal-content {
+    max-width: 70vw;
 }
+
 .modal-body {
     position: relative;
     padding: 15px;
     display: flex;
     flex-direction: column;
+    height: 70vh;
+    overflow-y: auto;
 }
 
     .modal-body a {
         margin: 2rem 0 0;
     }
+
         .modal-body a:active,
         .modal-body a:focus {
-            font-weight:bold;
+            font-weight: bold;
         }
 
-.modal-body .strip {
-    background-color: #F58634;
-    padding: 1rem 2rem;
-    margin: 1rem -1.5rem 2rem;
-    text-align: center;
-}
+    .modal-body .strip {
+        background-color: #F58634;
+        padding: 1rem 2rem;
+        margin: 1rem -1.5rem 2rem;
+        text-align: center;
+    }
+
 .transfer-details {
     align-items: center;
     display: grid;
@@ -874,6 +882,7 @@ a {
     .transfer-details p {
         margin: 0 6rem 0 0;
     }
+
     .transfer-details h5 {
         font-weight: bold;
     }
@@ -900,4 +909,36 @@ a {
     100% {
         transform: rotate(360deg)
     }
-}/*-----------------------------------------------------------*/
+}
+/*-----------------------------------------------------------*/
+
+
+
+.address-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .address-header a {
+        margin: 0;
+    }
+
+.address-container {
+    border: 2px solid #eee;
+    border-radius: .5rem;
+    padding: 1rem 1rem 0;
+    margin-bottom: 1rem;
+}
+
+.address-name {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+
+.address-container i {
+    color: #e18698;
+    margin-right: 1rem;
+    margin-top: .3rem;
+}

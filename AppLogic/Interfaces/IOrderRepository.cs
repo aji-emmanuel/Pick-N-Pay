@@ -9,6 +9,6 @@ namespace Week8PicknPay.Repository
 {
     public interface IOrderRepository
     {
-        Order CreateOrder(User user);
+        OrderCheckout CreateOrderCheckout(User user);
     }
 }

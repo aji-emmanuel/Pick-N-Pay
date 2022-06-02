@@ -14,14 +14,12 @@ namespace Week8PicknPay.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IOrderRepository _orderRepository;
         private readonly IShoppingCart _shoppingCart;
-        private readonly IAddressRepository _addressRepository;
 
-        public OrderController(UserManager<User> userManager, IOrderRepository orderRepository, IShoppingCart shoppingCart, IAddressRepository addressRepository)
+        public OrderController(UserManager<User> userManager, IOrderRepository orderRepository, IShoppingCart shoppingCart)
         {
             _userManager = userManager;
             _orderRepository = orderRepository;
             _shoppingCart = shoppingCart;
-            _addressRepository = addressRepository;
         }
 
         /// <summary>
@@ -32,9 +30,9 @@ namespace Week8PicknPay.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
-            var order = _orderRepository.CreateOrder(user);
-            var addresses = _addressRepository.GetUserAddresses(userId);
-            return View(new OrderCheckout() {Order = order, Addresses = addresses});
+            var orderCheckout = _orderRepository.CreateOrderCheckout(user);
+            
+            return View(orderCheckout);
         }
         
         public IActionResult CheckoutComplete()
