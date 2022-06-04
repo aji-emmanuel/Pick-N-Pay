@@ -11,11 +11,13 @@ namespace Week8PicknPay.Repository
     public class AddressRepository : IAddressRepository
     {
         private readonly AppDbContext _context;
+        private readonly IOrderRepository _orderRepository;
         private readonly DbSet<Address> _addresses;
         private static string UserId { get; set; }
-        public AddressRepository(AppDbContext context)
+        public AddressRepository(AppDbContext context, IOrderRepository orderRepository)
         {
             _context = context;
+            _orderRepository = orderRepository;
             _addresses = _context.Set<Address>();
         }
 
@@ -24,6 +26,7 @@ namespace Week8PicknPay.Repository
             address.Id = Guid.NewGuid().ToString();
             address.UserId = UserId;
             _addresses.Add(address);
+            _orderRepository.OrderAddress(address);
             return await _context.SaveChangesAsync() > 0;
         }
 

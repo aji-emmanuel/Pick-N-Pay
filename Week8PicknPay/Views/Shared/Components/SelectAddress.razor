@@ -1,0 +1,111 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Models
+@using Week8PicknPay.Repository
+
+@inject IAddressRepository _addressRepo
+@inject IOrderRepository _orderRepo
+
+
+
+@if (UserAddresses.Count() > 0)
+{
+    <div class="strip">
+        <b>SELECT AN ADDRESS FROM YOUR LIST OF ADDRESSES</b>
+    </div>
+    @foreach (var address in UserAddresses)
+    {
+        if (SelectedAddress == address)
+        {
+            <div class="address-container selected">
+                <div class="address-name">
+                    <i class="fas fa-user"></i>
+                    <p> @address.FirstName @address.LastName</p>
+                </div>
+                <div class="address-content">
+                    <div style="display: flex">
+                        <i class="fas fa-location-dot"></i>
+                        <p>@address.HouseNo, @address.Street, @address.City, @address.LGA, @address.State.</p>
+                    </div>
+
+                    <div style="display: flex">
+                        <i class="fas fa-phone"></i>
+                        <p>@address.PhoneNumber</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="address-container" @onclick="() => SetSelectedAddress(address)">
+                <div class="address-name">
+                    <i class="fas fa-user"></i>
+                    <p> @address.FirstName @address.LastName</p>
+                </div>
+                <div class="address-content">
+                    <div style="display: flex">
+                        <i class="fas fa-location-dot"></i>
+                        <p>@address.HouseNo, @address.Street, @address.City, @address.LGA, @address.State.</p>
+                    </div>
+
+                    <div style="display: flex">
+                        <i class="fas fa-phone"></i>
+                        <p>@address.PhoneNumber</p>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    }
+    <a class="btn btn-primary" @onclick="() => SaveSelectedAddress()"> Use Selected Address</a>
+}
+else
+{
+    <div class="no-address">
+        <h4>You currently have no saved address!</h4>
+    </div>
+
+}
+
+@if (show)
+{
+    <div class="alert alert-danger">
+        <div>
+            <p class="alert-info">Address has been successfully selected!</p>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/order/checkout">Ok</a>
+        </div>
+    </div>
+}
+
+
+@code {
+
+    [Parameter]
+    public string UserId { get; set; }
+
+    public IEnumerable<Address> UserAddresses { get; set; }
+    public Address SelectedAddress { get; set; }
+
+    bool show = false;
+
+
+    protected override void OnInitialized()
+    {
+        base.OnParametersSet();
+        UserAddresses = _addressRepo.GetUserAddresses(UserId);
+    }
+
+    private void SetSelectedAddress(Address address)
+    {
+        SelectedAddress = address;
+    }
+
+    private void SaveSelectedAddress()
+    {
+        show = _orderRepo.OrderAddress(SelectedAddress);
+    }
+
+}

@@ -971,9 +971,16 @@ body.modal-content {
     border-radius: .5rem;
     padding: 1rem 1rem 0;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
-
-.address-name {
+    .address-container.selected {
+        border: solid 1px #b61a4c;
+        background-color: #fdf4f1;
+    }
+.options-content .address-container.selected {
+    margin-top: 2rem;
+}
+    .address-name {
     display: flex;
     border-bottom: 1px solid #eee;
     margin-bottom: 1rem;

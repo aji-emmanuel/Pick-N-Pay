@@ -11,39 +11,47 @@ namespace Week8PicknPay.Repository
         private readonly AppDbContext _appDbContext;
         private readonly IShoppingCart _shoppingCart;
         private readonly IMapper _mapper;
-        private readonly IAddressRepository _addressRepository;
 
-        public OrderRepository(AppDbContext appDbContext, IShoppingCart shoppingCart, IMapper mapper, IAddressRepository addressRepository)
+        public OrderRepository(AppDbContext appDbContext, IShoppingCart shoppingCart, IMapper mapper)
         {
             _appDbContext = appDbContext;
             _shoppingCart = shoppingCart;
             _mapper = mapper;
-            _addressRepository = addressRepository;
         }
+
+        private static Order Order;
 
         /// <summary>
         /// Creates and saves a new Order to the database
         /// </summary>
         /// <param name="order"></param>
-        public OrderCheckout CreateOrderCheckout(User user)
+        public Order CreateOrderCheckout(User user)
         {
             IEnumerable<ShoppingCartItem> shoppingCartItems = _shoppingCart.GetShoppingCartItems();
 
-            var order = new Order()
+            if(Order == null)
             {
-                Id = Guid.NewGuid().ToString(),
-                User = user,
-                UserId = user.Id,
-                Email = user.Email,
-                OrderItems = _mapper.Map<IEnumerable<ShoppingCartItem>, IEnumerable<OrderDetail>>(shoppingCartItems),
-                OrderTotal = _shoppingCart.GetShoppingCartTotal(),
-                OrderTime = DateTime.Now
-            };
-            var addresses = _addressRepository.GetUserAddresses(user.Id);
+                Order = new Order()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    User = user,
+                    UserId = user.Id,
+                    Email = user.Email,
+                    OrderItems = _mapper.Map<IEnumerable<ShoppingCartItem>, IEnumerable<OrderDetail>>(shoppingCartItems),
+                    OrderTotal = _shoppingCart.GetShoppingCartTotal(),
+                    OrderTime = DateTime.Now
+                };
+            }
 
             // _appDbContext.Orders.Add(order);
             //  _appDbContext.SaveChanges();
-            return new OrderCheckout() { Order = order, Addresses = addresses };
+            return Order;
+        }
+
+        public bool OrderAddress(Address address)
+        {
+            Order.Address = address;
+            return Order.Address != null;
         }
     }
 }

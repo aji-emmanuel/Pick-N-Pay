@@ -1,8 +1,6 @@
 ﻿@using Week8PicknPay.Views.Shared.Components
 
-
-@model OrderCheckout
-
+@model Order
 
 <div class="order-checkout">
     <h4> Checkout</h4>
@@ -12,17 +10,48 @@
         <div class="options">
             <div class="options-content">
 
-                <div class="options-heading">
-                    <p>Deliver to me</p>
-                    <a class="btn plain" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false">
-                        Select Delivery Address
-                    </a>
-                </div>
-                <div style="display: flex">
-                    <i class="fas fa-location-dot"></i>
-                    <p class="instruct">Hi @Model.Order.User.FirstName, click on select delivery address to specify a delivery address.</p>
-                </div>
-                <p class="options-words">Your item should be delivered to you in about 5 working days within Lagos and Abuja, and 7 to 14 working days outside Lagos and Abuja.</p>
+                @if (Model.Address == null)
+                {
+                    <div class="options-heading">
+                        <p>Deliver to me</p>
+                        <a class="btn plain" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false">
+                            Select Delivery Address
+                        </a>
+                    </div>
+                    <div style="display: flex">
+                        <i class="fas fa-location-dot"></i>
+                        <p class="instruct">Hi @Model.User.FirstName, click on select delivery address to specify a delivery address.</p>
+                    </div>
+                    <p class="options-words">Your item should be delivered to you in about 5 working days within Lagos and Abuja, and 7 to 14 working days outside Lagos and Abuja.</p>
+
+                }
+                else
+                {
+                    <div class="options-heading">
+                        <p>Deliver to me</p>
+                        <a class="btn plain" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false">
+                            Change Delivery Address
+                        </a>
+                    </div>
+                    <div class="address-container selected">
+                        <div class="address-name">
+                            <i class="fas fa-user"></i>
+                            <p> @Model.Address.FirstName @Model.Address.LastName</p>
+                        </div>
+                        <div class="address-content">
+                            <div style="display: flex">
+                                <i class="fas fa-location-dot"></i>
+                                <p>@Model.Address.HouseNo, @Model.Address.Street, @Model.Address.City, @Model.Address.LGA, @Model.Address.State.</p>
+                            </div>
+
+                            <div style="display: flex">
+                                <i class="fas fa-phone"></i>
+                                <p>@Model.Address.PhoneNumber</p>
+                            </div>
+                        </div>
+
+                    </div>
+                }
             </div>
 
             <div class="options-content">
@@ -40,6 +69,8 @@
         </div>
     </div>
 
+    <!-- Review Order Section -->
+
     <div class="order-section">
         <h5>Review Order</h5>
         <hr />
@@ -51,7 +82,7 @@
         </div>
         <hr />
 
-        @foreach (var item in Model.Order.OrderItems)
+        @foreach (var item in Model.OrderItems)
         {
             <div class="table-label">
                 <div class="order-product">
@@ -66,8 +97,10 @@
             </div>
             <hr />
         }
-        <div class="order-total"><b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.Order.OrderTotal)</b></div>
+        <div class="order-total"><b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.OrderTotal)</b></div>
     </div>
+
+    <!-- Payment Options Section -->
 
     <div class="order-section">
         <h5>Payment Options</h5>
@@ -93,7 +126,7 @@
         <hr />
         <div class="order-subtotal">
             <h5>Order SubTotal:</h5>
-            <h5>@string.Format("# {0:N0}", Model.Order.OrderTotal)</h5>
+            <h5>@string.Format("# {0:N0}", Model.OrderTotal)</h5>
         </div>
         <hr />
 
@@ -143,7 +176,7 @@
 </div>
 
 
-/* Select Addresses Modal */
+<!-- Select Addresses Modal -->
 
 <div class="modal fade" id="address-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -156,56 +189,18 @@
             </div>
 
             <div class="modal-body">
-
                 <div class="address-header">
                     <h5>Want a new address?</h5>
                     <a class="btn plain" data-dismiss="modal" data-toggle="modal" data-target="#add-address-modal" data-backdrop="static" data-keyboard="false"> Add Address</a>
                 </div>
-
-                @if (Model.Addresses.Count() > 0)
-                {
-                    <div class="strip">
-                        <b>SELECT AN ADDRESS FROM YOUR LIST OF ADDRESSES</b>
-                    </div>
-                    @foreach (var address in Model.Addresses)
-                    {
-                        <div class="address-container">
-                            <div class="address-name">
-                                <i class="fas fa-user"></i>
-                                <p> @address.FirstName @address.LastName</p>
-                            </div>
-                            <div class="address-content">
-                                <div style="display: flex">
-                                    <i class="fas fa-location-dot"></i>
-                                    <p>@address.HouseNo, @address.Street, @address.City, @address.LGA, @address.State.</p>
-                                </div>
-
-                                <div style="display: flex">
-                                    <i class="fas fa-phone"></i>
-                                    <p>@address.PhoneNumber</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    }
-                    <a class="btn btn-primary" data-dismiss="modal"> Use Selected Address</a>
-                }
-                else
-                {
-            <div class="no-address">
-                <h4>You currently have no saved address!</h4>
-            </div>
-                    
-                }
-
+                @(await Html.RenderComponentAsync<SelectAddress>(RenderMode.ServerPrerendered, new { UserId = Model.UserId }))
             </div>
         </div>
     </div>
 </div>
 
 
-
-/* Add Address Modal  */
+<!-- Add Address Modal  -->
 
 <div class="modal fade" id="add-address-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -218,7 +213,8 @@
             </div>
 
             <div class="modal-body">
-                @(await Html.RenderComponentAsync<AddAddress>(RenderMode.ServerPrerendered, new { Order = Model.Order }))
+                @(await Html.RenderComponentAsync<AddAddress>(RenderMode.ServerPrerendered))
+                <a class="btn plain" data-dismiss="modal"> Cancel </a>
             </div>
             <div class="modal-footer"></div>
         </div>
@@ -226,10 +222,7 @@
 </div>
 
 
-
-
-
-
+<!-- Transfer Modal -->
 
 <div class="modal fade" id="transfer-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -244,7 +237,7 @@
             <div class="modal-body">
                 <div class="order-subtotal">
                     <h5><b>Order SubTotal:</b></h5>
-                    <h5><b>@string.Format("# {0:N0}", Model.Order.OrderTotal)</b></h5>
+                    <h5><b>@string.Format("# {0:N0}", Model.OrderTotal)</b></h5>
                 </div>
                 <div class="strip">
                     <b>A COPY OF THIS INSTRUCTION HAS BEEN SENT TO YOUR EMAIL</b>
@@ -254,7 +247,7 @@
                 </div>
                 <div class="transfer-details">
                     <p>Amount:</p>
-                    <h5>@string.Format("# {0:N0}", Model.Order.OrderTotal)</h5>
+                    <h5>@string.Format("# {0:N0}", Model.OrderTotal)</h5>
                 </div>
                 <div class="transfer-details">
                     <p>Bank Name:</p>
@@ -275,6 +268,9 @@
         </div>
     </div>
 </div>
+
+
+<!-- Order Success Modal-->
 
 <div class="modal fade" id="order-success-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
