@@ -6,7 +6,7 @@
 
 
 <div class="nav-search-div">
-        <input class="navbar-search" type="search" @bind-value="@SearchTerm"  @onsubmit="() => navigate()" placeholder="Search for products and categories..." aria-label="Search">
+        <input class="navbar-search" type="search" @bind-value="@SearchTerm" @onkeyup="() => navigate()" placeholder="Search for products and categories..." aria-label="Search">
         <a @onclick="() => navigate()">
             <span class="fa fa-search"></span>
         </a>

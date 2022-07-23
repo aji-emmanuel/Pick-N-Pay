@@ -92,8 +92,9 @@ hr {
 }
 
     .nav-search-div .fa-search {
-        margin-left: -2rem;
-        font-size: 15px;
+        margin-left: -3rem;
+        margin-top: .5rem;
+        font-size: 2rem;
         color: #b61a4c;
     }
 
