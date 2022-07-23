@@ -1,0 +1,104 @@
+﻿
+@page "/search-products/{query}"
+
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Repository
+@using Week8PicknPay.Models
+@using Week8PicknPay.Components
+
+@inject IUnitOfWork _unitOfWork;
+@inject IShoppingCart _cart
+
+@inherits ProductCart
+
+
+
+
+<div class="row">
+    @if (Products?.Any() ?? false)
+    {
+        <h4 style="color: #b61a4c; display: flex; justify-content: center; ">@PageTitle</h4>
+        <hr />
+
+        @foreach (var product in Products)
+        {
+            <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
+                <div class="thumbnail">
+                    <a href="/product/@product.ProductId.ToString()">
+                        <div class="thumbnail-img">
+                            <img src="@product.ImageUrl" alt="@product.Name">
+                        </div>
+
+                        <div class="caption" style="margin:0px;">
+                            <div>
+                                <h4 class="product-name">
+                                    @product.Name
+                                </h4>
+                                <h4 style="font-weight:bold">@string.Format("#{0:N0}", product.Price)</h4>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="addToCart">
+                        <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="empty-search">
+            <div class="search-icon-box">
+                <span class="fa-brands fa-searchengin"></span>
+            </div>
+            <div class="empty-search-discription">
+                <h4>There are no results for "@Query".</h4>
+                <p> - Check your spelling for typing errors </p>
+                <p> - Try searching with short and simple keywords </p>
+                <p>- Try searching more general terms - you can then filter the search results </p>
+            </div>
+            <div>
+                <a class="btn plain bold" href="/"><i class="fas fa-home" /> Go to homepage</a>
+            </div>
+        </div>
+    }
+
+
+    @if (show)
+    {
+        <div class="add-cart-success">
+            <div class="alert-content">
+                <p class="alert-info">Product successfully added to cart!</p>
+                <a class="alert-link" href="/shoppingcart">View Cart</a>
+            </div>
+            <div class="alert-close">
+                <p class="dismiss" @onclick="(() => CloseNotification())">x</p>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public string Query { get; set; }
+
+    public List<Product> Products { get; set; }
+
+    string PageTitle;
+
+    protected override void OnParametersSet()
+    {
+        Products = _unitOfWork.Products.SearchProducts(Query).ToList();
+
+        PageTitle = $"{Products.Count} products found for {Query}";
+    }
+
+    void AddToCart(Product product)
+    {
+        show = _cart.AddToCart(product, productQty);
+    }
+}

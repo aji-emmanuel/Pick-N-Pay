@@ -17,13 +17,12 @@
 
     public string SearchTerm { get; set; }
 
-    private async Task navigate()
+    private void navigate()
     {
         if (!string.IsNullOrWhiteSpace(SearchTerm))
         {
-            var query = SearchTerm;
-            NavigationManager.NavigateTo("/product?" + query);
+            var query = string.Format("/search-products/{0}", SearchTerm);
+            NavigationManager.NavigateTo(query, forceLoad: true);
         }
     }
 }
-

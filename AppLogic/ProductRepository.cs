@@ -30,7 +30,7 @@ namespace Week8PicknPay.Repository
         /// </summary>
         public IEnumerable<Product> TopDealProducts
         {
-            get => _appDbContext.Products.Where(p => p.IsTopDeal); //.Include(c => c.Category).Where(p => p.IsTopDeal);
+            get => _appDbContext.Products.Where(p => p.IsTopDeal);
         }
 
         /// <summary>
@@ -45,17 +45,29 @@ namespace Week8PicknPay.Repository
 
         public IEnumerable<Product> SearchProducts(string query)
         {
+            var products = new List<Product>();
+
             if (!string.IsNullOrWhiteSpace(query))
             {
-                var category = _appDbContext.Categories.FirstOrDefault(cat => cat.CategoryName.ToLower().Contains(query.ToLower().Trim()));
+                query = query.ToLower().Trim();
+                var category = _appDbContext.Categories.FirstOrDefault(cat => cat.CategoryName.ToLower().Contains(query));
 
                 if (category != null)
                 {
-                    return _appDbContext.Products.Where(prod => prod.CategoryId == category.CategoryId);
+                    products.AddRange(_appDbContext.Products.Where(prod => prod.CategoryId == category.CategoryId));
+                    products.AddRange(_appDbContext.Products.Where(prod =>
+                                                                       (prod.Name.ToLower().Contains(query) || prod.LongDescription.ToLower().Contains(query) || prod.ShortDescription.ToLower().Contains(query))
+                                                                       && prod.CategoryId != category.CategoryId));
                 }
-                return _appDbContext.Products.Where(x => x.Name.ToLower().Contains(query.ToLower().Trim()));
+                else
+                {
+                    products.AddRange(_appDbContext.Products.Where(prod =>
+                                                                          prod.Name.ToLower().Contains(query)
+                                                                          || prod.LongDescription.ToLower().Contains(query)
+                                                                          || prod.ShortDescription.ToLower().Contains(query)));
+                }
             }
-            return default;
+            return products;
         }
     }
 }

@@ -435,9 +435,9 @@ a {
     border-radius: 1rem 0 0 1rem;
 }
 
-.alert-content.rounded {
-    border-radius: 1rem;
-}
+    .alert-content.rounded {
+        border-radius: 1rem;
+    }
 
 .alert-link {
     color: white;
@@ -875,10 +875,10 @@ body.modal-content {
         width: 100%;
     }
 
-        .modal-body a:active,
-        .modal-body a:focus {
-            font-weight: bold;
-        }
+    .modal-body a:active,
+    .modal-body a:focus {
+        font-weight: bold;
+    }
 
     .modal-body .strip {
         background-color: #F58634;
@@ -911,6 +911,7 @@ body.modal-content {
 .invalid {
     outline: 1px solid red;
 }
+
 .input-validation-error {
     outline: 1px solid red;
 }
@@ -959,6 +960,7 @@ body.modal-content {
 /*-----------------------------------------------------------*/
 
 
+/*------------------- Address ---------------------------*/
 
 .address-header {
     display: flex;
@@ -977,14 +979,17 @@ body.modal-content {
     margin-bottom: 1rem;
     cursor: pointer;
 }
+
     .address-container.selected {
         border: solid 1px #b61a4c;
         background-color: #fdf4f1;
     }
+
 .options-content .address-container.selected {
     margin-top: 2rem;
 }
-    .address-name {
+
+.address-name {
     display: flex;
     border-bottom: 1px solid #eee;
     margin-bottom: 1rem;
@@ -995,8 +1000,46 @@ body.modal-content {
     margin-right: 1rem;
     margin-top: .3rem;
 }
+
 .no-address {
     display: flex;
     justify-content: center;
     margin: 2rem 0;
 }
+/*-----------------------------------------------------------------*/
+
+/*---------------------- Search Page --------------------------------*/
+.empty-search {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .empty-search .search-icon-box {
+        padding: 5rem;
+        background-color: whitesmoke;
+        border-radius: 50%;
+    }
+
+        .empty-search .search-icon-box span {
+            font-size: 8rem;
+            color: #b61a4c;
+        }
+
+.empty-search-discription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0 4rem;
+    text-align: center;
+}
+
+    .empty-search-discription h4 {
+        color: #b61a4c;
+        margin-bottom: 2rem;
+        font-weight: bold;
+    }
