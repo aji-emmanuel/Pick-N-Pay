@@ -69,26 +69,20 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 
+    <div class="form-group">
+        <button data-dismiss="modal" class="btn plain">Cancel</button>
+    </div>
+
 </EditForm>
 
 
 
 @if (show)
 {
-    <div class="alert alert-danger">
-        <div>
+    <div class="center-alert">
+        <div class="alert-content rounded">
             <p class="alert-info">Address has been successfully saved!</p>
-        </div>
-        <div>
-            <a class="btn btn-primary" href="/order/checkout">Ok</a>
+            <a class="alert-link" href="order/checkout">Ok</a>
         </div>
     </div>
-}
-
-
-
-
-
-@code {
-
 }

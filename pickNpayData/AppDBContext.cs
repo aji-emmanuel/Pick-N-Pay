@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Week8PicknPay.Models;
 
@@ -18,5 +17,16 @@ namespace Week8PicknPay.Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Request> UserRequests { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<OrderDetail>()
+               .HasOne(bc => bc.Order)
+               .WithMany(b => b.OrderItems)
+               .HasForeignKey(bc => bc.OrderId);
+        }
     }
 }

@@ -1,6 +1,7 @@
-﻿using AutoMapper;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 
@@ -9,49 +10,25 @@ namespace Week8PicknPay.Repository
     public class OrderRepository : IOrderRepository
     {
         private readonly AppDbContext _appDbContext;
-        private readonly IShoppingCart _shoppingCart;
-        private readonly IMapper _mapper;
 
-        public OrderRepository(AppDbContext appDbContext, IShoppingCart shoppingCart, IMapper mapper)
+        public OrderRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            _shoppingCart = shoppingCart;
-            _mapper = mapper;
         }
 
-        private static Order Order;
 
-        /// <summary>
-        /// Creates and saves a new Order to the database
-        /// </summary>
-        /// <param name="order"></param>
-        public Order CreateOrderCheckout(User user)
+        public IEnumerable<Order> GetUserOrders(string userId)
         {
-            IEnumerable<ShoppingCartItem> shoppingCartItems = _shoppingCart.GetShoppingCartItems();
-
-            if(Order == null)
-            {
-                Order = new Order()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    User = user,
-                    UserId = user.Id,
-                    Email = user.Email,
-                    OrderItems = _mapper.Map<IEnumerable<ShoppingCartItem>, IEnumerable<OrderDetail>>(shoppingCartItems),
-                    OrderTotal = _shoppingCart.GetShoppingCartTotal(),
-                    OrderTime = DateTime.Now
-                };
-            }
-
-            // _appDbContext.Orders.Add(order);
-            //  _appDbContext.SaveChanges();
-            return Order;
+            return _appDbContext.Orders
+                .Include(order => order.Address)
+                .Include(order => order.OrderItems)
+                .Where(order => order.UserId == userId);
         }
 
-        public bool OrderAddress(Address address)
+        public async Task<bool> SaveOrder(Order order)
         {
-            Order.Address = address;
-            return Order.Address != null;
+            _appDbContext.Orders.Add(order);
+            return await _appDbContext.SaveChangesAsync() > 0;
         }
     }
 }

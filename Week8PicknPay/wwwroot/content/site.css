@@ -74,7 +74,6 @@ hr {
 }
 
 .navbar-search {
-    margin-top: 10px;
     width: 100%;
     height: 34px;
     padding: 5px 10px;
@@ -86,6 +85,17 @@ hr {
     border-radius: 4px;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
+
+.nav-search-div {
+    display: flex;
+    align-items: center;
+}
+
+    .nav-search-div .fa-search {
+        margin-left: -2rem;
+        font-size: 15px;
+        color: #b61a4c;
+    }
 
 @media (min-width:767px) and (max-width: 830px) {
 }
@@ -383,25 +393,15 @@ a {
 }
 
 
-
-.alert-success {
-    padding: 5px;
-    border-radius: 1rem;
+.center-alert {
     position: fixed;
-    bottom: 10px;
-    z-index: 1000;
-    left: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color: #276b27;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: none;
     width: fit-content;
     transition: ease-in;
 }
-
-    .alert-success p {
-        margin: 0px;
-    }
 
 .alert-danger {
     color: #a94442;
@@ -412,11 +412,6 @@ a {
 .alert-info {
     color: white;
     text-align: center;
-}
-
-.alert-link {
-    margin: 0 1.5rem;
-    padding: 0 1rem;
 }
 
 .add-cart-success {
@@ -440,14 +435,22 @@ a {
     border-radius: 1rem 0 0 1rem;
 }
 
-.cart-link {
+.alert-content.rounded {
+    border-radius: 1rem;
+}
+
+.alert-link {
     color: white;
     border-radius: 5px;
     border: 1px solid white;
     padding: 3px;
+    margin: 0 1.5rem;
+    background: none;
+    min-width: 5rem;
+    text-align: center;
 }
 
-    .cart-link:hover, .cart-link:active {
+    .alert-link:hover, .alert-link:active {
         text-decoration: none;
         font-weight: bolder;
         color: white;
@@ -723,7 +726,7 @@ a {
     border-bottom: solid 1px #eee;
 }
 
-.options-content i.fas.fa-location-dot {
+.options-content i {
     color: crimson;
     margin-right: 1rem;
     margin-top: 1.5rem;
@@ -867,8 +870,8 @@ body.modal-content {
     overflow-x: hidden;
 }
 
-    .modal-body a.btn-primary {
-        margin: 2rem 0 0;
+    .modal-body a.plain {
+        margin: 2rem 0 0 0;
         width: 100%;
     }
 
@@ -890,9 +893,10 @@ body.modal-content {
         width: 100%;
     }
 
-    .modal-body form .btn-primary{
-        width: 100%;
-    }
+        .modal-body form .btn-primary,
+        .modal-body form .btn.plain {
+            width: 100%;
+        }
 
 .modal-form-header {
     display: flex;

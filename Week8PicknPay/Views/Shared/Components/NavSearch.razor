@@ -1,25 +1,29 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
 
-@inject IProductRepository _productRepository;
-
+@inject IUnitOfWork _unitOfWork;
+@inject NavigationManager NavigationManager
 
 
 <div class="nav-search-div">
-    <input class="navbar-search" type="search" @bind-value="@SearchTerm" @bind-value:event ="onsubmit" placeholder="Search for products and categories..." aria-label="Search">
+        <input class="navbar-search" type="search" @bind-value="@SearchTerm"  @onsubmit="() => navigate()" placeholder="Search for products and categories..." aria-label="Search">
+        <a @onclick="() => navigate()">
+            <span class="fa fa-search"></span>
+        </a>
 </div>
-
-
-
 
 
 @code {
 
     public string SearchTerm { get; set; }
 
-    //protected override void OnParametersSet()
-    //{
-    //    var products = _productRepository.SearchProducts(SearchTerm);
-    //}
-
+    private async Task navigate()
+    {
+        if (!string.IsNullOrWhiteSpace(SearchTerm))
+        {
+            var query = SearchTerm;
+            NavigationManager.NavigateTo("/product?" + query);
+        }
+    }
 }
+

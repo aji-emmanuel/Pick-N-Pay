@@ -20,7 +20,7 @@
                     </div>
                     <div style="display: flex">
                         <i class="fas fa-location-dot"></i>
-                        <p class="instruct">Hi @Model.User.FirstName, click on select delivery address to specify a delivery address.</p>
+                        <p class="instruct">Hi @Model.User?.FirstName, click on select delivery address to specify a delivery address.</p>
                     </div>
                     <p class="options-words">Your item should be delivered to you in about 5 working days within Lagos and Abuja, and 7 to 14 working days outside Lagos and Abuja.</p>
 
@@ -97,7 +97,11 @@
             </div>
             <hr />
         }
-        <div class="order-total"><b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.OrderTotal)</b></div>
+
+        <div class="order-total">
+            <b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.OrderTotal)</b>
+
+        </div>
     </div>
 
     <!-- Payment Options Section -->
@@ -159,11 +163,11 @@
                 </a>
             </div>
             <div class="options-content payment-methods">
-                <a>
+                <a data-toggle="modal" data-target="#pod-modal" data-backdrop="static" data-keyboard="false">
                     <div class="payment-options">
                         <div>
-                            <h5>Cash on Delivery</h5>
-                            <p>Pay with Cash on Delivery</p>
+                            <h5>Pay on Delivery</h5>
+                            <p>Pay at the Delivery Point</p>
                         </div>
                         <div>
                             <img src="~/Images/cash-on-delivery.png" alt="cash" />
@@ -214,7 +218,6 @@
 
             <div class="modal-body">
                 @(await Html.RenderComponentAsync<AddAddress>(RenderMode.ServerPrerendered))
-                <a class="btn plain" data-dismiss="modal"> Cancel </a>
             </div>
             <div class="modal-footer"></div>
         </div>
@@ -261,8 +264,73 @@
                     <p>Account Name:</p>
                     <h5>PickNPay-Ref</h5>
                 </div>
-                <a class="btn plain" data-dismiss="modal" data-toggle="modal" data-target="#order-success-modal" data-backdrop="static" data-keyboard="false"> I have made a transfer</a>
-                <a class="btn btn-primary" data-dismiss="modal">Select another payment method</a>
+                @if (Model.Address != null)
+                {
+                    <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#transfer-order-success-modal" data-backdrop="static" data-keyboard="false"> <b>I have made a transfer</b></a>
+                }
+                else
+                {
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false" data-dismiss="modal"> Select a Delivery Address</a>
+                }
+                <a class="btn plain" data-dismiss="modal">Select another payment method</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Pay on Delivery Modal -->
+
+<div class="modal fade" id="pod-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="order-subtotal">
+                    <h5><b>Order SubTotal:</b></h5>
+                    <h5><b>@string.Format("# {0:N0}", Model.OrderTotal)</b></h5>
+                </div>
+                <div class="strip">
+                    <b>A COPY OF THIS INSTRUCTION HAS BEEN SENT TO YOUR EMAIL</b>
+                </div>
+                <div style="margin: 1rem 0; text-align: justify;">
+                    <p>The sum of <b>@string.Format("# {0:N0}", Model.OrderTotal)</b> will be paid during pickup at the delivery address / pickup station.</p>
+                </div>
+
+                @if (Model.Address != null)
+                {
+                    <a class="btn  btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#order-success-modal" data-backdrop="static" data-keyboard="false"> <b>Confirm</b> </a>
+                }
+                else
+                {
+                    <a class="btn  btn-primary" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false" data-dismiss="modal"> Select a Delivery Address</a>
+                }
+                <a class="btn plain" data-dismiss="modal">Select another payment method</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Transfer Order Success Modal-->
+
+<div class="modal fade" id="transfer-order-success-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
+            </div>
+
+            <div class="modal-body">
+
+                @(await Html.RenderComponentAsync<TransferOrderSuccess>(RenderMode.ServerPrerendered))
 
             </div>
         </div>
@@ -270,8 +338,7 @@
 </div>
 
 
-<!-- Order Success Modal-->
-
+<!--- Order Success Modal -->
 <div class="modal fade" id="order-success-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -281,14 +348,7 @@
 
             <div class="modal-body">
 
-                <div class="strip">
-                    <b>THANKS FOR PATRONISING US</b>
-                </div>
-                <div style="margin: 1rem 0; text-align: justify;">
-                    <p>An email will be sent to you once payment has been verified and the products are been shipped.</p>
-                </div>
-
-                <a class="btn btn-primary" href="/">OK</a>
+                @(await Html.RenderComponentAsync<OrderSuccess>(RenderMode.ServerPrerendered))
 
             </div>
         </div>

@@ -1,0 +1,22 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Services
+
+@inject IOrderService _orderService
+
+<div class="strip">
+    <b>THANKS FOR PATRONISING US</b>
+</div>
+<div style="margin: 1rem 0; text-align: center;">
+    <p>An email will be sent to you once the products are been shipped.</p>
+</div>
+
+<a class="btn btn-primary" @onclick="()=> SaveOrder()" href="/">OK</a>
+
+@code {
+
+    private async void SaveOrder()
+    {
+        await _orderService.SaveOrder();
+    }
+}

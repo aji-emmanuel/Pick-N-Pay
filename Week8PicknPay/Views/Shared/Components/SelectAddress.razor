@@ -2,9 +2,11 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Models
 @using Week8PicknPay.Repository
+@using Week8PicknPay.Services
 
-@inject IAddressRepository _addressRepo
-@inject IOrderRepository _orderRepo
+
+@inject IAddressService _addressService;
+@inject IOrderService _orderService
 
 
 
@@ -13,6 +15,9 @@
     <div class="strip">
         <b>SELECT AN ADDRESS FROM YOUR LIST OF ADDRESSES</b>
     </div>
+
+    <p style="text-align: center;">Click on an address to select it.</p>
+
     @foreach (var address in UserAddresses)
     {
         if (SelectedAddress == address)
@@ -56,27 +61,20 @@
 
             </div>
         }
-
     }
-    <a class="btn btn-primary" @onclick="() => SaveSelectedAddress()"> Use Selected Address</a>
+    if (SelectedAddress != null)
+    {
+        <a class="btn btn-primary" @onclick="() => SaveSelectedAddress()" href="/order/checkout"> Use Selected Address</a>
+    }
+    else
+    {
+        <button class="btn btn-primary">No Address Selected!</button>
+    }
 }
 else
 {
     <div class="no-address">
         <h4>You currently have no saved address!</h4>
-    </div>
-
-}
-
-@if (show)
-{
-    <div class="alert alert-danger">
-        <div>
-            <p class="alert-info">Address has been successfully selected!</p>
-        </div>
-        <div>
-            <a class="btn btn-primary" href="/order/checkout">Ok</a>
-        </div>
     </div>
 }
 
@@ -89,13 +87,10 @@ else
     public IEnumerable<Address> UserAddresses { get; set; }
     public Address SelectedAddress { get; set; }
 
-    bool show = false;
-
-
     protected override void OnInitialized()
     {
         base.OnParametersSet();
-        UserAddresses = _addressRepo.GetUserAddresses(UserId);
+        UserAddresses = _addressService.GetUserAddresses(UserId);
     }
 
     private void SetSelectedAddress(Address address)
@@ -105,7 +100,6 @@ else
 
     private void SaveSelectedAddress()
     {
-        show = _orderRepo.OrderAddress(SelectedAddress);
+        _orderService.OrderAddress(SelectedAddress);
     }
-
 }

@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 using Week8PicknPay.Repository;
+using Week8PicknPay.Services;
 using Week8PicknPay.Utility;
 
 namespace Week8PicknPay
@@ -39,6 +40,11 @@ namespace Week8PicknPay
             services.AddScoped<IRequestForm, RequestForm>();
             services.AddTransient<IShoppingCart, ShoppingCart>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddAutoMapper(typeof(AutoMapping));
             services.AddHttpContextAccessor();

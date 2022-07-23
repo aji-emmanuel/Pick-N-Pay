@@ -5,17 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210824220943_First.cs" />
-    <Compile Remove="Migrations\20210824220943_First.Designer.cs" />
-    <Compile Remove="Migrations\20210824221844_First.cs" />
-    <Compile Remove="Migrations\20210824221844_First.Designer.cs" />
-    <Compile Remove="Migrations\20210824223832_First.cs" />
-    <Compile Remove="Migrations\20210824223832_First.Designer.cs" />
-    <Compile Remove="Migrations\20210827041604_second.cs" />
-    <Compile Remove="Migrations\20210827041604_second.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.18" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

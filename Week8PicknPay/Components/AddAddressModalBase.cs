@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using Week8PicknPay.Models;
-using Week8PicknPay.Repository;
+using Week8PicknPay.Services;
 
 namespace Week8PicknPay.Components
 {
     public class AddAddressModalBase : ComponentBase
     {
-        [Inject] IAddressRepository _addressRepo { get; set; }
+        [Inject] IAddressService _addressService { get; set; }
 
         protected CustomFormValidator customFormValidator;
 
@@ -17,7 +17,7 @@ namespace Week8PicknPay.Components
 
         protected async Task HandleSubmit()
         {
-            show = await _addressRepo.AddAddressAsync(AddressModel);
+            show = await _addressService.AddAddressAsync(AddressModel);
         }
     }
 }

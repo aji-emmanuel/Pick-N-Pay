@@ -1,5 +1,4 @@
-﻿
-@page "/{categoryName}/products"
+﻿@page "/product?{query}"
 
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
@@ -14,7 +13,7 @@
 
 <h1 style="color: #b61a4c; display: flex; justify-content: center; ">@PageTitle</h1>
 <div class="row">
-    @foreach (var product in _unitOfWork.Products.GetAllProducts(CategoryName))
+    @foreach (var product in _unitOfWork.Products.SearchProducts(Query))
     {
         <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
             <div class="thumbnail">
@@ -56,16 +55,17 @@
 
 </div>
 
-
 @code {
+    [Parameter]
+    public string Query { get; set; }
 
-    [Parameter] public string CategoryName { get; set; }
+    public IEnumerable<Product> Products { get; set; }
 
     string PageTitle;
 
     protected override void OnParametersSet()
     {
-        PageTitle = CategoryName == "All" ? "ALL PRODUCTS" : CategoryName.ToUpper();
+        PageTitle = "Search results for {Query}";
     }
 
     void AddToCart(Product product)

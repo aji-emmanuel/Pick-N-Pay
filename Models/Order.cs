@@ -10,25 +10,33 @@ namespace Week8PicknPay.Models
         [Required]
         public string Id { get; set; }
 
-        [Required]
         public User User { get; set; }
 
-        public string UserId { get; set; }
-
         [Required]
-        public string PhoneNumber { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         public string Email { get; set; }
 
+        [Required]
+        public string AddressId { get; set; }
+
         public Address Address { get; set; }
 
+        [Required]
         public IEnumerable<OrderDetail> OrderItems { get; set; }
 
+        [Required]
         public double OrderTotal { get; set; }
 
+        [Required]
         public string PaymentStatus { get; set; }
 
+        public string PaymentMethod { get; set; }
+
+        public bool PayOnDelivery { get; set; }
+
+        [Required]
         public DateTime OrderTime { get; set; }
     }
 }

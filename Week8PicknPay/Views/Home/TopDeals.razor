@@ -6,14 +6,14 @@
 @using Week8PicknPay.Views.Shared.Components
 
 @inject NavigationManager _navigationManager;
-@inject IProductRepository _productRepository;
+@inject IUnitOfWork _unitOfWork;
 @inject IShoppingCart _cart
 
 @inherits ProductCart
 
     <div class="row">
 
-        @foreach (var product in _productRepository.TopDealProducts)
+        @foreach (var product in _unitOfWork.Products.TopDealProducts)
         {
             <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
 
@@ -48,7 +48,7 @@
     <div class="add-cart-success">
         <div class="alert-content">
             <p class="alert-info">Product successfully added to cart!</p>
-            <a class="cart-link" href="/shoppingcart">View Cart</a>
+            <a class="alert-link" href="/shoppingcart">View Cart</a>
         </div>
         <div class="alert-close">
             <p class="dismiss" @onclick="(() => CloseNotification())">x</p>

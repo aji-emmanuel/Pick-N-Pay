@@ -7,7 +7,7 @@
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Components
 
-@inject IProductRepository _productRepository
+@inject IUnitOfWork _unitOfWork;
 @inject IShoppingCart _cart
 
 @inherits ProductCart
@@ -62,7 +62,7 @@ else
     <div class="add-cart-success">
         <div class="alert-content">
             <p class="alert-info">Product successfully added to cart!</p>
-            <a class="cart-link" href="/shoppingcart">View Cart</a>
+            <a class="alert-link" href="/shoppingcart">View Cart</a>
         </div>
         <div class="alert-close">
             <p class="dismiss" @onclick="(() => CloseNotification())">x</p>
@@ -79,7 +79,7 @@ else
 
     protected override void OnInitialized()
     {
-        product = _productRepository.GetProductById(int.Parse(Id));
+        product = _unitOfWork.Products.GetProductById(int.Parse(Id));
     }
 
     void AddToCart(Product product)

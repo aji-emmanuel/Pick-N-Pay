@@ -1,4 +1,6 @@
-﻿namespace Week8PicknPay.Models
+﻿using System.Collections.Generic;
+
+namespace Week8PicknPay.Models
 {
     public class Product
     {
@@ -10,5 +12,6 @@
         public int CategoryId { get; set; }
         public bool IsTopDeal { get; set; }
         public string ImageUrl { get; set; }
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
     }
 }
