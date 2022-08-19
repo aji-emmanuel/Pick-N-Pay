@@ -20,10 +20,6 @@ namespace Week8PicknPay.Controllers
             _orderService = orderService;
         }
 
-        /// <summary>
-        /// Returns the checkout view
-        /// </summary>
-        /// <returns></returns>
         public async Task<IActionResult> Checkout()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

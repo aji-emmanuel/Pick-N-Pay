@@ -6,18 +6,18 @@
 @using Week8PicknPay.Models
 @using Week8PicknPay.Components
 
-@inject IUnitOfWork _unitOfWork;
+@inject IUnitOfWork _unitOfWork
 @inject IShoppingCart _cart
 
 @inherits ProductCart
 
 
-
-
 <div class="row">
     @if (Products?.Any() ?? false)
     {
-        <h4 style="color: #b61a4c; display: flex; justify-content: center; ">@PageTitle</h4>
+        <h4 style="color: #b61a4c; display: flex; justify-content: center; ">
+            @Products.Count products found for: <b>"@Query"</b>
+        </h4>
         <hr />
 
         @foreach (var product in Products)
@@ -41,7 +41,6 @@
                     <div class="addToCart">
                         <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
                     </div>
-
                 </div>
             </div>
         }
@@ -53,7 +52,7 @@
                 <span class="fa-regular fa-face-frown"></span>
             </div>
             <div class="empty-search-discription">
-                <h4>There are no results for "@Query".</h4>
+                <h4>There are no results for: <b>"@Query"</b>.</h4>
                 <p> - Check your spelling for typing errors </p>
                 <p> - Try searching with short and simple keywords </p>
                 <p>- Try searching more general terms - you can then filter the search results </p>
@@ -64,6 +63,12 @@
         </div>
     }
 
+    @if (Products == null)
+    {
+        <div class="loader">
+            <img src="~/Images/spinner.gif" alt='Loading...' />
+        </div>
+    }
 
     @if (show)
     {
@@ -88,13 +93,9 @@
 
     public List<Product> Products { get; set; }
 
-    string PageTitle;
-
     protected override void OnParametersSet()
     {
         Products = _unitOfWork.Products.SearchProducts(Query).ToList();
-
-        PageTitle = $"{Products.Count} products found for {Query}";
     }
 
     void AddToCart(Product product)
