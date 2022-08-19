@@ -4,179 +4,171 @@
 
 <div class="order-checkout">
     <h4> Checkout</h4>
-    <div class="order-section">
-        <h5>Delivery/PickUp Options</h5>
-        <hr />
-        <div class="options">
-            <div class="options-content">
+    <div class="checkout-container">
+        <div>
+            <div class="order-section">
+                <h5>Delivery/PickUp Options</h5>
+                <hr />
+                <div class="options">
+                    <div class="options-content">
 
-                @if (Model.Address == null)
-                {
-                    <div class="options-heading">
-                        <p>Deliver to me</p>
-                        <a class="btn plain" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false">
-                            Select Delivery Address
-                        </a>
-                    </div>
-                    <div style="display: flex">
-                        <i class="fas fa-location-dot"></i>
-                        <p class="instruct">Hi @Model.User?.FirstName, click on select delivery address to specify a delivery address.</p>
-                    </div>
-                    <p class="options-words">Your item should be delivered to you in about 5 working days within Lagos and Abuja, and 7 to 14 working days outside Lagos and Abuja.</p>
-
-                }
-                else
-                {
-                    <div class="options-heading">
-                        <p>Deliver to me</p>
-                        <a class="btn plain" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false">
-                            Change Delivery Address
-                        </a>
-                    </div>
-                    <div class="address-container selected">
-                        <div class="address-name">
-                            <i class="fas fa-user"></i>
-                            <p> @Model.Address.FirstName @Model.Address.LastName</p>
-                        </div>
-                        <div class="address-content">
+                        @if (Model.Address == null)
+                        {
+                            <div class="options-heading">
+                                <p>Deliver to me</p>
+                                <a class="btn plain" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false">
+                                    Select Delivery Address
+                                </a>
+                            </div>
                             <div style="display: flex">
                                 <i class="fas fa-location-dot"></i>
-                                <p>@Model.Address.HouseNo, @Model.Address.Street, @Model.Address.City, @Model.Address.LGA, @Model.Address.State.</p>
+                                <p class="instruct">Hi @Model.User?.FirstName, click on select delivery address to specify a delivery address.</p>
                             </div>
+                            <p class="options-words">Your item should be delivered to you in about 5 working days within Lagos and Abuja, and 7 to 14 working days outside Lagos and Abuja.</p>
 
-                            <div style="display: flex">
-                                <i class="fas fa-phone"></i>
-                                <p>@Model.Address.PhoneNumber</p>
+                        }
+                        else
+                        {
+                            <div class="options-heading">
+                                <p>Deliver to me</p>
+                                <a class="btn plain" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false">
+                                    Change Delivery Address
+                                </a>
                             </div>
+                            <div class="address-container selected">
+                                <div class="address-name">
+                                    <i class="fas fa-user"></i>
+                                    <p> @Model.Address.FirstName @Model.Address.LastName</p>
+                                </div>
+                                <div class="address-content">
+                                    <div style="display: flex">
+                                        <i class="fas fa-location-dot"></i>
+                                        <p>@Model.Address.HouseNo, @Model.Address.Street, @Model.Address.City, @Model.Address.LGA, @Model.Address.State.</p>
+                                    </div>
+
+                                    <div style="display: flex">
+                                        <i class="fas fa-phone"></i>
+                                        <p>@Model.Address.PhoneNumber</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+
+                    <div class="options-content">
+
+                        <div class="options-heading">
+                            <p>Pickup from a Store</p>
+                            <a class="btn plain">Select PickUp Location</a>
                         </div>
-
+                        <div style="display: flex">
+                            <i class="fas fa-location-dot"></i>
+                            <p class="instruct">Select a pickup location nearest to you from our 45 pickup locations nationwide.</p>
+                        </div>
+                        <p class="options-words">Pickup items from our pickup locations closest to you.<br />Save some amount on delivery charges.</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Review Order Section -->
+
+            <div class="order-section">
+                <h5>Review Order</h5>
+                <hr />
+                <div class="table-label">
+                    <div>Products</div>
+                    <div>Quantity</div>
+                    <div>Price</div>
+                    <div>SubTotal</div>
+                </div>
+                <hr />
+
+                @foreach (var item in Model.OrderItems)
+                {
+                    <div class="table-label">
+                        <div class="order-product">
+                            <div>
+                                <img src="@item.Product.ImageUrl" alt="...">
+                            </div>
+                            <div class="item-name">@item.Product.Name</div>
+                        </div>
+                        <div>@item.Quantity</div>
+                        <div>@string.Format("# {0:N0}", item.Product.Price)</div>
+                        <div>@string.Format("# {0:N0}", item.SubTotal)</div>
+                    </div>
+                    <hr />
                 }
-            </div>
 
-            <div class="options-content">
+                <div class="order-total">
+                    <b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.OrderTotal)</b>
 
-                <div class="options-heading">
-                    <p>Pickup from a Store</p>
-                    <a class="btn plain">Select PickUp Location</a>
                 </div>
-                <div style="display: flex">
-                    <i class="fas fa-location-dot"></i>
-                    <p class="instruct">Select a pickup location nearest to you from our 45 pickup locations nationwide.</p>
-                </div>
-                <p class="options-words">Pickup items from our pickup locations closest to you.<br />Save some amount on delivery charges.</p>
             </div>
         </div>
-    </div>
 
-    <!-- Review Order Section -->
+        <!-- Payment Options Section -->
 
-    <div class="order-section">
-        <h5>Review Order</h5>
-        <hr />
-        <div class="table-label">
-            <div>Products</div>
-            <div>Quantity</div>
-            <div>Price</div>
-            <div>SubTotal</div>
-        </div>
-        <hr />
-
-        @foreach (var item in Model.OrderItems)
-        {
-            <div class="table-label">
-                <div class="order-product">
-                    <div>
-                        <img src="@item.Product.ImageUrl" alt="...">
-                    </div>
-                    <div class="item-name">@item.Product.Name</div>
+        <div class="order-section">
+            <h5>Payment Options</h5>
+            <hr />
+            <div style="color: #726d6d;">
+                <div class="cards">
+                    <p><b>We accept:</b></p>
+                    <img src="~/Images/mastercard.png" alt="master card" style="max-height: 5rem;" />
+                    <img src="~/Images/verve.png" alt="verve card" />
+                    <img src="~/Images/visa.jpg" alt="visa card" />
                 </div>
-                <div>@item.Quantity</div>
-                <div>@string.Format("# {0:N0}", item.Product.Price)</div>
-                <div>@string.Format("# {0:N0}", item.SubTotal)</div>
+                <div>
+                    <ul>
+                        <li>Ensure sufficient balance to cover this transaction</li>
+                        <li>No minimum or maximum order</li>
+                        <li>Make sure your card is still valid</li>
+                    </ul>
+                </div>
+                <i class="fas fa-padlock"></i>
+                <p style="margin-left: 2rem;">Transactions are 100% Safe and Secure.</p>
+            </div>
+
+            <hr />
+            <div class="order-subtotal">
+                <h5>Order SubTotal:</h5>
+                <h5>@string.Format("# {0:N0}", Model.OrderTotal)</h5>
             </div>
             <hr />
-        }
 
-        <div class="order-total">
-            <b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.OrderTotal)</b>
-
+            <div class="payment-method-options">
+                <div class="options-content payment-methods">
+                    <a data-toggle="modal" data-target="#transfer-modal" data-backdrop="static" data-keyboard="false">
+                        <div class="payment-options">
+                            <div>
+                                <h5>Pay Now</h5>
+                                <p>Make Payment Now!</p>
+                            </div>
+                            <div>
+                                <img src="~/Images/credit-card.svg" alt="card" />
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="options-content payment-methods">
+                    <a data-toggle="modal" data-target="#pod-modal" data-backdrop="static" data-keyboard="false">
+                        <div class="payment-options">
+                            <div>
+                                <h5>Pay on Delivery</h5>
+                                <p>Pay at the Delivery Point</p>
+                            </div>
+                            <div>
+                                <img src="~/Images/cash-on-delivery.png" alt="cash" />
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
+
     </div>
 
-    <!-- Payment Options Section -->
-
-    <div class="order-section">
-        <h5>Payment Options</h5>
-        <hr />
-        <div style="color: #726d6d;">
-            <div class="cards">
-                <p><b>We accept:</b></p>
-                <img src="~/Images/mastercard.png" alt="master card" style="max-height: 5rem;" />
-                <img src="~/Images/verve.png" alt="verve card" />
-                <img src="~/Images/visa.jpg" alt="visa card" />
-            </div>
-            <div>
-                <ul>
-                    <li>Ensure sufficient balance to cover this transaction</li>
-                    <li>No minimum or maximum order</li>
-                    <li>Make sure your card is still valid</li>
-                </ul>
-            </div>
-            <i class="fas fa-padlock"></i>
-            <p style="margin-left: 2rem;">Transactions are 100% Safe and Secure.</p>
-        </div>
-
-        <hr />
-        <div class="order-subtotal">
-            <h5>Order SubTotal:</h5>
-            <h5>@string.Format("# {0:N0}", Model.OrderTotal)</h5>
-        </div>
-        <hr />
-
-        <div class="options">
-            <div class="options-content payment-methods">
-                <a data-toggle="modal" data-target="#transfer-modal" data-backdrop="static" data-keyboard="false">
-                    <div class="payment-options">
-                        <div>
-                            <h5>Bank Transfer</h5>
-                            <p>Make Payments Using Bank Transfer</p>
-                        </div>
-                        <div>
-                            <img src="~/Images/bank-transfer.png" alt="transfer" />
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="options-content payment-methods">
-                <a>
-                    <div class="payment-options">
-                        <div>
-                            <h5>Card</h5>
-                            <p>Make Payments with your Credit or Debit Card</p>
-                        </div>
-                        <div>
-                            <img src="~/Images/credit-card.svg" alt="card" />
-
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="options-content payment-methods">
-                <a data-toggle="modal" data-target="#pod-modal" data-backdrop="static" data-keyboard="false">
-                    <div class="payment-options">
-                        <div>
-                            <h5>Pay on Delivery</h5>
-                            <p>Pay at the Delivery Point</p>
-                        </div>
-                        <div>
-                            <img src="~/Images/cash-on-delivery.png" alt="cash" />
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -293,12 +285,12 @@
             </div>
 
             <div class="modal-body">
+                <div class="strip">
+                    <b>A COPY OF THIS INSTRUCTION WILL BE SENT TO YOUR EMAIL AFTER CONFIRMATION</b>
+                </div>
                 <div class="order-subtotal">
                     <h5><b>Order SubTotal:</b></h5>
                     <h5><b>@string.Format("# {0:N0}", Model.OrderTotal)</b></h5>
-                </div>
-                <div class="strip">
-                    <b>A COPY OF THIS INSTRUCTION HAS BEEN SENT TO YOUR EMAIL</b>
                 </div>
                 <div style="margin: 1rem 0; text-align: justify;">
                     <p>The sum of <b>@string.Format("# {0:N0}", Model.OrderTotal)</b> will be paid during pickup at the delivery address / pickup station.</p>
@@ -312,7 +304,6 @@
                 {
                     <a class="btn  btn-primary" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false" data-dismiss="modal"> Select a Delivery Address</a>
                 }
-                <a class="btn plain" data-dismiss="modal">Select another payment method</a>
             </div>
         </div>
     </div>
