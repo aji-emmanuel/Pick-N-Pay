@@ -139,7 +139,7 @@
 
             <div class="payment-method-options">
                 <div class="options-content payment-methods">
-                    <a data-toggle="modal" data-target="#transfer-modal" data-backdrop="static" data-keyboard="false">
+                    <a asp-controller="Payment" asp-action="InitiatePayment" asp-route-order="@Model">
                         <div class="payment-options">
                             <div>
                                 <h5>Pay Now</h5>

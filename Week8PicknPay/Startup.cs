@@ -45,9 +45,12 @@ namespace Week8PicknPay
 
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IHttpClientService, HttpClientService>();
 
             services.AddAutoMapper(typeof(AutoMapping));
             services.AddHttpContextAccessor();
+            services.AddHttpClient();
             services.AddSession();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
