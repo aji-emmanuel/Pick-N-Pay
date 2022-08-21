@@ -1072,3 +1072,31 @@ a {
         position: absolute;
         z-index: 1000;
     }
+
+
+    /*-------------------- Server Reconnection ------------------*/
+    #components-reconnect-modal {
+        display: none;
+    }
+
+    #components-reconnect-modal.components-reconnect-show,
+    #components-reconnect-modal.components-reconnect-failed,
+    #components-reconnect-modal.components-reconnect-rejected {
+        display: none;
+    }
+
+
+.success-payment-div{
+
+}
+.success-payment-img {
+    display: flex;
+    justify-content: center;
+}
+    .success-payment-img img {
+        height: 15rem;
+        border-radius: 50%;
+    }
+.disable-anchor {
+    pointer-events: none
+}

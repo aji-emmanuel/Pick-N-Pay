@@ -139,7 +139,7 @@
 
             <div class="payment-method-options">
                 <div class="options-content payment-methods">
-                    <a asp-controller="Payment" asp-action="InitiatePayment" asp-route-order="@Model">
+                    <a asp-controller="Payment" asp-action="InitiatePayment" class="@(Model.Address == null ? "disable-anchor" : "")">
                         <div class="payment-options">
                             <div>
                                 <h5>Pay Now</h5>
@@ -152,7 +152,7 @@
                     </a>
                 </div>
                 <div class="options-content payment-methods">
-                    <a data-toggle="modal" data-target="#pod-modal" data-backdrop="static" data-keyboard="false">
+                    <a id="pay" data-toggle="modal" data-target="#pod-modal" data-backdrop="static" data-keyboard="false">
                         <div class="payment-options">
                             <div>
                                 <h5>Pay on Delivery</h5>
@@ -217,61 +217,6 @@
 </div>
 
 
-<!-- Transfer Modal -->
-
-<div class="modal fade" id="transfer-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <div class="order-subtotal">
-                    <h5><b>Order SubTotal:</b></h5>
-                    <h5><b>@string.Format("# {0:N0}", Model.OrderTotal)</b></h5>
-                </div>
-                <div class="strip">
-                    <b>A COPY OF THIS INSTRUCTION HAS BEEN SENT TO YOUR EMAIL</b>
-                </div>
-                <div style="margin: 1rem 0; text-align: justify;">
-                    <p>Kindly transfer into the Account below then click the 'I have made a transfer' button to complete the transaction. (<b>NB:</b> This account number is not reusable).</p>
-                </div>
-                <div class="transfer-details">
-                    <p>Amount:</p>
-                    <h5>@string.Format("# {0:N0}", Model.OrderTotal)</h5>
-                </div>
-                <div class="transfer-details">
-                    <p>Bank Name:</p>
-                    <h5>Guaranty Trust Bank</h5>
-                </div>
-                <div class="transfer-details">
-                    <p>Account Number:</p>
-                    <h5>1234567890</h5>
-                </div>
-                <div class="transfer-details">
-                    <p>Account Name:</p>
-                    <h5>PickNPay-Ref</h5>
-                </div>
-                @if (Model.Address != null)
-                {
-                    <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#transfer-order-success-modal" data-backdrop="static" data-keyboard="false"> <b>I have made a transfer</b></a>
-                }
-                else
-                {
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#address-modal" data-backdrop="static" data-keyboard="false" data-dismiss="modal"> Select a Delivery Address</a>
-                }
-                <a class="btn plain" data-dismiss="modal">Select another payment method</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <!-- Pay on Delivery Modal -->
 
 <div class="modal fade" id="pod-modal" tabindex="-1" role="dialog">
@@ -310,26 +255,8 @@
 </div>
 
 
-<!-- Transfer Order Success Modal-->
-
-<div class="modal fade" id="transfer-order-success-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
-            </div>
-
-            <div class="modal-body">
-
-                @(await Html.RenderComponentAsync<TransferOrderSuccess>(RenderMode.ServerPrerendered))
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <!--- Order Success Modal -->
+
 <div class="modal fade" id="order-success-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -345,3 +272,90 @@
         </div>
     </div>
 </div>
+
+
+<!--------------- Payment Success Modal ------------------->
+
+<div class="modal fade" id="payment-success-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
+            </div>
+
+            <div class="modal-body">
+                <div class="success-payment-div">
+                    <div class="success-payment-img">
+                        <img alt="Payment Success" src="~/Images/payment-success.gif" style="width: 15rem;"/>
+                    </div>
+                </div>
+
+                @(await Html.RenderComponentAsync<OrderSuccess>(RenderMode.ServerPrerendered))
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--------------- Payment Pending Modal ------------------->
+
+<div class="modal fade" id="payment-success-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
+            </div>
+
+            <div class="modal-body">
+                <div class="success-payment-div">
+                    <div class="success-payment-img">
+                        <img alt="Payment Success" src="~/Images/pending2.png" />
+                    </div>
+                </div>
+
+                @(await Html.RenderComponentAsync<PendingOrderSuccess>(RenderMode.ServerPrerendered))
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--------------- Payment Failed Modal ------------------->
+
+<div class="modal fade" id="payment-failed-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
+            </div>
+
+            <div class="modal-body">
+                <div class="success-payment-div">
+                    <div class="success-payment-img">
+                        <img alt="Payment Success" src="~/Images/payment_failure.png" />
+                    </div>
+                </div>
+                <a class="btn btn-primary" data-dismiss="modal">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.onload = function () {
+            if ("@Model.PaymentStatus" == "successful") {
+                $("#payment-success-modal").modal("show");
+            }
+            if ("@Model.PaymentStatus" == "pending") {
+                $("#payment-pending-modal").modal("show");
+            }
+            if ("@Model.PaymentStatus" == "failed" || "@Model.PaymentStatus" == "cancelled") {
+                $("#payment-failed-modal").modal("show");
+            }
+        };
+    });
+</script>

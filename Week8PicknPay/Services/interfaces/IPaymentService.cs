@@ -5,7 +5,7 @@ namespace Week8PicknPay.Services
 {
     public interface IPaymentService
     {
-        Task<FlutterResponse<FlutterResponseData>> InitiatePaymentAsync(Order order);
+        Task<FlutterResponse<FlutterResponseData>> InitiatePaymentAsync();
         Task<FlutterResponse<VerifyResponse>> VerifyPaymentAsync(string transactionRef);
     }
 }

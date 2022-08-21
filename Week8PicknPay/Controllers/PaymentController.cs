@@ -15,9 +15,9 @@ namespace Week8PicknPay.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> InitiatePayment(Order order)
+        public async Task<IActionResult> InitiatePayment()
         {
-            var response = await _paymentService.InitiatePaymentAsync(order);
+            var response = await _paymentService.InitiatePaymentAsync();
             if(response.Data != null)
             {
                 return Redirect(response.Data.Link);
@@ -28,9 +28,8 @@ namespace Week8PicknPay.Controllers
         [HttpGet]
         public async Task<IActionResult> Verify([FromQuery]string tx_ref)
         {
-            var response = await _paymentService.VerifyPaymentAsync(tx_ref);
-
-            return View();
+            await _paymentService.VerifyPaymentAsync(tx_ref);
+            return RedirectToAction("Checkout", "Order");
         }
     }
 }

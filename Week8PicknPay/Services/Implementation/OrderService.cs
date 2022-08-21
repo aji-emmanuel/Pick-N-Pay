@@ -27,7 +27,7 @@ namespace Week8PicknPay.Services
         /// Creates and saves a new Order to the database
         /// </summary>
         /// <param name="order"></param>
-        public Order CreateOrderCheckout(User user)
+        public Order CreateOrderCheckout(User user = null)
         {
             IEnumerable<ShoppingCartItem> shoppingCartItems = _shoppingCart.GetShoppingCartItems();
 
@@ -37,11 +37,10 @@ namespace Week8PicknPay.Services
                 {
                     Id = Guid.NewGuid().ToString(),
                     User = user,
-                    UserId = user.Id,
-                    Email = user.Email,
+                    UserId = user?.Id,
+                    Email = user?.Email,
                     OrderItems = _mapper.Map<IEnumerable<ShoppingCartItem>, IEnumerable<OrderDetail>>(shoppingCartItems),
                     OrderTotal = _shoppingCart.GetShoppingCartTotal(),
-                    PaymentStatus = PaymentStatus.Pending.ToString(),
                     OrderTime = DateTime.Now
                 };
             }
@@ -55,6 +54,12 @@ namespace Week8PicknPay.Services
                 Order.Address = address;
                 Order.AddressId = address.Id;
             }
+        }
+
+        public void UpdateOrderPayment(string status, string method)
+        {
+            Order.PaymentMethod = method;
+            Order.PaymentStatus = status;
         }
 
         public async Task<bool> SaveOrder()

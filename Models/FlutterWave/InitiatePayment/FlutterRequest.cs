@@ -14,7 +14,7 @@ namespace Week8PicknPay.Models
         public double Amount { get; set; }
 
         [JsonProperty("currency")]
-        public string Currency { get; set; }
+        public string Currency { get => "NGN"; }
 
         [JsonProperty("redirect_url")]
         public string Redirect_Url { get; set; }
