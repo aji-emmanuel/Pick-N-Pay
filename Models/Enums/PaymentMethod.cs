@@ -4,6 +4,6 @@
     {
         Transfer = 1,
         Card = 2,
-        Cash = 3
+        OnDelivery = 3
     }
 }

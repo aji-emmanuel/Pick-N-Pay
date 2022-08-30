@@ -63,11 +63,9 @@
         </div>
     }
 
-    @if (Products == null)
+    @if (loading)
     {
-        <div class="loader">
-            <img src="~/Images/spinner.gif" alt='Loading...' />
-        </div>
+        <div class="spinner" />
     }
 
     @if (show)
@@ -93,9 +91,12 @@
 
     public List<Product> Products { get; set; }
 
+    bool loading = true;
+
     protected override void OnParametersSet()
     {
         Products = _unitOfWork.Products.SearchProducts(Query).ToList();
+        loading = false;
     }
 
     void AddToCart(Product product)

@@ -6,14 +6,34 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <li>
-        <form method="post" id="logoutForm" style="padding: 0rem; width: fit-content;">
-            <button asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" class="btn navbar-btn navbar-link">Logout</button>
-        </form>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-user"></i> @((await UserManager.GetUserAsync(User)).FirstName)
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" id="signedin-dropdown">
+            <li>
+                <a href="#!">Profile</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <form method="post" id="logoutForm" style="padding: 0rem; width: fit-content;">
+                    <button asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" id="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
     </li>
 }
 else
 {
-    <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-    <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-user"></i>
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" id="signedout-dropdown">
+            <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+            <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        </ul>
+    </li>
 }

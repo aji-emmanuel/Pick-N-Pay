@@ -41,6 +41,8 @@ namespace Week8PicknPay.Services
                     Email = user?.Email,
                     OrderItems = _mapper.Map<IEnumerable<ShoppingCartItem>, IEnumerable<OrderDetail>>(shoppingCartItems),
                     OrderTotal = _shoppingCart.GetShoppingCartTotal(),
+                    PaymentMethod = PaymentMethod.OnDelivery.ToString(),
+                    PaymentStatus = PaymentStatus.Pending.ToString(),
                     OrderTime = DateTime.Now
                 };
             }

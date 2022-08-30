@@ -15,7 +15,6 @@
               integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="~/content/site.css" rel="stylesheet" />
-
         <base href="~/" />
     </head>
 
@@ -25,7 +24,7 @@
             <nav class="navbar navbar-inverse" role="navigation">
                     <div class=pull-left>
                         <a asp-controller="Home" asp-action="Index">
-                            <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px;" />
+                            <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" style="margin: 9px; border-radius: 6px; height: 32px;" />
                         </a>
                     </div>
                     <div class="navbar-header">
@@ -56,7 +55,6 @@
                 @RenderBody()
             </div>
 
-
             <footer>
                 <div style="display: flex; justify-content: center;">
                     <div class="footer-links">
@@ -76,4 +74,3 @@
         <script src="_framework/blazor.server.js"></script>
     </body>
 </html>
-

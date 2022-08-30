@@ -1,13 +1,11 @@
 ﻿
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Models
-@using Week8PicknPay.Repository
 @using Week8PicknPay.Services
 
-
-@inject IAddressService _addressService;
+@inject IAddressService _addressService
 @inject IOrderService _orderService
-
+@inject IUserService _userService
 
 
 @if (UserAddresses.Count() > 0)
@@ -25,17 +23,16 @@
             <div class="address-container selected">
                 <div class="address-name">
                     <i class="fas fa-user"></i>
-                    <p> @address.FirstName @address.LastName</p>
+                    <p> @User.FirstName @User.LastName</p>
                 </div>
                 <div class="address-content">
                     <div style="display: flex">
                         <i class="fas fa-location-dot"></i>
                         <p>@address.HouseNo, @address.Street, @address.City, @address.LGA, @address.State.</p>
                     </div>
-
                     <div style="display: flex">
                         <i class="fas fa-phone"></i>
-                        <p>@address.PhoneNumber</p>
+                        <p>@User.PhoneNumber</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +42,7 @@
             <div class="address-container" @onclick="() => SetSelectedAddress(address)">
                 <div class="address-name">
                     <i class="fas fa-user"></i>
-                    <p> @address.FirstName @address.LastName</p>
+                    <p> @User.FirstName @User.LastName</p>
                 </div>
                 <div class="address-content">
                     <div style="display: flex">
@@ -55,7 +52,7 @@
 
                     <div style="display: flex">
                         <i class="fas fa-phone"></i>
-                        <p>@address.PhoneNumber</p>
+                        <p>@User.PhoneNumber</p>
                     </div>
                 </div>
 
@@ -86,11 +83,13 @@ else
 
     public IEnumerable<Address> UserAddresses { get; set; }
     public Address SelectedAddress { get; set; }
+    public User User { get; set; }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         base.OnParametersSet();
         UserAddresses = _addressService.GetUserAddresses(UserId);
+        User = await _userService.GetUserByIdAsync(UserId);
     }
 
     private void SetSelectedAddress(Address address)
