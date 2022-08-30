@@ -25,7 +25,6 @@
                                 <p class="instruct">Hi @Model.User?.FirstName, click on select delivery address to specify a delivery address.</p>
                             </div>
                             <p class="options-words">Your item should be delivered to you in about 5 working days within Lagos and Abuja, and 7 to 14 working days outside Lagos and Abuja.</p>
-
                         }
                         else
                         {
@@ -38,7 +37,7 @@
                             <div class="address-container selected">
                                 <div class="address-name">
                                     <i class="fas fa-user"></i>
-                                    <p> @Model.Address.FirstName @Model.Address.LastName</p>
+                                    <p> @Model.User?.FirstName @Model.User?.LastName</p>
                                 </div>
                                 <div class="address-content">
                                     <div style="display: flex">
@@ -48,10 +47,9 @@
 
                                     <div style="display: flex">
                                         <i class="fas fa-phone"></i>
-                                        <p>@Model.Address.PhoneNumber</p>
+                                        <p>@Model.User?.PhoneNumber</p>
                                     </div>
                                 </div>
-
                             </div>
                         }
                     </div>
@@ -102,7 +100,6 @@
 
                 <div class="order-total">
                     <b>Total (excluding delivery charges): @string.Format("# {0:N0}", Model.OrderTotal)</b>
-
                 </div>
             </div>
         </div>
@@ -265,9 +262,7 @@
             </div>
 
             <div class="modal-body">
-
                 @(await Html.RenderComponentAsync<OrderSuccess>(RenderMode.ServerPrerendered))
-
             </div>
         </div>
     </div>

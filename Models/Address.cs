@@ -9,39 +9,25 @@ namespace Week8PicknPay.Models
         public string UserId { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
-        [StringLength(30, MinimumLength = 2, ErrorMessage = "Name length must be greater than 1 and less than 30 characters.")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [StringLength(30, MinimumLength = 2, ErrorMessage = "Name length must be greater than 1 and less than 30 characters.")]
-        public string LastName { get; set; }
-
-        [Required]
-        [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        [RegularExpression("[0-9]", ErrorMessage = "Not a valid number")]
+        [RegularExpression(@"^[1-9]\d{0,3}?[a-zA-Z]?$", ErrorMessage = "Not a valid house number (e.g 20, 20a, 20A)")]
         public string HouseNo { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
-        [StringLength(50, ErrorMessage ="Street length must be less than 50 characters.")]
+        [RegularExpression(@"^(?:[A-Z]\d|[^\W\d_]{2,}\.?)(?:[- '’][^\W\d_]+\.?)*$", ErrorMessage = "Street can only contain alphabets")]
+        [StringLength(50, ErrorMessage = "Street length must be less than 50 characters.")]
         public string Street { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
+        [RegularExpression(@"^(?:[A-Z]\d|[^\W\d_]{2,}\.?)(?:[- '’][^\W\d_]+\.?)*$", ErrorMessage = "City can only contain alphabets")]
         [StringLength(50, ErrorMessage = "City length must be less than 50 characters.")]
         public string City { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
+        [RegularExpression(@"^(?:[A-Z]\d|[^\W\d_]{2,}\.?)(?:[- '’][^\W\d_]+\.?)*$", ErrorMessage = "LGA can only contain alphabets")]
         public string LGA { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
+        [RegularExpression(@"^(?:[A-Z]\d|[^\W\d_]{2,}\.?)(?:[- '’][^\W\d_]+\.?)*$", ErrorMessage = "State can only contain alphabets")]
         public string State { get; set; }
     }
 }

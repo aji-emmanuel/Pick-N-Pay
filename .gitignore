@@ -197,6 +197,6 @@ UpgradeLog*.htm
 
 Week8PicknPay/appsettings.json
 Week8PicknPay/appsettings.[Dd]evelopment.json
-Week8PicknPay/Logs
+#Week8PicknPay/myPicknPay.db
 
 # End of https://www.gitignore.io/api/visualstudio

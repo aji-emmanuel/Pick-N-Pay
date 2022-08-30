@@ -32,9 +32,8 @@ namespace Week8PicknPay.Models
         [Required]
         public string PaymentStatus { get; set; }
 
+        [Required]
         public string PaymentMethod { get; set; }
-
-        public bool PayOnDelivery { get; set; }
 
         [Required]
         public DateTime OrderTime { get; set; }
