@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Week8PicknPay.Database;
 using Week8PicknPay.Models;
 
@@ -11,6 +12,11 @@ namespace Week8PicknPay.Repository
         public RequestForm(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
+        }
+
+        public bool SaveNewsLetterMail(string email)
+        {
+            return Regex.IsMatch(email, @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
         }
 
         /// <summary>

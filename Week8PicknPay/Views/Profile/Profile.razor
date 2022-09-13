@@ -1,0 +1,32 @@
+﻿
+@page "/profile/{id}"
+
+@using Microsoft.AspNetCore.Components.Web
+@using Week8PicknPay.Views.Shared.Components
+@using Week8PicknPay.Models
+@using Week8PicknPay.Repository
+@using Microsoft.AspNetCore.Identity
+
+
+@inject UserManager<User> UserManager
+
+
+
+<div>
+
+</div>
+
+
+
+
+@code {
+    [Parameter] public string Id { get; set; }
+
+    User user;
+
+    protected async override void OnInitialized()
+    {
+        user = await UserManager.FindByIdAsync(Id);
+    }
+
+}
