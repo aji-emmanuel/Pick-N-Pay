@@ -1102,3 +1102,37 @@ body.modal-content {
 .disable-anchor {
     pointer-events: none
 }
+
+/*--------------------- Subscribe Email ---------------------------*/
+.subscribe-email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscribe-email-intro {
+    max-width: 70rem;
+    text-align: center;
+}
+.subscribe-email form {
+    display: flex;
+    border: none;
+    padding: 1rem 0;
+    width: fit-content;
+}
+.subscribe-email input {
+    width: 60vw;
+    max-width: 50rem;
+    padding: .5em;
+    border: 3px solid #b61a4c;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.subscribe-email-form{
+    max-width: 60rem;
+}
+.subscribe-email .opt-out {
+    font-size: 12px;
+}
+
+

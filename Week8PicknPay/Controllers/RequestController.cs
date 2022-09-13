@@ -27,9 +27,15 @@ namespace Week8PicknPay.Controllers
             {
                 return View("Index");
             }
-
             _requestForm.SaveRequest(request);
             return RedirectToAction("Index", "Home");
+        }
+
+
+        public void NewsLetter(string email)
+        {
+            var result = _requestForm.SaveNewsLetterMail(email);
+            ViewBag["Subscribe"] = result;
         }
     }
 }

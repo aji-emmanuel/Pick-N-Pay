@@ -6,5 +6,6 @@ namespace Week8PicknPay.Repository
     public interface IRequestForm
     {
         void SaveRequest(Request request);
+        bool SaveNewsLetterMail(string email);
     }
 }
