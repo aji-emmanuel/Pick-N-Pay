@@ -91,7 +91,7 @@ else
         <div>
             <p class="alert-info">Do you want to remove @delete.Product.Name from cart?</p>
         </div>
-        <div>
+        <div style="display: flex;">
             <button class="alert-link" @onclick="(e => RemoveProductFromCart())">Yes</button>
             <button class="alert-link" @onclick="(e => CancelDelete())">No</button>
         </div>

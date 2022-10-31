@@ -16,7 +16,10 @@ namespace Week8PicknPay.Repository
 
         public bool SaveNewsLetterMail(string email)
         {
-            return Regex.IsMatch(email, @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+            var result = false;
+            if(!string.IsNullOrWhiteSpace(email))
+                result = Regex.IsMatch(email, @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+            return result;
         }
 
         /// <summary>

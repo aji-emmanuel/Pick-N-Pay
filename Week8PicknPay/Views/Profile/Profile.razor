@@ -4,17 +4,90 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Views.Shared.Components
 @using Week8PicknPay.Models
-@using Week8PicknPay.Repository
 @using Microsoft.AspNetCore.Identity
+@using Week8PicknPay.Services
 
 
 @inject UserManager<User> UserManager
+@inject IOrderService _orderService
+@inject IAddressService _addressService
 
 
+<div class="profile-container">
+    <section class="profile-nav">
+        <button @onclick="() => ShowAccount()">Account Details</button>
+        <button @onclick="() => ShowOrders()">Orders</button>
+        <button @onclick="() => ShowAddress()">Delivery Addresses</button>
+    </section>
 
-<div>
+    <section class="profile-content">
+        @if (showAccount)
+        {
+            <div>
+                <h3>
+                    @user.FirstName
+                </h3>
+            </div>
+        }
 
+        @if (showOrders)
+        {
+            @if (orders.Any())
+            {
+                <div>
+                    <h3>
+                        Orders
+                    </h3>
+                </div>
+            }
+            else
+            {
+                <h5>
+                    No Orders
+                </h5>
+            }
+        }
+
+        @if (showAddress)
+        {
+            @if (addreses.Any())
+            {
+                @foreach (var address in addreses)
+                {
+                    <div class="address-container">
+                        <div class="address-name">
+                            <i class="fas fa-user"></i>
+                            <p> @user.FirstName @user.LastName</p>
+                        </div>
+                        <div class="address-content">
+                            <div style="display: flex">
+                                <i class="fas fa-location-dot"></i>
+                                <p>@address.HouseNo, @address.Street, @address.City, @address.LGA, @address.State.</p>
+                            </div>
+
+                            <div style="display: flex">
+                                <i class="fas fa-phone"></i>
+                                <p>@user.PhoneNumber</p>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="no-address">
+                    <h4>You currently have no saved address!</h4>
+                </div>
+            }
+        }
+
+
+    </section>
 </div>
+
+
+
 
 
 
@@ -23,10 +96,39 @@
     [Parameter] public string Id { get; set; }
 
     User user;
+    IEnumerable<Order> orders;
+    IEnumerable<Address> addreses;
+
+    bool showAccount = true;
+    bool showOrders = false;
+    bool showAddress = false;
 
     protected async override void OnInitialized()
     {
         user = await UserManager.FindByIdAsync(Id);
+        orders = _orderService.GetUserOrders(Id);
+        addreses = _addressService.GetUserAddresses(Id);
+    }
+
+    private void ShowAccount()
+    {
+        showOrders = false;
+        showAddress = false;
+        showAccount = true;
+    }
+
+    private void ShowOrders()
+    {
+        showAccount = false;
+        showAddress = false;
+        showOrders = true;
+    }
+
+    private void ShowAddress()
+    {
+        showAccount = false;
+        showOrders = false;
+        showAddress = true;
     }
 
 }

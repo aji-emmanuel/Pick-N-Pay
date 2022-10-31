@@ -13,7 +13,7 @@
         </a>
         <ul class="dropdown-menu" id="signedin-dropdown">
             <li>
-                <a href="#!">Profile</a>
+                <a href="/profile/@((await UserManager.GetUserAsync(User)).Id)">Profile</a>
             </li>
             <li class="divider"></li>
             <li>

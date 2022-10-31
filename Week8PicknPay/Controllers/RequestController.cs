@@ -35,7 +35,6 @@ namespace Week8PicknPay.Controllers
         public void NewsLetter(string email)
         {
             var result = _requestForm.SaveNewsLetterMail(email);
-            ViewBag["Subscribe"] = result;
         }
     }
 }
