@@ -2,84 +2,201 @@
 @page "/profile/{id}"
 
 @using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+@using System.ComponentModel.DataAnnotations;
 @using Week8PicknPay.Views.Shared.Components
-@using Week8PicknPay.Models
-@using Microsoft.AspNetCore.Identity
-@using Week8PicknPay.Services
+@using Week8PicknPay.Components
 
+@inherits ProfileBase
 
-@inject UserManager<User> UserManager
-@inject IOrderService _orderService
-@inject IAddressService _addressService
 
 
 <div class="profile-container">
     <section class="profile-nav">
-        <button @onclick="() => ShowAccount()">Account Details</button>
-        <button @onclick="() => ShowOrders()">Orders</button>
-        <button @onclick="() => ShowAddress()">Delivery Addresses</button>
+        <div class="nav-items">
+            <h4><i class="fas fa-user"></i> My Profile </h4>
+            <button @onclick="() => ShowAccountInfo()" style=@(showAccountInfo ? "color:#b61a4c" : "")>Account Details</button>
+            <button @onclick="() => LoadAddress()" style=@(showAddress ? "color:#b61a4c" : "")>Delivery Address</button>
+            <hr />
+            <h4><i class="fas fa-user"></i> My Orders </h4>
+            <button @onclick="() => ShowOrderHistory()" style=@(showOrderHistory ? "color:#b61a4c" : "")>Order History</button>
+            <button @onclick="() => ShowPendingRating()" style=@(showPendingRating ? "color:#b61a4c" : "")>Pending Ratings</button>
+        </div>
     </section>
 
     <section class="profile-content">
-        @if (showAccount)
+
+        @*----------Show Account Details Section-----------*@
+
+        @if (showAccountInfo)
         {
             <div>
-                <h3>
-                    @user.FirstName
-                </h3>
+                <div class="heading">
+                    <h4>Account Details</h4>
+                </div>
+
+                <EditForm Model="@user" OnValidSubmit="@HandleSubmit">
+
+                    <DataAnnotationsValidator />
+                    <CustomFormValidator @ref="customFormValidator" />
+
+                    @*<div class="modal-form-header">
+                            <h3>Address Form</h3>
+                        </div>*@
+
+                    <div class="form-group">
+                        <label for="FirstName">First Name</label>
+                        <InputText id="FirstName" @bind-Value="user.FirstName" class="form-control" />
+                        <ValidationMessage For="@(() => user.FirstName)" class="text-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="LastName">Last Name</label>
+                        <InputText id="LastName" @bind-Value="user.LastName" class="form-control" />
+                        <ValidationMessage For="@(() => user.LastName)" class="text-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Email">Email Address</label>
+                        <InputText id="Email" @bind-Value="user.Email" class="form-control" />
+                        <ValidationMessage For="@(() => user.Email)" class="text-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Phone">Phone Number</label>
+                        <InputText id="Phone" @bind-Value="user.PhoneNumber" class="form-control" />
+                        <ValidationMessage For="@(() => user.PhoneNumber)" class="text-danger" />
+                    </div>
+
+                    @*<div class="form-group">
+                            <label for="LGA">LGA</label>
+                            <InputText id="LGA" @bind-Value="AddressModel.LGA" class="form-control" />
+                            <ValidationMessage For="@(() => AddressModel.LGA)" class="text-danger" />
+                        </div>*@
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+
+                </EditForm>
+
+                @if (result != null)
+                {
+                    <div class="center-alert">
+                        <div class="alert-content rounded">
+                            @if (result.Succeeded)
+                            {
+                                <p class="alert-info">Your account details has been successfully updated!</p>
+                            }
+                            else
+                            {
+                                <p class="alert-info">An error occurred. Please, try again!</p>
+                            }
+                            <a class="alert-link" @onclick="() => hideAlert()">Ok</a>
+                        </div>
+                    </div>
+                }
             </div>
         }
 
-        @if (showOrders)
-        {
-            @if (orders.Any())
-            {
-                <div>
-                    <h3>
-                        Orders
-                    </h3>
-                </div>
-            }
-            else
-            {
-                <h5>
-                    No Orders
-                </h5>
-            }
-        }
+        @*----------Show Delivery Address Section-----------*@
 
         @if (showAddress)
         {
-            @if (addreses.Any())
-            {
-                @foreach (var address in addreses)
+            <div>
+                <div class="heading">
+                    <h4>Delivery Address</h4>
+                </div>
+                @if (addresses.Any())
                 {
-                    <div class="address-container">
-                        <div class="address-name">
-                            <i class="fas fa-user"></i>
-                            <p> @user.FirstName @user.LastName</p>
-                        </div>
-                        <div class="address-content">
-                            <div style="display: flex">
-                                <i class="fas fa-location-dot"></i>
-                                <p>@address.HouseNo, @address.Street, @address.City, @address.LGA, @address.State.</p>
-                            </div>
+                    <div class="address-grid">
+                        @foreach (var address in addresses)
+                        {
+                            <div class="address-container">
+                                <div class="address-name">
+                                    <i class="fas fa-user"></i>
+                                    <p> @user.FirstName @user.LastName</p>
+                                </div>
+                                <div class="address-content">
+                                    <div style="display: flex">
+                                        <i class="fas fa-location-dot"></i>
+                                        <p>@address.HouseNo, @address.Street, @address.City, @address.LGA, @address.State.</p>
+                                    </div>
 
-                            <div style="display: flex">
-                                <i class="fas fa-phone"></i>
-                                <p>@user.PhoneNumber</p>
+                                    <div style="display: flex">
+                                        <i class="fas fa-phone"></i>
+                                        <p>@user.PhoneNumber</p>
+                                    </div>
+                                </div>
+                                <div class="address-action">
+                                    <a @onclick="() => DeleteAddress(address)">
+                                        <i class="fas fa-trash"></i>
+                                        <p> Delete</p>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-
+                        }
                     </div>
                 }
-            }
-            else
-            {
-                <div class="no-address">
-                    <h4>You currently have no saved address!</h4>
+                else
+                {
+                    <div class="no-address">
+                        <h4>You currently have no saved address!</h4>
+                    </div>
+                }
+                    <div class="profile-add-address">
+                        <button class="btn btn-primary" data-toggle="modal"
+                                data-target="#add-address-modal" data-backdrop="static" data-keyboard="false">
+                            Add New Address
+                        </button>
+                    </div>
+            </div>
+
+        }
+
+        @*----------Show Order History Section-----------*@
+
+        @if (showOrderHistory)
+        {
+            <div>
+                <div class="heading">
+                    <h4>Order History</h4>
                 </div>
-            }
+                @if (orders.Any())
+                {
+                    <div>
+                        <h3>
+                            Orders
+                        </h3>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <h5>
+                            No Orders
+                        </h5>
+                    </div>
+
+                }
+            </div>
+        }
+
+
+        @if (showPendingRating)
+        {
+            <div>
+                <div class="heading">
+                    <h4>Pending Ratings</h4>
+                </div>
+
+                <h3>
+                    <i></i>
+                    You do not have any product for review!
+                </h3>
+                <p>After your order have been delivered, you will be able to write a review and rate the product.</p>
+                <p>Your review and rating will be published on product page to help other shoppers make the best decision to get the best shopping experience.</p>
+            </div>
         }
 
 
@@ -87,48 +204,58 @@
 </div>
 
 
+@*----------------  Add Address Modal -------------------*@
+
+<div class="modal fade" id="add-address-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img alt="Pick n Pay Stores'" src="~/Images/pick-n-pay-logo.jpg" />
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <AddAddress />
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 
 
+@code{
 
 
-
-@code {
-    [Parameter] public string Id { get; set; }
-
-    User user;
-    IEnumerable<Order> orders;
-    IEnumerable<Address> addreses;
-
-    bool showAccount = true;
-    bool showOrders = false;
-    bool showAddress = false;
-
-    protected async override void OnInitialized()
+    private void ShowAccountInfo()
     {
-        user = await UserManager.FindByIdAsync(Id);
-        orders = _orderService.GetUserOrders(Id);
-        addreses = _addressService.GetUserAddresses(Id);
-    }
-
-    private void ShowAccount()
-    {
-        showOrders = false;
+        showOrderHistory = false;
         showAddress = false;
-        showAccount = true;
+        showPendingRating = false;
+        showAccountInfo = true;
     }
 
-    private void ShowOrders()
+    private void ShowOrderHistory()
     {
-        showAccount = false;
+        showAccountInfo = false;
         showAddress = false;
-        showOrders = true;
+        showPendingRating = false;
+        showOrderHistory = true;
     }
 
-    private void ShowAddress()
+    
+
+    private void ShowPendingRating()
     {
-        showAccount = false;
-        showOrders = false;
-        showAddress = true;
+        showAccountInfo = false;
+        showOrderHistory = false;
+        showAddress = false;
+        showPendingRating = true;
     }
 
+    private void hideAlert()
+    {
+        result = null;
+    }
 }
