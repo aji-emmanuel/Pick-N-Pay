@@ -21,6 +21,7 @@ namespace Week8PicknPay.Components
 
         protected IEnumerable<Order> orders;
         protected List<Address> addresses;
+        protected Address delete;
 
         protected bool showAccountInfo = true;
         protected bool showOrderHistory = false;
@@ -49,12 +50,17 @@ namespace Week8PicknPay.Components
             result = await UserManager.UpdateAsync(user);
         }
 
+        protected void SetDelete(Address address)
+        {
+            delete = address;
+        }
         protected async Task DeleteAddress(Address address)
         {
             var result = await AddressService.RemoveAddressAsync(address);
             if (result)
             {
                 addresses.Remove(address);
+                SetDelete(null);
             }
         }
 

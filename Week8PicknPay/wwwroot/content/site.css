@@ -1151,7 +1151,7 @@ body.modal-content {
 }
 
 .profile-nav {
-    padding: 3rem 1rem;
+    padding: 3rem 0 3rem 2rem;
     background-color: white;
     border-radius: 0.8rem;
     border: 1px solid #c6c3c3;
@@ -1159,12 +1159,14 @@ body.modal-content {
     .profile-nav .nav-items {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
     }
+        .profile-nav hr {
+            margin-left: -2rem;
+        }
     .profile-content {
         background-color: white;
         border-radius: 0.8rem;
-        /*margin-bottom: 2rem;*/
         border: 1px solid #c6c3c3;
     }
 
@@ -1213,30 +1215,13 @@ body.modal-content {
 .profile-add-address button {
     width: 100%;
 }
-/* .order-checkout h4 {
-        text-align: center;
-        font-weight: bolder;
-    }
 
-    .profile-section h5 {
-        font-weight: bold;
-    }
-
-    .profile-section .cards {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin: 2rem;
-    }
-
-.cards img {
-    max-width: 20vw;
-    max-height: 3rem;
-}*/
+.address-action a:hover, .address-action a:focus {
+    color: #b61a4c;
+    text-decoration: none;
+    font-weight: bold;
+}
 @media (max-width:450px) {
-    /* .order-checkout {
-        padding: 1rem;
-    }*/
 
     .profile-section {
         padding: 1rem;
@@ -1255,4 +1240,37 @@ body.modal-content {
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 1rem;
     }
+}
+
+/*------------ Profile Pending Rating -----------------*/
+
+.pending-rating-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem;
+    margin : auto;
+}
+    .pending-rating-content .fa-thumbs-up {
+        font-size: 8rem;
+        color: #dc5580;
+    }
+
+    .pending-rating-content h4 {
+        font-weight: 600;
+        color: #464242;
+    }
+
+    .pending-rating-content p {
+        text-align: center;
+        font-style: oblique;
+    }
+.product-rating{
+    display: flex;
+}
+
+/*------------ Profile Order History -----------------*/
+
+.pending-rating-content img{
+    height: 30vh;
 }
