@@ -19,5 +19,11 @@ namespace Week8PicknPay.Components
         {
             show = await _addressService.AddAddressAsync(AddressModel);
         }
+
+        protected void Dismiss()
+        {
+            show = false;
+            AddressModel = new Address();
+        }
     }
 }

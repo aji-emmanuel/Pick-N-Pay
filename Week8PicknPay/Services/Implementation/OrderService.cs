@@ -51,7 +51,7 @@ namespace Week8PicknPay.Services
 
         public void OrderAddress(Address address)
         {
-            if (address != null)
+            if (address != null && Order != null)
             {
                 Order.Address = address;
                 Order.AddressId = address.Id;

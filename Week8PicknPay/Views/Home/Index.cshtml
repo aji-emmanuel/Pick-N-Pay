@@ -1,30 +1,17 @@
 ﻿
 @using Week8PicknPay.Views.Home
+@using Week8PicknPay.Views.Shared.Components
+
 
 <partial name="_Carousel" />
 
 <h2 style="color:crimson;">TOP DEALS OF THE WEEK, JUST FOR YOU!</h2>
 <hr />
-    
-     @(await Html.RenderComponentAsync<TopDeals>(RenderMode.ServerPrerendered))
+
+@(await Html.RenderComponentAsync<TopDeals>(RenderMode.ServerPrerendered))
 
 <hr />
-<div class="subscribe-email">
-    <h4><b>Want first Dibs?</b></h4>
-    <div class="subscribe-email-intro">
-        <p>Join our email list and be the first to know about new limited edition products, material innovations and lots of other fun updates.</p>
-    </div>
-    <div class="subscribe-email-form">
-        @using (Html.BeginForm("NewsLetter", "Request"))
-        {
-            <input placeholder="Enter your email address" type="email" required />
-            <button type="submit" class="btn btn-primary">SignUp</button>
-        }
-    </div>
-    <div class="subscribe-email-intro">
-        <p class="opt-out">Note: You can opt out at any time. See our <a href="#!">privacy policy and terms</a>.</p>
-    </div>
-</div>
+@(await Html.RenderComponentAsync<EmailSubscribe>(RenderMode.ServerPrerendered))
 <hr />
 <div>
     <h4 style="color: crimson; display: flex; justify-content: center; font-weight: bold;">ABOUT US</h4>

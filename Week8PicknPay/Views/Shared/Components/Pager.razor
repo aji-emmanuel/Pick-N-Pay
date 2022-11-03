@@ -1,11 +1,11 @@
 ﻿
 <ul class="pagination">
     @for(var i = 1; i<=totalPages; i++)
-            {
-                <li class="page-item @(i == pageNo ?  "active" : "")">
-                    <a href="@linkUrl/@i" class="page-link">@i</a>
-                </li>
-            }
+    {
+        <li class="page-item @(i == pageNo ?  "active" : "")">
+            <a href="@linkUrl/@i" class="page-link">@i</a>
+        </li>
+    }
 </ul>
 
 

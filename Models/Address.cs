@@ -9,6 +9,10 @@ namespace Week8PicknPay.Models
         public string UserId { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0][7-9]\d{9}$", ErrorMessage = "Phone number is not in a valid format.")]
+        public string PhoneNo { get; set; }
+
+        [Required]
         [RegularExpression(@"^[1-9]\d{0,3}?[a-zA-Z]?$", ErrorMessage = "Not a valid house number (e.g 20, 20a, 20A)")]
         public string HouseNo { get; set; }
 

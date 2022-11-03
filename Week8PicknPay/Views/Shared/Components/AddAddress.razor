@@ -18,6 +18,12 @@
     </div>
 
     <div class="form-group">
+        <label for="PhoneNo">Phone Number</label>
+        <InputText id="PhoneNo" @bind-Value="AddressModel.PhoneNo" class="form-control" />
+        <ValidationMessage For="@(() => AddressModel.PhoneNo)" class="text-danger" />
+    </div>
+
+    <div class="form-group">
         <label for="HouseNo">House Number</label>
         <InputText id="HouseNo" @bind-Value="AddressModel.HouseNo" class="form-control" />
         <ValidationMessage For="@(() => AddressModel.HouseNo)" class="text-danger" />
@@ -64,7 +70,19 @@
     <div class="center-alert">
         <div class="alert-content rounded">
             <p class="alert-info">Address has been successfully saved!</p>
-            <a class="alert-link" href="order/checkout">Ok</a>
+            @if (Path != null)
+            {
+                <a class="alert-link" href="@Path">Ok</a>
+            }
+            else
+            {
+                <a class="alert-link" data-dismiss="modal" @onclick="() => Dismiss()">Ok</a>
+            }
         </div>
     </div>
+}
+
+
+@code{
+    [Parameter] public string Path { get; set; }
 }
