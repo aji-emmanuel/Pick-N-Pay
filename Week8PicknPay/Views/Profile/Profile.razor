@@ -16,14 +16,12 @@
     <section class="profile-nav">
         <div class="nav-items">
             <h4><i class="fa fa-user" aria-hidden="true"></i> My Profile </h4>
-            <button @onclick="() => ShowAccountInfo()" style=@(showAccountInfo ? "color:#b61a4c; font-weight:bold" : "")><i class="fa fa-user-circle" aria-hidden="true"></i>  Account Details</button>
-            <button @onclick="() => LoadAddress()" style=@(showAddress ? "color:#b61a4c; font-weight:bold" : "")><i class="fa fa-address-book" aria-hidden="true"></i>  Delivery Address</button>
-        </div>
+            <button @onclick="() => ShowAccountInfo()" class=@(showAccountInfo ? "active" : "")><i class="fa fa-user-circle" aria-hidden="true"></i>  Details</button>
+            <button @onclick="() => LoadAddress()" class=@(showAddress ? "active" : "")><i class="fa fa-address-book" aria-hidden="true"></i>  Address</button>
         <hr />
-        <div class="nav-items">
             <h4><i class="fa fa-shopping-bag" aria-hidden="true"></i> My Orders </h4>
-            <button @onclick="() => ShowOrderHistory()" style=@(showOrderHistory ? "color:#b61a4c; font-weight:bold" : "")><i class="fa fa-history" aria-hidden="true"></i>  Order History</button>
-            <button @onclick="() => ShowPendingRating()" style=@(showPendingRating ? "color:#b61a4c; font-weight:bold" : "")><i class="fa fa-star" aria-hidden="true"></i>  Pending Ratings</button>
+            <button @onclick="() => ShowOrderHistory()" class=@(showOrderHistory ? "active" : "")><i class="fa fa-history" aria-hidden="true"></i>  Orders</button>
+            <button @onclick="() => ShowPendingRating()" class=@(showPendingRating ? "active" : "")><i class="fa fa-star" aria-hidden="true"></i>  Ratings</button>
         </div>
     </section>
 
