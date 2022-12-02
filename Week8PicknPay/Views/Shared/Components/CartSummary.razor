@@ -1,6 +1,10 @@
 ﻿
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
+@using Week8PicknPay.Components
+@using Week8PicknPay.CustomEvents
+
+@implements IDisposable
 @inject IShoppingCart _cart
 
 <li>
@@ -15,14 +19,29 @@
 @code{
     private int Count;
 
-
     protected override void OnInitialized()
     {
         _cart.GetShoppingCartItems();
+        CartEvent.UpdateCartSummary += UpdateCartCount;
     }
 
     protected override void OnParametersSet()
     {
         Count = _cart.CartItemsCount;
     }
+
+    public void UpdateCartCount(object sender, EventArgs e)
+    {
+        _ = InvokeAsync(() =>
+        {
+            Count = _cart.CartItemsCount;
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        CartEvent.UpdateCartSummary -= UpdateCartCount;
+    }
 }
+

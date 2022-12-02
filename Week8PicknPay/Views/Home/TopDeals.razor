@@ -3,42 +3,43 @@
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Models
 @using Week8PicknPay.Components
+@using Week8PicknPay.CustomEvents
 
 @inject IUnitOfWork _unitOfWork
 @inject IShoppingCart _cart
 
 @inherits ProductCart
 
-    <div class="row">
+<div class="row">
 
-        @foreach (var product in _unitOfWork.Products.TopDealProducts)
-        {
-            <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
+    @foreach (var product in _unitOfWork.Products.TopDealProducts)
+    {
+        <div class="col-xs-6  col-sm-4 col-lg-3 col-md-3">
 
-                <div class="thumbnail">
-                    <a href="/product/@product.ProductId.ToString()">
-                        <div class="thumbnail-img">
-                            <img src="@product.ImageUrl" alt="@product.Name">
-                        </div>
-
-                        <div class="caption" style="margin:0px;">
-                            <div>
-                                <h4 class="product-name">
-                                    @product.Name
-                                </h4>
-                                <h4 style="font-weight:bold">@string.Format("#{0:N0}", product.Price)</h4>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="addToCart" style="margin-bottom:5px;">
-                        <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
+            <div class="thumbnail">
+                <a href="/product/@product.ProductId.ToString()">
+                    <div class="thumbnail-img">
+                        <img src="@product.ImageUrl" alt="@product.Name">
                     </div>
 
+                    <div class="caption" style="margin:0px;">
+                        <div>
+                            <h4 class="product-name">
+                                @product.Name
+                            </h4>
+                            <h4 style="font-weight:bold">@string.Format("#{0:N0}", product.Price)</h4>
+                        </div>
+                    </div>
+                </a>
+                <div class="addToCart" style="margin-bottom:5px;">
+                    <p class="btn btn-primary" @onclick="(e => AddToCart(product))">Add To Cart</p>
                 </div>
-            </div>
-        }
 
-    </div>
+            </div>
+        </div>
+    }
+
+</div>
 
 
 @if (show)
@@ -61,5 +62,6 @@
     void AddToCart(Product product)
     {
         show = _cart.AddToCart(product, productQty);
+        CartEvent.OnCartChange(EventArgs.Empty);
     }
 }

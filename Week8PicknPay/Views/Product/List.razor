@@ -5,6 +5,7 @@
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Models
 @using Week8PicknPay.Components
+@using Week8PicknPay.CustomEvents
 
 @inject IUnitOfWork _unitOfWork;
 @inject IShoppingCart _cart
@@ -71,5 +72,6 @@
     void AddToCart(Product product)
     {
         show = _cart.AddToCart(product, productQty);
+        CartEvent.OnCartChange(EventArgs.Empty);
     }
 }

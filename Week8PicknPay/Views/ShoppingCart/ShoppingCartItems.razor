@@ -4,6 +4,8 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Week8PicknPay.Repository
 @using Week8PicknPay.Models
+@using Week8PicknPay.CustomEvents
+
 
 @inject IShoppingCart _cart
 
@@ -135,5 +137,6 @@ else
         _cart.RemoveFromCart(delete.Product.ProductId);
         shoppingCartItems.Remove(delete);
         delete = null;
+        CartEvent.OnCartChange(EventArgs.Empty);
     }
 }
